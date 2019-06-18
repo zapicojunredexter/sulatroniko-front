@@ -1,26 +1,66 @@
 import React from 'react';
-import logo from './logo.svg';
+import { connect } from 'react-redux';
+import { Switch, Route, Redirect } from "react-router-dom";
+import Dashboard from './containers/dashboard';
+import Login from './containers/login';
+import { setIsLoggedOut } from './redux/user/user.action';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.PureComponent<> {
+
+    protectedRoute = props => {
+        if (this.props.isLoggedIn) {
+            return (
+                <Switch>
+                    <Route path="/" exact component={Dashboard} />
+                </Switch>
+            );
+        }
+        return (
+            <Redirect
+                to={{
+                    pathname: '/login',
+                    state: { from: props.location },
+                }}
+            />
+        );
+    };
+
+    loginRoute = () => {
+        if (this.props.isLoggedIn === false) {
+            return <Route path="/login" component={Login} />;
+        }
+
+        return (
+            <Redirect
+                to={{
+                    pathname: '/',
+                }}
+            />
+        );
+    };
+
+    render(){
+        return (
+            <Switch>
+                <Route path="/login" render={this.loginRoute} />
+                <Route path="/" render={this.protectedRoute} />
+            </Switch>
+        );
+    }
 }
 
-export default App;
+
+const mapStateToProps = state => ({
+    isLoggedIn: state.userStore.isLoggedIn
+});
+
+const mapDispatchToProps = dispatch => ({
+    logout: () => dispatch(setIsLoggedOut()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App);
