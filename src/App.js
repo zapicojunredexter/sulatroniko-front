@@ -65,7 +65,8 @@ class App extends React.PureComponent<> {
 
 
 const mapStateToProps = state => ({
-    isLoggedIn: state.userStore.isLoggedIn
+    isLoggedIn: state.userStore.isLoggedIn,
+    isRehydrated: state._persist.rehydrated,
 });
 
 const mapDispatchToProps = dispatch => ({
