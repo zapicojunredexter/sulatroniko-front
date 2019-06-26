@@ -2,18 +2,30 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route, Redirect } from "react-router-dom";
 import Dashboard from './containers/dashboard';
+import Profile from './containers/profile';
+import Publishers from './containers/publishers';
+import Authors from './containers/authors';
 import Login from './containers/login';
 import { setIsLoggedOut } from './redux/user/user.action';
+import FirebaseClient from './modules/FirebaseClient';
 
 import './App.css';
 
 class App extends React.PureComponent<> {
+    constructor(props){
+        super(props);
+        FirebaseClient.init();
+    }
+
 
     protectedRoute = props => {
         if (this.props.isLoggedIn) {
             return (
                 <Switch>
                     <Route path="/" exact component={Dashboard} />
+                    <Route path="/authors" exact component={Authors} />
+                    <Route path="/publishers" exact component={Publishers} />
+                    <Route path="/profile" exact component={Profile} />
                 </Switch>
             );
         }
