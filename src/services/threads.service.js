@@ -1,4 +1,5 @@
 import FirebaseClient from '../modules/FirebaseClient';
+import { setThreads } from '../redux/threads/threads.action';
 
 export default class Service {
     threadsListener;
@@ -12,7 +13,8 @@ export default class Service {
             // .where('isDeleted', '==', false)
             .where('memberIds', 'array-contains', uid)
             .onSnapshot(data => {
-                    console.log('ARA AY', data.docs.map(data => data.data()));
+                    const threads = data.docs.map(data => ({id: data.id, ...data.data()}));
+                    dispatch(setThreads(threads));
                 }
             );
     }

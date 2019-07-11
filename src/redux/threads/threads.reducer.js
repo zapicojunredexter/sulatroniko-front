@@ -1,14 +1,14 @@
-import { SET_MANUSCRIPTS } from './manuscripts.action';
+import { SET_THREADS } from './threads.action';
 
 const initialState = {
-    manuscripts: [],
+    threads: [],
 };
 export default (state = initialState, action) => {
     switch (action.type) {
-        case SET_MANUSCRIPTS:
+        case SET_THREADS:
             return {
                 ...state,
-                manuscripts: action.payload.manuscripts,
+                threads: action.payload.threads,
             }
         default:
             return state;

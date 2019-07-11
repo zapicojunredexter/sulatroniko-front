@@ -8,7 +8,7 @@ export default (state = initialState, action) => {
         case SET_PUBLISHERS:
             return {
                 ...state,
-                publishers: action.payload.authors,
+                publishers: action.payload.publishers,
             }
         default:
             return state;

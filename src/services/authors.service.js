@@ -1,13 +1,13 @@
 import RequestService from './request.service';
 import { responseToJson } from '../utils/parsing.helper';
-import { setPublishers } from '../redux/publishers/publishers.action';
+import { setAuthors } from '../redux/authors/authors.action';
 
 export default class Service {
     static fetchAll = () => async dispatch => {
         try {
-            const results = await RequestService.get('publishers');
+            const results = await RequestService.get('authors');
             const json = await responseToJson(results);
-            dispatch(setPublishers(json));
+            dispatch(setAuthors(json));
         } catch (err) {
 
         }

@@ -5,9 +5,14 @@ import Dashboard from './containers/dashboard';
 import Profile from './containers/profile';
 import Publishers from './containers/publishers';
 import Authors from './containers/authors';
+import Threads from './containers/threads';
+import Manuscripts from './containers/manuscripts';
 import Login from './containers/login';
 import { setIsLoggedOut } from './redux/user/user.action';
+import { hasProfileDetails } from './redux/user/user.selector';
 import FirebaseClient from './modules/FirebaseClient';
+import Sidebar from './components/sidebar';
+import AuthService from './services/auth.service';
 
 import './App.css';
 
@@ -17,15 +22,34 @@ class App extends React.PureComponent<> {
         FirebaseClient.init();
     }
 
+    componentDidMount(){
+        this.props.authenticationListener();
+    }
+
 
     protectedRoute = props => {
         if (this.props.isLoggedIn) {
+            if(this.props.shouldSetup && props.location.pathname !== '/profile'){
+                return (
+                    <Redirect
+                        to={{
+                            pathname: '/profile',
+                            state: { from: props.location },
+                        }}
+                    />
+                );
+            }
             return (
                 <Switch>
-                    <Route path="/" exact component={Dashboard} />
-                    <Route path="/authors" exact component={Authors} />
-                    <Route path="/publishers" exact component={Publishers} />
-                    <Route path="/profile" exact component={Profile} />
+                    <div>    
+                        <Sidebar />
+                        <Route path="/" exact component={Dashboard} />
+                        <Route path="/authors" exact component={Authors} />
+                        <Route path="/publishers" exact component={Publishers} />
+                        <Route path="/profile" exact component={Profile} />
+                        <Route path="/threads" component={Threads} />
+                        <Route path="/manuscripts" component={Manuscripts} />
+                    </div>
                 </Switch>
             );
         }
@@ -67,10 +91,12 @@ class App extends React.PureComponent<> {
 const mapStateToProps = state => ({
     isLoggedIn: state.userStore.isLoggedIn,
     isRehydrated: state._persist.rehydrated,
+    shouldSetup: !hasProfileDetails(state),
 });
 
 const mapDispatchToProps = dispatch => ({
     logout: () => dispatch(setIsLoggedOut()),
+    authenticationListener: () => dispatch(AuthService.authenticationListener()),
 });
 
 export default connect(
