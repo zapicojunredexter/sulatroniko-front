@@ -12,4 +12,25 @@ export default class Service {
 
         }
     }
+
+    static setPublisher = (params) => async (dispatch, getState) => {
+        try {
+            const { userStore: { uid } } = getState();
+            const payload = {
+                ...params,
+                copywriter: params.copywriter,
+                user: params.user,
+                publisherId: uid,
+            };
+            // alert('iedit dapat'+ JSON.stringify(payload));
+            const results = await RequestService.post(`publishers/${uid}`,payload);
+            const t = await responseToJson(results);
+            console.log('success', t);
+            // dispatch(setManuscripts(json));
+        } catch (err) {
+
+            console.error(err);
+            throw err;
+        }
+    }
 };

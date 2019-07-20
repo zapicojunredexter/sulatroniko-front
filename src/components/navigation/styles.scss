@@ -1,0 +1,11 @@
+.custom-navigation {
+    padding: 10px 30px 10px 30px;
+    &__wrapper {
+        background-color: #359999;
+        border-radius: 5px;
+        font-weight: bold;
+        a: {
+            color: red !important;
+        }
+    }
+}

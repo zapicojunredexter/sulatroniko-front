@@ -13,6 +13,7 @@ export default class Container extends React.PureComponent<> {
                     <li><Link to="/profile">profile</Link></li>
                     <li><Link to="/threads">threads</Link></li>
                     <li><Link to="/manuscripts">manuscripts</Link></li>
+                    <li><Link to="/copywriters">copywriters</Link></li>
                 </ul>
             </div>
         );

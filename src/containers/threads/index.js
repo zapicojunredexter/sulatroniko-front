@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Navigation from '../../components/navigation';
+import './styles.scss';
 
 class Container extends React.PureComponent<> {
     state = {
@@ -22,15 +24,22 @@ class Container extends React.PureComponent<> {
     }
     render() {
         return (
-            <div>
+            <div className="threads">
+                <Navigation />
                 threads/index.js
-                <ul>
-                    {this.props.threads.map(thread => <li onClick={() => this.handleSelectThread(thread.id)}>{JSON.stringify(thread)}</li>)}
-                </ul>
-                <div style={{backgroundColor:'orange'}}>
-                    <h2>messages</h2>
-                    <div>
-                        {JSON.stringify(this.props.threads.find(thread => thread.id === this.state.selectedThread))}
+                <div className="threads__wrapper">
+                    <div className="row">
+                        <div className="col-md-6">
+                            <h4>Recent Messages</h4>
+                            <ul>
+                                {this.props.threads.map(thread => <li onClick={() => this.handleSelectThread(thread.id)}>{JSON.stringify(thread)}</li>)}
+                            </ul>
+                        </div>
+                        <div className="col-md-6">
+                            <div>
+                                {JSON.stringify(this.props.threads.find(thread => thread.id === this.state.selectedThread))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

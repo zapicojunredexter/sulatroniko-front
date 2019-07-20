@@ -7,11 +7,13 @@ import Publishers from './containers/publishers';
 import Authors from './containers/authors';
 import Threads from './containers/threads';
 import Manuscripts from './containers/manuscripts';
+import CopyWriters from './containers/copywriters';
 import Login from './containers/login';
 import { setIsLoggedOut } from './redux/user/user.action';
 import { hasProfileDetails } from './redux/user/user.selector';
 import FirebaseClient from './modules/FirebaseClient';
-import Sidebar from './components/sidebar';
+import Footer from './components/footer';
+import Header from './components/header';
 import AuthService from './services/auth.service';
 
 import './App.css';
@@ -41,14 +43,16 @@ class App extends React.PureComponent<> {
             }
             return (
                 <Switch>
-                    <div>    
-                        <Sidebar />
+                    <div style={{minHeight: '100vh'}}>
+                        <Header currentRoute={props.location.pathname} />
                         <Route path="/" exact component={Dashboard} />
                         <Route path="/authors" exact component={Authors} />
                         <Route path="/publishers" exact component={Publishers} />
                         <Route path="/profile" exact component={Profile} />
                         <Route path="/threads" component={Threads} />
                         <Route path="/manuscripts" component={Manuscripts} />
+                        <Route path="/copywriters" component={CopyWriters} />
+                        <Footer />
                     </div>
                 </Switch>
             );

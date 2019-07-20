@@ -13,6 +13,23 @@ export default class Service {
         }
     }
 
+    static edit = (params) => async (dispatch, getState) => {
+        try {
+            const { userStore: { uid } } = getState();
+            const payload = {
+                ...params,
+                authorId: uid,
+                status: 'unpublished',
+            };
+            console.log('eeeeeeeekkk', payload);;
+            const results = await RequestService.patch(`manuscripts/${params.id}`,payload);
+            await responseToJson(results);
+        } catch (err) {
+
+            console.error(err);
+            throw err;
+        }
+    }
     static add = (params) => async (dispatch, getState) => {
         try {
             const { userStore: { uid } } = getState();

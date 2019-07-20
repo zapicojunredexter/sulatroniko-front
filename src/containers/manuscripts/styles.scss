@@ -1,0 +1,38 @@
+.manuscripts {
+    background-color: #ebebeb;
+ &__wrapper {
+     .row{
+        margin-left: 0;
+        margin-right: 0;
+     }
+ }
+}
+
+.manuscript-card {
+    // background-color: silver;
+    margin: 20px;
+    height: 200px;
+    width: 150px;
+    overflow: hidden;
+    img {
+        width: 100%;
+    }
+}
+
+.manuscripts-list-wrapper {
+    display: -webkit-flex; /* Safari */
+    -webkit-flex-wrap: wrap; /* Safari 6.1+ */
+    display: flex;   
+    flex-wrap: wrap;
+}
+
+.manuscript-form-wrapper {
+    margin: 20px;
+    border: solid silver 1px;
+    border-radius: 3px;
+    .row {
+        .col-sm-6 {
+            padding: 30px;
+        }
+    }
+}

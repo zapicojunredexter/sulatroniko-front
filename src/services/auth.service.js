@@ -31,7 +31,6 @@ export default class Service {
     }
     static login = (username, password) => async dispatch => {
         try {
-            console.log('heyy', username, password);
             const results = await RequestService.post('users/login', {username, password});
             const json = await responseToJson(results);
 
@@ -40,18 +39,35 @@ export default class Service {
                 dispatch(Service.authenticationListener());
             } else {
             }
-            // await FirebaseClient.instance.auth().signInWithEmailAndPassword(email, password);
         } catch (error) {
             console.error(error);
             throw error;
         }
     }
 
-    static registerAuthor = (email, password) => async dispatch => {
+    static registerAuthor = (username, password) => async dispatch => {
         try {
-            // await FirebaseClient.instance.auth().createUserWithEmailAndPassword(email, password);
-            // console.log('registered',result);
-            // dispatch(setIsLoggedIn());
+            const user = {
+                username,
+                password
+            };
+            const userResult = await RequestService.post(`users`,{...user, type: 'author'});
+            await responseToJson(userResult);
+            dispatch(this.login(username, password));
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    static registerPublisher = (username, password) => async dispatch => {
+        try {
+            const user = {
+                username,
+                password
+            };
+            const userResult = await RequestService.post(`users`,{...user, type: 'publisher'});
+            await responseToJson(userResult);
+            dispatch(this.login(username, password));
         } catch (error) {
             console.error(error);
         }

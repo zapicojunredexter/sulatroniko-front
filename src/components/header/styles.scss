@@ -1,0 +1,26 @@
+.header-navigation__container {
+    border-bottom: solid gray 3px;
+}
+.is-route-selected {
+    .nav-link {
+        color: #359999 !important;
+    }
+}
+.header-link {
+    font-weight: bold;
+}
+
+.profile-component {
+    padding: 5px;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    &__image {
+        width: 100%;
+        border-radius: 50%;
+        border: solid black 3px;
+    }
+    &__link {
+        color: black !important;
+    }
+}

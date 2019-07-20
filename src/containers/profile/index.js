@@ -4,6 +4,8 @@ import Author from './forms/Author';
 import Publisher from './forms/Publisher';
 import CopyWriter from './forms/CopyWriter';
 import UserService from '../../services/user.service';
+import CopywriterService from '../../services/copywriters.service';
+import PublisherService from '../../services/publishers.service';
 
 class Container extends React.PureComponent<> {
     renderForm = () => {
@@ -12,9 +14,9 @@ class Container extends React.PureComponent<> {
             case 'author':
                 return <Author setAuthor={this.props.setAuthor} user={this.props.user} />;
             case 'publisher':
-                return <Publisher />;
+                return <Publisher setPublisher={this.props.setPublisher} user={this.props.user} />;
             case 'copywriter':
-                return <CopyWriter />;
+                return <CopyWriter setCopywriter={this.props.setCopywriter} user={this.props.user} />;
             default:
                 return null;
         }
@@ -37,6 +39,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     setAuthor: (params) => dispatch(UserService.setAuthor(params)),
+    setCopywriter: (params) => dispatch(CopywriterService.setCopywriter(params)),
+    setPublisher: (params) => dispatch(PublisherService.setPublisher(params)),
 });
 
 export default connect(

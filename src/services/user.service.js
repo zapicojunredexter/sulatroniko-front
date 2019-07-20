@@ -15,7 +15,15 @@ export default class Service {
                 dispatch(setUserDetails({type: json.type, user: author}));
             }
             if(json.type === 'publisher') {
+                console.log('naa sna');
                 const publisherResult = await RequestService.get(`publishers/${uid}`);
+                const publisher = await responseToJson(publisherResult).catch((err) => console.error(err));
+                console.log('dasda', publisher);
+                dispatch(setUserDetails({type: json.type, user: publisher}));
+            }
+            console.log('zz', json);
+            if(json.type === 'copywriter') {
+                const publisherResult = await RequestService.get(`copywriters/${uid}`);
                 const publisher = await responseToJson(publisherResult).catch((err) => console.error(err));
                 dispatch(setUserDetails({type: json.type, user: publisher}));
             }
