@@ -33,7 +33,7 @@ export default class Container extends React.PureComponent<> {
                         <input className="form-control" placeholder="manuscript" onChange={(event) => this.setState({manuscript: event.target.files})} type="file" />
                     
                         <h5>Cover</h5>
-                        <input className="form-control" placeholder="cover" onChange={(event) => this.setState({cover: event.target.files})} type="file" />
+                        <input className="form-control" placeholder="cover" onChange={(event) => this.setState({cover: event.target.files})} type="file" accept="image/jpg, image/jpg, image/png," />
                         
                         <br /><br />
                         <button type="button" onClick={this.props.cancel} className="btn btn-danger">Cancel</button>

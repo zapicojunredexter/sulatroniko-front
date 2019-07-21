@@ -23,4 +23,13 @@
     &__link {
         color: black !important;
     }
+    &__with-name{
+        // img {
+            height: 20px;
+            width: 20px;
+        // }
+    }
+}
+.with-name {
+    display: flex;
 }

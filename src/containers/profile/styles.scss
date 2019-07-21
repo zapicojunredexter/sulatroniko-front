@@ -1,0 +1,20 @@
+.profile-page {
+    .row{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    &__form-wrapper {
+        // margin: 20px;
+        border: solid silver 2px;
+        border-radius: 3px;
+    }
+    &__card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 150px !important;
+        }
+    }
+}

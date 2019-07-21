@@ -1,0 +1,22 @@
+.dashboard {
+    &__list-wrapper {
+        .row {
+            margin-left: 100px;
+            margin-right: 100px;
+        }
+    }
+    &__manuscript-card {
+        &__container {
+            // background-color: green;
+            padding: 25px;
+            overflow: hidden;
+            img {
+                width: 100%;
+            }
+        }
+    }
+
+    &__button {
+        margin: 20px;
+    }
+}

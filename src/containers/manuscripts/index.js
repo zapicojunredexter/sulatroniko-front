@@ -98,7 +98,7 @@ class Container extends React.PureComponent<> {
                 className="manuscript-card"
             >
                 
-                <img src={manuscript.cover} alt="manuscript" title={manuscript.title} />
+                <img src={manuscript.cover} alt={manuscript.title} title={manuscript.title} />
             </div>
         );
     }
@@ -170,8 +170,10 @@ class Container extends React.PureComponent<> {
     }
 
     renderMainContents = () => {
-        const published = this.props.ownManuscripts;
-        const unpublished = this.props.ownManuscripts;
+        // const published = this.props.ownManuscripts;
+        // const unpublished = this.props.ownManuscripts;
+        const published = this.props.ownManuscripts.filter(manuscript => manuscript.status === 'published');
+        const unpublished = this.props.ownManuscripts.filter(manuscript => manuscript.status === 'unpublished');
 
         return (
             <div className="row">

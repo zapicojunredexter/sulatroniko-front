@@ -6,4 +6,84 @@
         margin-right: 0;
      }
  }
+    &__scrollable {
+        max-height: 600px;
+        min-height: 600px;
+        overflow: scroll;
+    }
+    &__messages {
+        overflow: scroll;
+        background-color: orange;
+    }
+}
+
+.send-message-components {
+    // background-color: blue;
+}
+
+.threads__messages-container {
+    // background-color: silver;
+    border: solid gray 1px;
+    border-radius: 3px;
+    padding: 15px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .messages {
+        height: 400px;
+        overflow: scroll;
+    }
+
+    .add-components {
+        height: 200px;
+        // background-color: green;
+    }
+}
+
+.chat-bubble {
+    // background-color: green;
+    background-color: silver;
+    // margin: 20px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 80%;
+}
+
+.is-own {
+    width: calc(80%-40px);
+    // background-color: blue;
+    background-color: #359999;
+    margin-left: 20%;
+    // float:right;
+}
+
+.thread-isActive {
+    background-color: silver;
+}
+
+.thread-details-card{
+    border: solid gray 1px;
+    border-radius: 3px;
+    display: flex;
+    margin-bottom: 20px;
+    // height: 100px;
+    &__name {
+        flex: 1;
+        display: flex;
+        padding-left: 30px;
+        align-items: center;
+    }
+    &__image-wrapper {
+        width: 80px;
+        padding: 20px;
+        border-left: solid gray 1px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        img {
+            width: 100%;
+        }
+    }
 }

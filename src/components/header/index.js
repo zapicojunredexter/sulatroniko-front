@@ -15,11 +15,32 @@ class Container extends React.PureComponent<> {
                     <a class="navbar-brand" href="/"><img src="./sulatroniko-logo.png" style={{height: 40}} /></a>
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class={`nav-item ${this.props.currentRoute === '/' ? `active is-route-selected` : ``}`}><Link class="nav-link header-link" to="/">HOME</Link></li>
+                            <li class={`nav-item ${this.props.currentRoute === '/threads' ? `active is-route-selected` : ``}`}><Link class="nav-link header-link" to="/threads">MESSAGES</Link></li>
+                        {this.props.userType === 'author' && (
+                            <li class={`nav-item ${this.props.currentRoute === '/manuscripts' ? `active is-route-selected` : ``}`}><Link class="nav-link header-link" to="/manuscripts">MY MANUSCRIPTS</Link></li>
+                        )}
+                        {/*
                         <li class={`nav-item ${this.props.currentRoute === '/authors' ? `active is-route-selected` : ``}`}><Link class="nav-link header-link" to="/authors">authors</Link></li>
                         <li class={`nav-item ${this.props.currentRoute === '/publishers' ? `active is-route-selected` : ``}`}><Link class="nav-link header-link" to="/publishers">publishers</Link></li>
-                        <li class={`nav-item ${this.props.currentRoute === '/threads' ? `active is-route-selected` : ``}`}><Link class="nav-link header-link" to="/threads">threads</Link></li>
-                        <li class={`nav-item ${this.props.currentRoute === '/manuscripts' ? `active is-route-selected` : ``}`}><Link class="nav-link header-link" to="/manuscripts">manuscripts</Link></li>
                         <li class={`nav-item ${this.props.currentRoute === '/copywriters' ? `active is-route-selected` : ``}`}><Link class="nav-link header-link" to="/copywriters">copywriters</Link></li>
+                        */}
+                        
+                        <li class={`nav-item ${this.props.currentRoute === '/copywriters' ? `active is-route-selected` : ``}`}>
+                            <div class="nav-link header-link dropdown">
+                                <a class="dropdown-toggle" id="clubs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    USERS
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="clubs">
+                                    <Link class="dropdown-item" to="/publishers">publishers</Link>
+                                    <Link class="dropdown-item" to="/authors">authors</Link>
+                                    <Link class="dropdown-item" to="/copywriters">copywriters</Link>
+                                </div>
+                            </div>
+                        </li>
+
+
+                              
+                    
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
                         <ProfileComponent />
@@ -31,7 +52,7 @@ class Container extends React.PureComponent<> {
 }
 
 const mapStateToProps = state => ({
-    userType: 'copywriter'
+    userType: state.userStore.type
 });
 
 const mapDispatchToProps = dispatch => ({

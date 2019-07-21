@@ -9,15 +9,18 @@ class Container extends React.PureComponent<> {
     }
 
     handleLogin = () => {
-        this.props.login(this.state.username, this.state.password);
+        this.props.login(this.state.username, this.state.password)
+        .catch(err => alert(err.message));
     }
 
     handleRegistrationAuthor = () => {
-        this.props.registerAuthor(this.state.username, this.state.password);
+        this.props.registerAuthor(this.state.username, this.state.password)
+        .catch(err => alert(err.message));
     }
 
     handleRegistrationPublisher = () => {
-        this.props.registerPublisher(this.state.username, this.state.password);
+        this.props.registerPublisher(this.state.username, this.state.password)
+        .catch(err => alert(err.message));
     }
     render() {
         return (
@@ -35,7 +38,7 @@ class Container extends React.PureComponent<> {
                 <br />
                 <input value={this.state.username} onChange={event => this.setState({username: event.target.value})} />
                 <input value={this.state.password} onChange={event => this.setState({password: event.target.value})} />
-                <button onClick={this.handleRegistrationAuthor}>register author</button>
+                <button onClick={this.handleRegistrationAuthor}>login/register author</button>
 
 
 
@@ -47,7 +50,7 @@ class Container extends React.PureComponent<> {
                 <br />
                 <input value={this.state.username} onChange={event => this.setState({username: event.target.value})} />
                 <input value={this.state.password} onChange={event => this.setState({password: event.target.value})} />
-                <button onClick={this.handleRegistrationPublisher}>register author</button>
+                <button onClick={this.handleRegistrationPublisher}>login/register publisher</button>
             </div>
         );
     }

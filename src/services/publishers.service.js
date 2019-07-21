@@ -25,7 +25,7 @@ export default class Service {
             // alert('iedit dapat'+ JSON.stringify(payload));
             const results = await RequestService.post(`publishers/${uid}`,payload);
             const t = await responseToJson(results);
-            console.log('success', t);
+            alert('success');
             // dispatch(setManuscripts(json));
         } catch (err) {
 

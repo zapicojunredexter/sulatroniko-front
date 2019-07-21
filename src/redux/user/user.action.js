@@ -4,12 +4,23 @@ export const SET_IS_LOGGED_OUT = 'SET_IS_LOGGED_OUT';
 export const SET_UID = 'SET_UID';
 
 export const SET_USER_DETAILS = 'SET_USER_DETAILS';
+export const SET_USER_CREDENTIALS = 'SET_USER_CREDENTIALS';
 
 export const setUID = uid => dispatch =>
     dispatch({
         type: SET_UID,
         payload: {
             uid
+        }
+    });
+
+
+export const setUserCredentials = (username, password) => dispatch =>
+    dispatch({
+        type: SET_USER_CREDENTIALS,
+        payload: {
+            username,
+            password
         }
     });
 

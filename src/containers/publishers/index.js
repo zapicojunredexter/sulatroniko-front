@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PublishersService from '../../services/publishers.service';
 import ManuscriptService from '../../services/manuscripts.service';
+import ThreadsService from '../../services/threads.service';
 import { getOwnManuscripts } from '../../redux/manuscripts/manuscripts.selector';
+import config from '../../config/config';
 
 class Container extends React.PureComponent<> {
     state = {
@@ -22,8 +24,40 @@ class Container extends React.PureComponent<> {
             console.error(err);
         }
     }
+
+    
+    handleClickMessage = (copywriterId) => {
+        this.props.createThread(copywriterId)
+            .then((result) => {
+                // window.location.href=`threads/#${result.id}`;
+                window.location.href=`${config.front_url}/threads#${result.id}`;
+            })
+            .catch(err => alert(err.message));
+    }
+
     render() {
-        console.log('rendered', this.state);
+        return (
+            <div>
+
+                <table class="table m-3">
+                    <tr>
+                        <th>PUBLISHER</th>
+                        <th></th>
+                    </tr>
+                    {this.props.publishers.map(copywriter => {
+                        return (
+                            <tr>
+                                <td>
+                                    <img src="default-user.png" style={{width: 50}} />
+                                    {copywriter.name}
+                                </td>
+                                <td><button onClick={() => this.handleClickMessage(copywriter.id)} className="btn btn-secondary">message</button></td>
+                            </tr>
+                        );
+                    })}
+                </table>
+            </div>
+        );
         return (
             <div>
                 <button onClick={this.handleSubmitRequest}>REQUEST</button>
@@ -39,7 +73,12 @@ class Container extends React.PureComponent<> {
                 <ul>
                     {this.props.publishers.map(publisher => {
                         return (
-                            <li onClick={() => this.setState({selectedPublisher: publisher})}>{JSON.stringify(publisher)}</li>
+                            <li
+                                onClick={() => this.setState({selectedPublisher: publisher})}
+                            >
+                                {JSON.stringify(publisher)}
+                                <button onClick={() => this.props.createThread(publisher.id)}>send message</button>
+                            </li>
                         );
                     })}
                 </ul>
@@ -56,6 +95,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     fetchPublishers: () => dispatch(PublishersService.fetchAll()),
+    createThread: (userId) => dispatch(ThreadsService.createThread(userId)),
     submitManuscriptRequest: (manuscript, publisher) => dispatch(ManuscriptService.requestTransaction(manuscript, publisher))
 });
 

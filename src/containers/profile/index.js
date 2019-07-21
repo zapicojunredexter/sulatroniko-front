@@ -6,26 +6,79 @@ import CopyWriter from './forms/CopyWriter';
 import UserService from '../../services/user.service';
 import CopywriterService from '../../services/copywriters.service';
 import PublisherService from '../../services/publishers.service';
+import Navigation from '../../components/navigation';
+import "./styles.scss"
 
 class Container extends React.PureComponent<> {
+
+    getCardData = () => {
+        try {
+            const userType = `${this.props.userType.charAt(0).toUpperCase()}${this.props.userType.slice(1).toLowerCase()}`;
+
+            return {
+                imgUrl: 'default-user.png',
+                userType,
+                name: this.props.user.name
+            }
+        } catch (err) {
+            console.error(err);
+            return {};
+        }
+    }
     renderForm = () => {
-        console.log('aray',this.props.userType);
         switch(this.props.userType){
             case 'author':
-                return <Author setAuthor={this.props.setAuthor} user={this.props.user} />;
+                return (
+                    <Author
+                        setAuthor={this.props.setAuthor}
+                        user={this.props.user}
+                        credentials={this.props.credentials}
+                    />
+                );
             case 'publisher':
-                return <Publisher setPublisher={this.props.setPublisher} user={this.props.user} />;
+                return (
+                    <Publisher
+                        setPublisher={this.props.setPublisher}
+                        user={this.props.user}
+                        credentials={this.props.credentials}
+                    />
+                );
             case 'copywriter':
-                return <CopyWriter setCopywriter={this.props.setCopywriter} user={this.props.user} />;
+                return (
+                    <CopyWriter
+                        setCopywriter={this.props.setCopywriter}
+                        user={this.props.user}
+                        credentials={this.props.credentials}
+                    />
+                );
             default:
                 return null;
         }
     }
     render() {
+        const cardData = this.getCardData();
         return (
-            <div>
-                profile/index.js
-                {this.renderForm()}
+            <div className="profile-page">
+
+                <Navigation />
+                <div className="row">
+                    <div className="col-sm-3">
+                        <div className="profile-page__form-wrapper">
+                            <div className="profile-page__card">
+                                <img src={cardData.imgUrl} />
+                                <h5>{cardData.name}</h5>
+                                <h6>{cardData.userType}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-sm-9">
+                        <div className="profile-page__form-wrapper">
+                        
+                        {this.renderForm()}
+                        </div>
+                        
+                    </div>
+                </div>
             </div>
         );
     }
@@ -35,6 +88,7 @@ class Container extends React.PureComponent<> {
 const mapStateToProps = state => ({
     userType: state.userStore.type,
     user: state.userStore.user,
+    credentials: state.userStore.credentials,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,6 +1,6 @@
 import FirebaseClient from '../modules/FirebaseClient';
 
-import { setIsLoggedIn, setIsLoggedOut, setUID } from '../redux/user/user.action';
+import { setIsLoggedIn, setIsLoggedOut, setUID, setUserCredentials } from '../redux/user/user.action';
 import ThreadsService from './threads.service';
 import RequestService from './request.service';
 import { responseToJson } from '../utils/parsing.helper';
@@ -35,6 +35,10 @@ export default class Service {
             const json = await responseToJson(results);
 
             if (json) {
+                
+                console.log('before');
+                dispatch(setUserCredentials(username, password));
+                console.log('after');
                 dispatch(setUID(json.id));
                 dispatch(Service.authenticationListener());
             } else {
@@ -56,6 +60,7 @@ export default class Service {
             dispatch(this.login(username, password));
         } catch (error) {
             console.error(error);
+            throw error;
         }
     }
 
@@ -70,6 +75,7 @@ export default class Service {
             dispatch(this.login(username, password));
         } catch (error) {
             console.error(error);
+            throw error;
         }
     }
 

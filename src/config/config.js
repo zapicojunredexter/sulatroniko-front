@@ -2,9 +2,11 @@ const env = 'development' || 'production';
 const configurations = {
     development: {
         api_url: 'http://localhost:5000/sulatroniko-6c3bd/us-central1/api',
+        front_url: 'http://localhost:3000',
     },
     production: {
         api_url: 'https://us-central1-sulatroniko-6c3bd.cloudfunctions.net/api',
+        front_url: 'http://localhost:3000',
     },
 }
 export default configurations[env];
