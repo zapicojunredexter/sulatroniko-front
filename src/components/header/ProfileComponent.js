@@ -19,8 +19,9 @@ class Container extends React.PureComponent<> {
                     </a>
                     <a class="dropdown-item disabled">{userType}</a>
                     <div class="dropdown-divider"></div>
-                    {this.props.userType === 'publisher' && <a class="dropdown-item" href="/copywriters">Copywriters</a>}
-                    <a class="dropdown-item" href="/profile">Profile</a>
+                                    
+                    {this.props.userType === 'publisher' && <Link class="dropdown-item" to="/copywriters">Copywriters</Link>}
+                    <Link class="dropdown-item" to="/profile">Profile</Link>
                     <a class="dropdown-item" onClick={this.props.logout}>Logout</a>
                 </div>
             </div>
