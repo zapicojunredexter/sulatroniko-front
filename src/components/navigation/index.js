@@ -14,7 +14,7 @@ class Container extends React.PureComponent<> {
                     )}
                     <div className="col-sm-3"><Link to="/threads">Message</Link></div>
                   
-                    <div className="col-sm-3"><Link>Work in Progress</Link></div>
+                    <div className="col-sm-3"><Link to="/progress">Work in Progress</Link></div>
                 </div>
             </div>
         );
