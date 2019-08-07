@@ -18,8 +18,10 @@ class Container extends React.PureComponent<> {
 
     handleSubmitRequest = () => {
         try {
-            console.log(this.state.selectedManuscript, this.state.selectedPublisher.id);
-            this.props.submitManuscriptRequest(this.state.selectedManuscript, this.state.selectedPublisher.id);
+            this.props.submitManuscriptRequest(this.state.selectedManuscript, this.state.selectedPublisher)
+                .then(res => {
+                    window.location.href=`${config.front_url}/threads#${res.thread.id}`;
+                });
         } catch (err) {
             console.error(err);
         }
@@ -35,53 +37,55 @@ class Container extends React.PureComponent<> {
             .catch(err => alert(err.message));
     }
 
+    handleAssignManuscripit = (copywriterId) => {
+        this.setState({selectedPublisher: copywriterId});
+    }
+
     render() {
         return (
             <div>
+                <div>
+                    mao ning form
+                    <select onChange={(ev) => {
+                        this.setState({selectedManuscript: ev.target.value})
+                    }}>
+                        <option>-</option>
+                        {this.props.myManuscripts.map(manuscript => {
+                            return (
+                                <option value={manuscript.id}>{manuscript.title}</option>
+                            );
+                        })}
+                    </select>
+                    <button
+                        onClick={this.handleSubmitRequest}
+                        disabled={!this.state.selectedManuscript || !this.state.selectedPublisher}
+                    >
+                        submit
+                    </button>
+                </div>
 
                 <table class="table m-3">
                     <tr>
                         <th>PUBLISHER</th>
                         <th></th>
                     </tr>
-                    {this.props.publishers.map(copywriter => {
+                    {this.props.publishers.map(publisher => {
                         return (
                             <tr>
                                 <td>
                                     <img src="default-user.png" style={{width: 50}} />
-                                    {copywriter.name}
+                                    {publisher.name}
                                 </td>
-                                <td><button onClick={() => this.handleClickMessage(copywriter.id)} className="btn btn-secondary">message</button></td>
+                                <td><button onClick={() => this.handleClickMessage(publisher.id)} className="btn btn-secondary">message</button></td>
+                                <td>
+                                    <button onClick={() => this.handleAssignManuscripit(publisher.id)} className="btn btn-secondary">
+                                        assign manuscript
+                                    </button>
+                                </td>
                             </tr>
                         );
                     })}
                 </table>
-            </div>
-        );
-        return (
-            <div>
-                <button onClick={this.handleSubmitRequest}>REQUEST</button>
-                publishers/index.js
-                <select onChange={(event) => this.setState({selectedManuscript: event.target.value})}>
-                    {this.props.myManuscripts.map(manuscript => {
-                        return (
-                            <option value={manuscript.id}>{JSON.stringify(manuscript)}</option>
-                        );
-                    })}
-                </select>
-
-                <ul>
-                    {this.props.publishers.map(publisher => {
-                        return (
-                            <li
-                                onClick={() => this.setState({selectedPublisher: publisher})}
-                            >
-                                {JSON.stringify(publisher)}
-                                <button onClick={() => this.props.createThread(publisher.id)}>send message</button>
-                            </li>
-                        );
-                    })}
-                </ul>
             </div>
         );
     }

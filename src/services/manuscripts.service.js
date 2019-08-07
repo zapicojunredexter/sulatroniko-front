@@ -48,10 +48,19 @@ export default class Service {
         }
     }
 
-    static requestTransaction = (manuscript, publisher) => dispatch => {
+    static requestTransaction = (manuscript, publisher) => async (dispatch, getState) => {
 
         try {
-            console.log('harhar', manuscript, publisher);
+            const { userStore: { uid } } = getState();
+            const payload = {
+                manuscriptId: manuscript,
+                publisherId: publisher,
+                authorId: uid,
+            };
+            const results = await RequestService.post('proposals',payload);
+            const json = await responseToJson(results);
+            alert('success');
+            return json;
         } catch (err) {
 
             // console.error('mierror', err);

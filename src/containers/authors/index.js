@@ -19,6 +19,7 @@ class Container extends React.PureComponent<> {
             .catch(err => alert(err.message));
     }
 
+
     render() {
         return (
             <div>
@@ -36,6 +37,7 @@ class Container extends React.PureComponent<> {
                                     {author.name}
                                 </td>
                                 <td><button onClick={() => this.handleClickMessage(author.id)} className="btn btn-secondary">message</button></td>
+                                
                             </tr>
                         );
                     })}
