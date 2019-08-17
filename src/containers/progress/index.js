@@ -4,6 +4,7 @@ import Board from '../../components/draggable/Board';
 import FirebaseClient from '../../modules/FirebaseClient';
 import AuthorsService from '../../services/authors.service';
 import ThreadsService from '../../services/threads.service';
+import Navigation from '../../components/navigation';
 import TransactionService from '../../services/transactions.service';
 import config from '../../config/config';
 
@@ -130,6 +131,7 @@ class Container extends React.PureComponent<> {
     render() {
         return (
             <div>
+                <Navigation />
                 <button
                     onClick={() => {
                         if(this.state.transaction && this.state.transaction.id) {

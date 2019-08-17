@@ -45,7 +45,6 @@ class Container extends React.PureComponent<> {
         return (
             <div>
                 <div>
-                    mao ning form
                     <select onChange={(ev) => {
                         this.setState({selectedManuscript: ev.target.value})
                     }}>
