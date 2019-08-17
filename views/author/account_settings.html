@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Dashboard</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="../../assets/css/author/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="../../assets/css/author/mdb.min.css" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="../../assets/css/author/style.min.css" rel="stylesheet">
+
+<!--   <link href="../../assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/> -->
+
+</head>
+
+<body class="grey lighten-3">
+
+  <!--Main Navigation-->
+  <header>
+
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+      <div class="container-fluid">
+
+        <!-- Collapse -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+          <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect teal-text" target="_blank">
+               LOGO
+          </a>
+        
+          <!--  <input type="search" placeholder="Search" aria-label="Search" class="form-control center" style="width:40%; margin-right: -11em !important;">
+            <button class="btn btn-primary btn-sm my-0 p" type="submit">
+              <i class="fas fa-search"></i>
+           </button> -->
+  
+          <!-- Right -->
+          <ul class="navbar-nav nav-flex-icons">
+           <div class="btn-group">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Basic dropdown</button>
+
+              <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#"><i class="fas fa-cog" style="margin-right: .5em;"></i>Account Settings</a>
+                  <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt" style="margin-right: .5em;"></i>Logout</a>
+              </div>
+           </div>
+          </ul>
+
+        </div>
+
+      </div>
+    </nav>
+    <!-- Navbar -->
+
+    <!-- Sidebar -->
+    <div class="sidebar-fixed position-fixed">
+
+      <div class="profile-image">
+        <img src="../../assets/images/profile_img.jpg" class="img-fluid rounded-circle mx-auto d-block" alt="" style="margin: .5em 0; width: 200px; height: 200px;">
+        <p class="text-center">Owen Rama</p>
+        <p class="text-center" style="margin-top: -1em;">Author</p>
+        <hr>
+      </div>
+
+      <div class="list-group list-group-flush">
+        <a href="../../views/author/dashboard.html" class="list-group-item active waves-effect">
+          <i class="fas fa-chart-pie mr-3"></i>Dashboard
+        </a>
+        <a href="../../views/author/manuscript.html" class="list-group-item list-group-item-action waves-effect">
+          <i class="fas fa-newspaper mr-3"></i>Manuscript</a>
+        <a href="../../views/author/message.html" class="list-group-item list-group-item-action waves-effect">
+          <i class="fa fa-envelope mr-3"></i>Message</a>
+        <a href="#" class="list-group-item list-group-item-action waves-effect">
+          <i class="fas fa-gavel mr-3"></i>Work in Progress</a>
+        <a href="#" class="list-group-item list-group-item-action waves-effect">
+          <i class="fas fa-money-bill-alt mr-3"></i>Transaction</a>
+        <a href="#" class="list-group-item list-group-item-action waves-effect teal-text">
+        <i class="fas fa-arrow-left mr-3"></i>Back to HomePage</a>
+      </div>
+
+    </div>
+    <!-- Sidebar -->
+
+  </header>
+  <!--Main Navigation-->
+
+  <!--Main layout-->
+  <main class="pt-5 mx-lg-5" style="min-height: 90vh;">
+ <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-12 mb-12">
+
+          <!--Card-->
+          <div class="card"  style="margin-top: 4em;">
+
+            <!--Card content-->
+            <div class="card-body">
+
+             <div class="row container">
+                 <div class="md-form col-lg-3" style="margin-left: 2em;">
+                    <h6>Login Details</h6>
+
+                     <div class="row">
+                      <div class="md-form col s12">
+
+                        <input type="text" id="email" class="form-control">
+                        <label for="email">Email</label>
+                        <span class="helper-text" data-error="Invalid Email"></span>
+                        <!-- <input id="email" type="email" class="form-control">
+                        <label for="email_inline">Email</label>
+                        <span class="helper-text" data-error="Invalid Email"></span> -->
+                      </div>
+                    </div>
+                  <div class="row">
+                    <div class="md-form col s12">
+                      <input id="password" type="password" class="form-control">
+                      <label for="password">Password</label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="md-form col s12">
+                      <input id="password" type="password" class="form-control">
+                      <label for="password">Confirm Password</label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="md-form col s12">
+                      <input id="phone" type="tel" class="form-control">
+                      <label for="phone">Phone Number</label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="md-form col s12">
+                      <div class="md-form col s12">
+                        <input type="text" id="birthdate" class="form-control datepicker">
+                         <label for="birthdate">Birthdate</label>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="md-form col s8" style="margin-left: 4em;">
+               <h6 style="margin-left: 1em;">Personal Information</h6>
+                <div class="md-form row">
+                  <div class="md-form col s4" style="margin-top: .7em;margin-bottom: -1em;">
+                    <input id="first_name" type="text" class="form-control">
+                    <label for="first_name">First Name</label>
+                  </div>
+                   <div class="md-form col s4" style="margin-top: .7em;margin-bottom: -1em;">
+                    <input id="address" type="text" class="form-control">
+                    <label for="address">Address</label>
+                  </div>
+                   <div class="md-form col s4" style="margin-top: .7em;margin-bottom: -1em;">
+                    <input id="state_province" type="text" class="form-control">
+                    <label for="state_province">State/Province</label>
+                  </div>
+                </div>
+
+                 <div class="md-form row">
+                  <div class="md-form col s4" style="margin-top: 2.4em;">
+                    <input id="last_name" type="text" class="form-control">
+                    <label for="last_name">Last Name</label>
+                  </div>
+                   <div class="md-form col s4" style="margin-top: 2.4em;">
+                    <input id="city" type="text" class="form-control">
+                    <label for="city">City</label>
+                  </div>
+                   <div class="md-form col s4" style="margin-top: 2.4em;">
+                    <input id="zip_code" type="text" class="form-control">
+                    <label for="zip_code">Zip Code</label>
+                  </div>
+                </div>
+
+                <div class="md-form row">
+                  <div class="md-form col s4" style="margin-top: 0;">
+                    <input id="contact_number" type="text" class="form-control">
+                    <label for="contact_number">Contact Number</label>
+                  </div>
+                   <div class="md-form col s4" style="margin-top: 0em;">
+                    <input id="credit_card" type="text" class="form-control">
+                    <label for="credit_card">Credit Card Number</label>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="md-form col s4" style="margin-top: 0em;">
+                    <input id="company" type="text" class="form-control">
+                    <label for="company">Company/Institution</label>
+                  </div>
+                   <div class="md-form col s4" style="margin-top: 0em;">
+                    <input id="cvv" type="text" class="form-control">
+                    <label for="cvv">CVV</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="md-form col s12" style="margin-top: -.6em;">
+                  <textarea id="bio" class="md-textarea form-control" rows="2"></textarea>
+                    <label for="bio">Bio</label>
+                  </div>
+                </div>
+
+            <div class=" float-right"><button class="btn btn-primary" type="button">Save Changes</button></div>
+      
+        </div>
+
+             </div>
+               
+
+            </div>
+
+          </div>
+          <!--/.Card-->
+
+
+        </div>
+        <!--Grid column-->
+        
+      </div>
+  </main>
+  <!--Main layout-->
+
+  <!--Footer-->
+  <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
+    <!--Copyright-->
+    <div class="footer-copyright py-3">
+      © 2019 Copyright:
+      <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> MDBootstrap.com </a>
+    </div>
+    <!--/.Copyright-->
+
+  </footer>
+  <!--/.Footer-->
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="../../assets/js/author/jquery-3.4.1.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="../../assets/js/author/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="../../assets/js/author/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="../../assets/js/author/mdb.min.js"></script>
+ <!--  <script src="../../assets/js/materialize.js"></script>
+  <script src="../../assets/js/init.js"></script> -->
+
+</body>
+
+</html>
