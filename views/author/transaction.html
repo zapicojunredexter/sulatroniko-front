@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Manuscript</title>
+  <title>Transaction</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <!-- Bootstrap core CSS -->
@@ -73,13 +73,13 @@
         <a href="../../views/author/dashboard.html" class="list-group-item waves-effect">
           <i class="fas fa-chart-pie mr-3"></i>Dashboard
         </a>
-        <a href="../../views/author/manuscript.html" class="list-group-item active list-group-item-action waves-effect">
+        <a href="../../views/author/manuscript.html" class="list-group-item list-group-item-action waves-effect">
           <i class="fas fa-newspaper mr-3"></i>Manuscript</a>
         <a href="../../views/author/message.html" class="list-group-item list-group-item-action waves-effect">
           <i class="fa fa-envelope mr-3"></i>Message</a>
         <a href="#" class="list-group-item list-group-item-action waves-effect">
           <i class="fas fa-gavel mr-3"></i>Work in Progress</a>
-        <a href="../../views/author/transaction.html" class="list-group-item list-group-item-action waves-effect">
+        <a href="../../views/author/transaction.html" class="list-group-item list-group-item-action waves-effect active">
           <i class="fas fa-money-bill-alt mr-3"></i>Transaction</a>
         <a href="#" class="list-group-item list-group-item-action waves-effect teal-text">
         <i class="fas fa-arrow-left mr-3"></i>Back to HomePage</a>
@@ -107,54 +107,33 @@
             <div class="card-body">
 
              <div class="row container">
-              <div class="col-md-6">
-                <h4>Create Work</h4>
-                <input class="form-control form-control-md" type="text" placeholder="Title"><br/>
-
-                <select class="browser-default custom-select">
-                  <option selected>Genre</option>
-                  <option value="1">Romance</option>
-                  <option value="2">Comedy</option>
-                  <option value="3">Psychological</option>
-                  <option value="3">Slice of Life</option>
-                </select>
-
-                <div class="form-group" style="margin-top: 1.8em !important">
-                  <textarea class="form-control" id="synopsis" rows="7" placeholder="Synopsis"></textarea>
+              <div class="col-md-12">
+                <div class="container-fluid" style="padding-bottom: 2em;">
+	                <p>Transaction</p>
+	                <button class="btn btn-outline-info btn-sm" style="width: 100%;margin-top: -.2em;margin-bottom: 1em;height: auto;">
+	                	<img class="float-left" src="../../assets/images/book1.jpg" width= "80" height= "80" style="margin: 1em 0;">
+                    <p class="float-left" style="margin: 3.4em 0 0 2em !important;font-size: 12px;color:#495057;"><b>Percy Jackson</b></p>
+                    <p class="float-right" style="margin: 3.4em 2em 0 0 !important;font-size: 12px;color:#495057;"><b>View Progress</b></p>
+	                </button>
+	                <button class="btn btn-outline-info btn-sm" style="width: 100%;margin-top: -.2em;margin-bottom: 1em;height: auto;">
+                    <img class="float-left" src="../../assets/images/book1.jpg" width= "80" height= "80" style="margin: 1em 0;">
+                    <p class="float-left" style="margin: 3.4em 0 0 2em !important;font-size: 12px;color:#495057;"><b>Percy Jackson</b></p>
+                    <p class="float-right" style="margin: 3.4em 2em 0 0 !important;font-size: 12px;color:#495057;"><b>View Progress</b></p>
+                  </button>
+	                 <button class="btn btn-outline-info btn-sm" style="width: 100%;margin-top: -.2em;margin-bottom: 1em;height: auto;">
+                    <img class="float-left" src="../../assets/images/book1.jpg" width= "80" height= "80" style="margin: 1em 0;">
+                    <p class="float-left" style="margin: 3.4em 0 0 2em !important;font-size: 12px;color:#495057;"><b>Percy Jackson</b></p>
+                    <p class="float-right" style="margin: 3.4em 2em 0 0 !important;font-size: 12px;color:#495057;"><b>View Progress</b></p>
+                  </button>
+                  <button class="btn btn-outline-info btn-sm" style="width: 100%;margin-top: -.2em;margin-bottom: 1em;height: auto;">
+                    <img class="float-left" src="../../assets/images/book1.jpg" width= "80" height= "80" style="margin: 1em 0;">
+                    <p class="float-left" style="margin: 3.4em 0 0 2em !important;font-size: 12px;color:#495057;"><b>Percy Jackson</b></p>
+                    <p class="float-right" style="margin: 3.4em 2em 0 0 !important;font-size: 12px;color:#495057;"><b>View Progress</b></p>
+                  </button>
+	        
                 </div>
               </div>
 
-              <div class="col-md-6">
-                <!-- <div class="row">
-                  <div class="col-md-8" style="margin-top: 2.3em;margin-left: 1em !important">
-                    <input class="form-control form-control-md" type="text" placeholder="Manuscript">
-                  </div>
-                  <div class="col-md-3" style="margin-top: 1.8em;">
-                    <button type="button" class="btn btn-primary btn-md">Primary</button>
-                  </div>
-                </div> -->
-                <div class="input-group" style="margin-top: 2.2em;margin-left: 1em !important">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroupFileAddon01">Manuscript</span>
-                  </div>
-                  <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="inputGroupFile01"
-                      aria-describedby="inputGroupFileAddon01">
-                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                  </div>
-                </div>
-
-                <div class="input-group" style="margin-top: 1.6em;margin-left: 1em !important">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroupFileAddon01">Cover</span>
-                  </div>
-                  <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="inputGroupFile01"
-                      aria-describedby="inputGroupFileAddon01">
-                    <label class="custom-file-label" for="inputGroupFile01">Choose photo</label>
-                  </div>
-                </div>
-              </div>
 
              </div>
                
