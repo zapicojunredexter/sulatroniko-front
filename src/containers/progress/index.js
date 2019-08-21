@@ -73,6 +73,16 @@ class Container extends React.PureComponent<> {
         }
     }
 
+    changeProgressOrder = (dragged, target) => {
+        if(this.state.transaction && this.state.transaction.id) {
+            console.log('ginaedit dapat', dragged, target);
+            // this.props.editCard(this.state.transaction.id, {
+            //     cardId,
+            //     status,
+            // });
+        }
+    }
+
     mapData = () => {
         return [
             {
@@ -147,6 +157,7 @@ class Container extends React.PureComponent<> {
                 <Board
                     boardData={this.state.progressData}
                     changeProgressStatus={this.changeProgressStatus}
+                    changeProgressOrder={this.changeProgressOrder}
                 />
             </div>
             );

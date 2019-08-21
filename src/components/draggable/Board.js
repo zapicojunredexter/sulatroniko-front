@@ -6,7 +6,7 @@ import './styles.scss';
 export default class Container extends React.PureComponent<> {
     renderCard = (cardId, label) => {
         return (
-            <Card key={cardId} cardId={cardId} label={label} />
+            <Card key={cardId} changeProgressOrder={this.props.changeProgressOrder} cardId={cardId} label={label} />
         );
     }
     render() {

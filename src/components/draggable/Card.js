@@ -12,6 +12,10 @@ export default class Container extends React.PureComponent<> {
                 draggable
                 onDragStart={this.onDragStart}
                 onDragOver={(ev) => ev.preventDefault()}
+                onDrop={(ev) => {
+                    // console.log('gidroppan', ev.dataTransfer.getData("key"));
+                    this.props.changeProgressOrder(ev.dataTransfer.getData("key"), this.props.cardId);
+                }}
                 style={{backgroundColor: 'orange'}}
             >
                 {this.props.cardId}

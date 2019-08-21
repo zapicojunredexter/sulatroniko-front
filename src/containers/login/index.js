@@ -23,6 +23,136 @@ class Container extends React.PureComponent<> {
         .catch(err => alert(err.message));
     }
     render() {
+        // return (
+        //     <div>
+        //         <div class="navbar-fixed">
+        //             <nav class="blue-grey darken-4" role="navigation">
+        //                 <div class="nav-wrapper container">
+        //                 <a id="logo-container" href="#" class="brand-logo">
+        //                 </a>
+        //                 <ul class="right hide-on-med-and-down">
+        //                     <li><a class="waves-effect cyan btn modal-trigger">Login</a></li>
+        //                     <li><a class="waves-effect cyan btn modal-trigger">Sign Up</a></li>
+        //                 </ul>
+
+        //                 <ul id="nav-mobile" class="sidenav">
+        //                     <li><a href="#">Navbar Link</a></li>
+        //                 </ul>
+        //                 <a href="#" data-target="nav-mobile" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+        //                 </div>
+        //             </nav>
+        //         </div>
+
+
+        //         <div id="index-banner" class="parallax-container">
+        //             <div class="section no-pad-bot">
+        //                 <div class="container parallax-header">
+        //                     <br /><br />
+        //                     <h1 class="header center light">SulaTroniko</h1>
+        //                     <div class="row center">
+        //                     <h5 class="header col s12 light">Discover new user-generated stories, spanning across different genres written
+        //                     by Philippine authors.</h5>
+        //                     </div>
+        //                     <div class="row center">
+        //                     <a href="#l" id="download-button" class="btn-large waves-effect waves-light cyan">Get Started</a>
+        //                     </div>
+        //                     <br /><br />
+
+        //                 </div>
+        //             </div>
+        //         </div>
+
+
+
+
+
+
+
+        //         <div class="container">
+        //             <div class="section">
+        //                 <h6 class="header center book-header">LATEST PUBLISHED</h6>
+        //                 <div class="row book-row">
+        //                     <div class="col s12 m3">
+        //                         <div class="icon-block">
+        //                             <img class="responsive-img z-depth-3" src="../../assets-2/images/book1.jpg" /> 
+        //                         </div>
+        //                     </div>
+
+        //                     <div class="col s12 m3">
+        //                         <div class="icon-block">
+        //                             <img class="responsive-img z-depth-3" src="../../assets-2/images/book1.jpg" /> 
+        //                         </div>
+        //                     </div>
+
+
+        //                     <div class="col s12 m3">
+        //                         <div class="icon-block">
+        //                             <img class="responsive-img z-depth-3" src="../../assets-2/images/book1.jpg" /> 
+        //                         </div>
+        //                     </div>
+
+        //                     <div class="col s12 m3">
+        //                         <div class="icon-block">
+        //                             <img class="responsive-img z-depth-3" src="../../assets-2/images/book1.jpg" /> 
+        //                         </div>
+        //                     </div>
+        //                 </div>
+
+        //                 <div class="row book-row">
+        //                     <div class="col s12 m3">
+        //                         <div class="icon-block">
+        //                             <img class="responsive-img z-depth-3" src="../../assets-2/images/book2.jpg" /> 
+        //                         </div>
+        //                     </div>
+
+        //                     <div class="col s12 m3">
+        //                         <div class="icon-block">
+        //                             <img class="responsive-img z-depth-3" src="../../assets-2/images/book2.jpg" />
+        //                         </div>
+        //                     </div>
+
+
+        //                     <div class="col s12 m3">
+        //                         <div class="icon-block">
+        //                             <img class="responsive-img z-depth-3" src="../../assets-2/images/book2.jpg" /> 
+        //                         </div>
+        //                     </div>
+
+        //                     <div class="col s12 m3">
+        //                         <div class="icon-block">
+        //                             <img class="responsive-img z-depth-3" src="../../assets-2/images/book2.jpg" />
+        //                         </div>
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //         </div>
+
+
+
+        //         <div class="modal login-modal">
+        //             <div class="modal-content">
+        //                 <h4 class="header center">Login to SulaTroniko</h4>
+        //                 <div class="row">
+        //                     <div class="input-field col s12">
+        //                     <input id="email" type="email" class="validate" />
+        //                     <label for="email_inline">Email</label>
+        //                     <span class="helper-text" data-error="Invalid Email"></span>
+        //                     </div>
+        //                 </div>
+        //                 <div class="row">
+        //                     <div class="input-field col s12">
+        //                     <input id="password" type="password" class="validate" />
+        //                     <label for="password">Password</label>
+        //                     </div>
+        //                 </div>
+        //                 <div class="modal-footer">
+        //                     <a href="#!" class="modal-close waves-effect cyan btn">Login</a>
+        //                     <a href="#!" class="modal-close waves-effect red lighten-1 btn" style={{marginRight: '2em'}}>Cancel</a>
+        //                 </div>
+        //             </div>
+        //         </div> 
+        //     </div>
+        // );
         return (
             <div>
                 login/index.js
