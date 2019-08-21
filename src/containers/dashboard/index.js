@@ -16,6 +16,53 @@ class Container extends React.PureComponent<> {
     render() {
         const published = this.props.manuscripts.filter(manuscript => manuscript.status === 'published');
         const unpublished = this.props.manuscripts.filter(manuscript => manuscript.status === 'unpublished');
+
+        return (
+            <main class="pt-5 mx-lg-5 threads-page-container">
+                <div class="container-fluid mt-5">
+                    <div className="dashboard__container">
+                        <div className="dashboard__list-wrapper">
+                            <button className="btn btn-info dashboard__button">Unpublished</button>
+                            <div className="row">
+                                {unpublished.map(manuscript => {
+                                    return (
+                                        <div className="col-sm-3">
+                                            <div className="dashboard__manuscript-card__container">
+                                                <a href={manuscript.manuscript} target="_blank">
+                                                    
+                                                    <img alt={manuscript.title} src={manuscript.cover} />
+
+                                                </a>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                            <button className="btn btn-info dashboard__button">Published</button>
+                            <div className="row">
+                                {published.map(manuscript => {
+                                    return (
+                                        <div className="col-sm-3">
+                                            <div className="dashboard__manuscript-card__container">
+                                                <a href={manuscript.manuscript} target="_blank">
+                                                    
+                                                    <img alt={manuscript.title} src={manuscript.cover} />
+
+                                                </a>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                        {
+                            /*JSON.stringify(this.props.manuscripts)
+                        */
+                        }
+                    </div>
+                </div>
+            </main>
+        );
         return (
             <div className="dashboard__container">
                 <div className="dashboard__list-wrapper">

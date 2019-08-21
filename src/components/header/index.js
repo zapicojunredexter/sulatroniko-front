@@ -2,10 +2,46 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import ProfileComponent from './ProfileComponent';
+import DropDown from '../dropdown';
+import Sidebar from '../sidebar';
+import AuthService from '../../services/auth.service';
 import './styles.scss';
 
 class Container extends React.PureComponent<> {
     render() {
+        return (
+            <header>
+          
+              <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+                <div class="container-fluid">
+          
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+          
+                    <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect" target="_blank">
+                         LOGO
+                    </a>
+                  
+                    <ul class="navbar-nav nav-flex-icons">
+                        <DropDown>
+                            <Link class="dropdown-item" to="/profile"><i class="fas fa-cog" style={{marginRight: '0.5em'}}></i>Account Settings</Link>
+                            <a class="dropdown-item" onClick={this.props.logout}><i class="fas fa-sign-out-alt" style={{marginRight: '0.5em'}}></i>Logout</a>
+                        </DropDown>
+                    </ul>
+          
+                  </div>
+          
+              </nav>
+          
+            <Sidebar />
+
+
+
+
+            </header>
+        );
         return (
             <div class="navbar navbar-expand-lg navbar-light header-navigation__container">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,6 +92,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    logout: () => dispatch(AuthService.logout()),
 });
 
 export default connect(

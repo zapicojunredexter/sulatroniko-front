@@ -196,6 +196,17 @@ class Container extends React.PureComponent<> {
 
     render() {
         return (
+            <main class="pt-5 mx-lg-5 threads-page-container">
+                <div class="container-fluid mt-5">
+                    {
+                        (this.state.isAddingManuscript && this.renderAddManuscript()) ||
+                        (this.state.isEditingManuscript && this.renderEditManuscript()) ||
+                        this.renderMainContents()
+                    }
+                </div>
+            </main>
+        );
+        return (
             <div className="manuscripts">
                 <Navigation />
                 <div className="manuscripts__wrapper">

@@ -40,6 +40,17 @@ class Container extends React.PureComponent<> {
     }
 
     renderThreadDetails = (thread) => {
+        console.log('ayayay', thread);
+        return (
+            <button onClick={() => this.handleSelectThread(thread.id)} class="btn btn-mdb-color btn-sm" style={{width: '100%',marginTop: '-.2em'}}>
+                <span style={{float:'left', fontSize: 15}}>{thread.threadDisplayable && thread.threadDisplayable.name}</span>
+                {thread.messages.length ? <span class="badge badge-danger" style={{float:'left',marginTop: '.7em',marginLeft: '1em'}}>{thread.messages.length}</span> : null}
+                {/*
+                <span style={{border: '1px solid white',borderRadius: '50%',padding: '2px 8px',float:'right'}}>C</span>
+                */}
+                
+            </button>
+        );
         return (
             <div className={`thread-details-card ${thread.id === this.state.selectedThread ? 'thread-isActive' : ''}`} onClick={() => this.handleSelectThread(thread.id)}>
                 <div className="thread-details-card__name">
@@ -54,13 +65,52 @@ class Container extends React.PureComponent<> {
 
     renderThreadMessages = () => {
         const selectedThread = this.props.threads.find(thread => thread.id === this.state.selectedThread);
-        if(!selectedThread) return null;
         const renderFilesLinks = (files) => {
             return (
                 files.map(file => <a href={file.filePath}>{` ${file.fileName}`}</a>)
                 
             );
         }
+        const hasSelected = !!selectedThread;
+        return (
+            <div class="container-fluid" style={{paddingBottom: '2em'}}>
+                {hasSelected ? (
+                    <>
+                        <div className="messages">
+
+                        {selectedThread.messages.map(message => {
+                            return (
+                                <div className={`chat-bubble ${message.isOwn ? `is-own` : ``}`}>
+                                    {message.message}
+                                    {renderFilesLinks(message.files)}
+                                </div>
+                            );
+                        })}
+                        </div>
+                        <div className="add-components">
+                        {this.renderSendMessage()}
+                        </div>
+                    </>
+                ) :
+                (
+                    <>
+                        <p style={{marginTop: '1em'}}>New Message</p><br/>
+                        <hr style={{marginTop: '-.5em'}} />
+                        <input class="form-control form-control-md" type="text" placeholder="Recepient's Name" style={{marginTop: '1em'}} /><br/>
+                        <div class="form-group" style={{marginTop: '-1em !important'}}>
+                        <textarea class="form-control" rows="10" placeholder="Type your message"></textarea>
+                        </div>
+                        <p class="blue-grey-text" style={{fontSize: 10}}>Tip: For technical issues related to the SulaTroniko site or questions, please contact <a class="blue-text">Support</a>.</p>
+                        <div style={{float:'right', marginBottom: '1.5em'}}>
+                            <button type="button" class="btn btn-primary btn-sm">Upload File</button>
+                            <button type="button" class="btn btn-primary btn-sm">Send</button>
+                            
+                        </div>
+                    </>
+                )}
+                
+            </div>
+        );
         return (
             <div className="threads__messages-container">
                 <div className="messages">
@@ -98,6 +148,49 @@ class Container extends React.PureComponent<> {
         )
     }
     render() {
+        return (
+            <main class="pt-5 mx-lg-5 threads-page-container">
+                <div class="container-fluid mt-5">
+
+                    <div class="row wow fadeIn">
+
+                        <div class="col-md-12 mb-12">
+
+                            <div class="card">
+
+                                <div class="card-body">
+
+                                    <div class="row container">
+                                        <div class="col-md-4 thread-details-container">
+                                            <div class="container-fluid" style={{paddingBottom: '2em'}}>
+                                                <input class="form-control form-control-md" type="text" placeholder="Search" style={{marginTop: '1em'}} /><br/>
+                                                <hr style={{marginTop: '-.5em'}} />
+                                                <p>Recent Messages</p>
+                                                
+                                                {this.props.threads.map(thread => this.renderThreadDetails(thread))}
+                                        
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-7" style={{background: '#f2f2f2', border: '1.5px solid #e6e6e6', borderRadius: 5,marginLeft: '2em',}}>
+                                            {this.renderThreadMessages()}
+                                        </div>
+
+                                    </div>
+                                
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </main>
+        );
         return (
             <div className="threads">
                 <Navigation />

@@ -58,6 +58,13 @@ class Container extends React.PureComponent<> {
     render() {
         const cardData = this.getCardData();
         return (
+            <main class="pt-5 mx-lg-5" style={{minHeight: '90vh'}}>
+                <div class="row wow fadeIn">
+                    {this.renderForm()}
+                </div>
+            </main>
+        );
+        return (
             <div className="profile-page">
 
                 <Navigation />
