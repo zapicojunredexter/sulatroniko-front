@@ -5,15 +5,18 @@ import { getMyCopywriters } from '../../redux/copywriters/copywriters.selector';
 import ThreadsService from '../../services/threads.service';
 import config from '../../config/config';
 
+const initialState = {
+    isAdding:false,
+    username: null,
+    password: null,
+    name: null,
+    phone: null,
+    email: null,
+    jobDesc: null,
+}
 class Container extends React.PureComponent<> {
     state = {
-        isAdding:false,
-        username: null,
-        password: null,
-        name: null,
-        phone: null,
-        email: null,
-        jobDesc: null,
+        ...initialState,
     }
     componentDidMount(){
         this.props.fetchCopywriters();
@@ -29,8 +32,13 @@ class Container extends React.PureComponent<> {
                 email: this.state.email,
                 phone: this.state.phone,
                 jobDesc: this.state.jobDesc,
-
             }
+        })
+        .then(() => {
+            alert('success');
+            this.props.fetchCopywriters().then(() => {
+                this.setState(initialState);
+            })
         })
         .catch(err => alert(err.message));
     }
@@ -46,28 +54,43 @@ class Container extends React.PureComponent<> {
     renderAddingForm = () => {
         return (
 
-            <div className="row p-3">
-                <div className="col-sm-5">
-                    Username
-                    <input className="form-control" onChange={(event) => this.setState({username: event.target.value})} value={this.state.username} placeholder="username" />
-                    <br />Password
-                    <input className="form-control" onChange={(event) => this.setState({password: event.target.value})} value={this.state.password} placeholder="password" />
+            <main class="pt-5 mx-lg-5 threads-page-container">
+                <div class="container-fluid mt-5">
+                    <div className="row p-3">
+
+                        <div className="col-sm-5 p-3">
+                            <div class="md-form">
+                                <input onChange={(event) => this.setState({username: event.target.value})} id="username" value={this.state.username} type="text" class="form-control"/>
+                                <label class={this.state.username && 'active'} for="username">Username</label>
+                            </div>
+                            <div class="md-form">
+                                <input onChange={(event) => this.setState({password: event.target.value})} id="password" value={this.state.password} type="text" class="form-control"/>
+                                <label class={this.state.password && 'active'} for="password">Password</label>
+                            </div>
+                        </div>
+                        <div className="col-sm-7 p-3">
+                            <div class="md-form">
+                                <input onChange={(event) => this.setState({name: event.target.value})} id="name" value={this.state.name} type="text" class="form-control"/>
+                                <label class={this.state.name && 'active'} for="name">Name</label>
+                            </div>
+                            <div class="md-form">
+                                <input onChange={(event) => this.setState({email: event.target.value})} id="email" value={this.state.email} type="text" class="form-control"/>
+                                <label class={this.state.email && 'active'} for="email">Email</label>
+                            </div>
+                            <div class="md-form">
+                                <input onChange={(event) => this.setState({phone: event.target.value})} id="phone" value={this.state.phone} type="text" class="form-control"/>
+                                <label class={this.state.phone && 'active'} for="phone">phone</label>
+                            </div>
+                            <div class="md-form">
+                                <input onChange={(event) => this.setState({jobDesc: event.target.value})} id="jobDesc" value={this.state.jobDesc} type="text" class="form-control"/>
+                                <label class={this.state.jobDesc && 'active'} for="jobDesc">jobDesc</label>
+                            </div>
+                            <button onClick={() => this.setState({isAdding: false})} className="btn btn-secondary">CANCEL</button>
+                            {`     `}<button className="btn btn-info" onClick={this.handleAdd}>ADD</button>
+                        </div>
+                    </div>
                 </div>
-                <div className="col-sm-7">
-                    Name
-                    <input className="form-control" value={this.state.name} onChange={(event) => this.setState({name: event.target.value})} placeholder="name" />
-                    <br />Email
-                    <input className="form-control" value={this.state.email} onChange={(event) => this.setState({email: event.target.value})} placeholder="email" />
-                    <br />Contact Number
-                    <input className="form-control" value={this.state.phone} onChange={(event) => this.setState({phone: event.target.value})} placeholder="phone" />
-                    <br />Job Description
-                    <input className="form-control" value={this.state.jobDesc} onChange={(event) => this.setState({jobDesc: event.target.value})} placeholder="jobDesc" />
-                    <br />
-                    
-                    <button onClick={() => this.setState({isAdding: false})} className="btn btn-secondary">CANCEL</button>
-                    {`     `}<button className="btn btn-info" onClick={this.handleAdd}>ADD</button>
-                </div>
-            </div>
+            </main>
         );
     }
     render() {
@@ -75,28 +98,29 @@ class Container extends React.PureComponent<> {
             return this.renderAddingForm();
         }
         return (
-            <div>
-                <table class="table m-3">
-                    <tr>
-                        <th>Names</th>
-                        <th>Status</th>
-                        <th>Specialized Genres</th>
-                        <th></th>
-                    </tr>
-                    {this.props.myCopywriters.map(copywriter => {
-                        return (
-                            <tr>
-                                <td>{copywriter.name}</td>
-                                <td>{copywriter.field}</td>
-                                <td>{copywriter.status}</td>
-                                    <td><button onClick={() => this.handleClickMessage(copywriter.id)} className="btn btn-secondary">message</button></td>
-                                </tr>
-                        );
-                    })}
-                </table>
-                <button onClick={() => this.setState({isAdding: true})} className="btn btn-secondary">ADD</button>
-            </div>
-
+            <main class="pt-5 mx-lg-5 threads-page-container">
+                <div class="container-fluid mt-5">
+                    <table class="table m-3">
+                        <tr>
+                            <th>Names</th>
+                            <th>Status</th>
+                            <th>Specialized Genres</th>
+                            <th></th>
+                        </tr>
+                        {this.props.myCopywriters.map(copywriter => {
+                            return (
+                                <tr>
+                                    <td>{copywriter.name}</td>
+                                    <td>{copywriter.field}</td>
+                                    <td>{copywriter.status}</td>
+                                        <td><button onClick={() => this.handleClickMessage(copywriter.id)} className="btn btn-secondary">message</button></td>
+                                    </tr>
+                            );
+                        })}
+                    </table>
+                    <button onClick={() => this.setState({isAdding: true})} className="btn btn-secondary">ADD</button>
+                </div>
+            </main>
         );
         return (
             <div>

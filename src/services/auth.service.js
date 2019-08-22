@@ -37,7 +37,7 @@ export default class Service {
             if (json) {
                 
                 console.log('before');
-                dispatch(setUserCredentials(username, password));
+                dispatch(setUserCredentials(username, password, json.displayPic));
                 console.log('after');
                 dispatch(setUID(json.id));
                 dispatch(Service.authenticationListener());

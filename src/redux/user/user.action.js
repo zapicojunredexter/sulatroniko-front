@@ -15,12 +15,13 @@ export const setUID = uid => dispatch =>
     });
 
 
-export const setUserCredentials = (username, password) => dispatch =>
+export const setUserCredentials = (username, password, displayPic) => dispatch =>
     dispatch({
         type: SET_USER_CREDENTIALS,
         payload: {
             username,
-            password
+            password,
+            displayPic
         }
     });
 

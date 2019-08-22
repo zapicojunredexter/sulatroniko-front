@@ -6,6 +6,7 @@ import StorageService from '../../services/storage.service';
 import { getOwnManuscripts } from '../../redux/manuscripts/manuscripts.selector';
 import AddManuscript from './AddManuscript';
 import EditManuscript from './EditManuscript';
+import config from '../../config/config';
 import "./styles.scss";
 
 class Container extends React.PureComponent<> {
@@ -48,7 +49,10 @@ class Container extends React.PureComponent<> {
             // adding manuscript
             
             await this.props.addManuscript(payload);
-            alert('added');
+            alert('succcess');
+            this.setState({
+                isAddingManuscript: false,
+            })
         } catch (err) {
             alert(err.message);
         }
@@ -73,7 +77,10 @@ class Container extends React.PureComponent<> {
             // adding manuscript
             
             await this.props.updateManuscript(payload);
-            alert('updated');
+            alert('success');
+            this.setState({
+                isEditingManuscript: null,
+            })
         } catch (err) {
             alert(err.message);
         }
@@ -81,7 +88,10 @@ class Container extends React.PureComponent<> {
 
     renderManuscript = (manuscript) => {
         return (
+
             <div
+                class="card manuscript-card"
+
                 onClick={() => {
                     const toEdit = {
                         id: manuscript.id,
@@ -95,6 +105,15 @@ class Container extends React.PureComponent<> {
                         isEditingManuscript: toEdit,
                     });
                 }}
+            >
+                <img class="card-img-top" src={manuscript.cover} alt={manuscript.title} />
+                <div class="card-footer">
+                    {manuscript.title}
+                </div>
+            </div>
+        )
+        return (
+            <div
                 className="manuscript-card"
             >
                 
@@ -168,7 +187,7 @@ class Container extends React.PureComponent<> {
             </div>
         );
     }
-
+a
     renderMainContents = () => {
         // const published = this.props.ownManuscripts;
         // const unpublished = this.props.ownManuscripts;
@@ -177,9 +196,9 @@ class Container extends React.PureComponent<> {
 
         return (
             <div className="row">
-                <div className="col-md-12">Filters</div>
+                <div className="col-md-12"></div>
                 <div className="col-md-6">
-                    Unpublished <button onClick={() => this.setState({isAddingManuscript: true})} type="button" className="btn btn-light">+</button>
+                    Unpublished <i  onClick={() => this.setState({isAddingManuscript: true})} class="fas fa-plus"></i>
                     <div className="manuscripts-list-wrapper">
                         {unpublished.map(manuscript => this.renderManuscript(manuscript))}
                     </div>

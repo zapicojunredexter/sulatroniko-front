@@ -1,6 +1,6 @@
 import RequestService from './request.service';
 import { responseToJson } from '../utils/parsing.helper';
-import { setUserDetails } from '../redux/user/user.action';
+import { setUserDetails, setUserCredentials } from '../redux/user/user.action';
 
 export default class Service {
     static fetchUserDetails = () => async (dispatch, getState) => {
@@ -32,6 +32,17 @@ export default class Service {
         }
     }
 
+    static fetchAllUserTypes = () => async (dispatch, getState) => {
+        try {
+            const results = await RequestService.get(`users/multiple`);
+
+            const json = await responseToJson(results);
+            return json;
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     static setPublisher = params => async (dispatch, getState) => {
         try {
             const { uid } = getState().userStore;
@@ -52,6 +63,20 @@ export default class Service {
 
             await responseToJson(results);
             dispatch(setUserDetails({type: 'author', user: params}));
+            dispatch(Service.fetchUserDetails());
+            // dispatch(setPublishers(json));
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+
+    static updateProfileImageUrl = displayPic => async (dispatch, getState) => {
+        try {
+            const { uid, credentials } = getState().userStore;
+            const results = await RequestService.post(`users/${uid}`, { displayPic });
+            await responseToJson(results);
+            dispatch(setUserCredentials(credentials.username,credentials.password,displayPic));
             // dispatch(setPublishers(json));
         } catch (err) {
             console.error(err);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Board from '../../components/draggable/Board';
+import { getOwnManuscripts } from '../../redux/manuscripts/manuscripts.selector';
 import FirebaseClient from '../../modules/FirebaseClient';
 import AuthorsService from '../../services/authors.service';
 import ThreadsService from '../../services/threads.service';
@@ -138,12 +139,38 @@ class Container extends React.PureComponent<> {
             },
         ];
     }
+
+    renderManuscript = (manuscript) => {
+        return (
+            <div
+                style={{marginBottom: 20}}
+                class="card"
+                // onClick
+            >
+                <div class="card-header">
+                    {manuscript.title}
+                </div>
+                <div class="card-body row">
+                    <div class="col-sm-3">
+                        <img src={manuscript.cover} style={{width: 100}} />
+                    </div>
+                    <div class="col-sm-6">
+                        {manuscript.synopsis}
+                    </div>
+                    <div class="col-sm-3 d-flex justify-content-center">
+                        VIEW PROGRESS
+                    </div>
+                </div>
+            </div>
+        );
+    }
     render() {
 
         return (
             <main class="pt-5 mx-lg-5 threads-page-container">
                 <div class="container-fluid mt-5">
-                    
+                    {this.props.ownManuscripts.map(this.renderManuscript)}
+                    {/*
                     <button
                         onClick={() => {
                             if(this.state.transaction && this.state.transaction.id) {
@@ -156,6 +183,8 @@ class Container extends React.PureComponent<> {
                             }
                         }}
                     >addCard</button>
+                    */}
+                    
                     <Board
                         boardData={this.state.progressData}
                         changeProgressStatus={this.changeProgressStatus}
@@ -218,6 +247,7 @@ class Container extends React.PureComponent<> {
 
 
 const mapStateToProps = state => ({
+    ownManuscripts: getOwnManuscripts(state),
 });
 
 const mapDispatchToProps = dispatch => ({

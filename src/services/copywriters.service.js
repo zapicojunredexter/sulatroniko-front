@@ -1,4 +1,5 @@
 import RequestService from './request.service';
+import UserService from './user.service';
 import { responseToJson } from '../utils/parsing.helper';
 import { setCopywriters } from '../redux/copywriters/copywriters.action';
 
@@ -49,7 +50,8 @@ export default class Service {
             // alert('iedit dapat'+ JSON.stringify(payload));
             const results = await RequestService.patch(`copywriters/${uid}`,payload);
             const t = await responseToJson(results);
-            console.log('success', t);
+            
+            dispatch(UserService.fetchUserDetails());
             // dispatch(setManuscripts(json));
         } catch (err) {
 

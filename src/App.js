@@ -9,6 +9,7 @@ import Threads from './containers/threads';
 import Manuscripts from './containers/manuscripts';
 import CopyWriters from './containers/copywriters';
 import Progress from './containers/progress';
+import Clubs from './containers/clubs';
 import Login from './containers/login';
 import { setIsLoggedOut } from './redux/user/user.action';
 import { hasProfileDetails } from './redux/user/user.selector';
@@ -54,6 +55,8 @@ class App extends React.PureComponent<> {
                         <Route path="/manuscripts" component={Manuscripts} />
                         <Route path="/copywriters" component={CopyWriters} />
                         <Route path="/progress" component={Progress} />
+                        <Route path="/clubs" component={Clubs} />
+                        
                         <Footer />
                     </div>
                 </Switch>

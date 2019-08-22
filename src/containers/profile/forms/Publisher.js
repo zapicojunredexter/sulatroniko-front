@@ -27,7 +27,9 @@ export default class Container extends React.PureComponent<> {
             pubCCNum: this.state.pubCCNum,
             pubCCV: this.state.pubCCV,
         };
-        this.props.setPublisher(publisher);
+        this.props.setPublisher(publisher)
+            .then(() => alert('success'))
+            .catch(err => alert(err.message));
     }
     render() {
         return (

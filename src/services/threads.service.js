@@ -22,7 +22,6 @@ export default class Service {
 
     static listenThreads = (uid) => async dispatch => {
 
-        console.log('sulod before');
         dispatch(this.unListenThreads());
         this.threadsListener = FirebaseClient.instance
             .firestore()
@@ -30,7 +29,6 @@ export default class Service {
             // .where('isDeleted', '==', false)
             .where('memberIds', 'array-contains', uid)
             .onSnapshot(data => {
-                console.log('sulod');
                     const threads = data.docs.map(data => ({id: data.id, ...data.data()}));
                     dispatch(setThreads(threads));
                     threads.forEach((thread) => {

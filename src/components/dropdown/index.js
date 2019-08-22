@@ -12,8 +12,8 @@ export default class Container extends React.PureComponent<> {
     render() {
         return (
             <div class="btn-group">
-                <button onClick={this.toggle} class="btn btn-primary dropdown-toggle" type="button">Basic dropdown</button>
-                <div class="dropdown-menu" style={{display: this.state.isOpen ? 'block' : 'none'}}>
+                <button onClick={this.toggle} class="btn btn-primary dropdown-toggle" type="button">{this.props.title}</button>
+                <div class="dropdown-menu" onClick={this.toggle} style={{display: this.state.isOpen ? 'block' : 'none'}}>
                     {this.props.children}
                 </div>
             </div>

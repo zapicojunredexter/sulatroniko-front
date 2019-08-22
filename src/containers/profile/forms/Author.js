@@ -4,6 +4,7 @@ export default class Container extends React.PureComponent<> {
     constructor(props){
         super(props);
         this.state = {
+            name: '',
             email: '',
             phone: '',
             biography: '',
@@ -27,6 +28,7 @@ export default class Container extends React.PureComponent<> {
 
     handleSubmit = () => {
         const params = {
+            name: this.state.name,
             email: this.state.email,
             phone: this.state.phone,
             biography: this.state.biography,

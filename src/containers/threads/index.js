@@ -10,11 +10,13 @@ class Container extends React.PureComponent<> {
         message: null,
         files: null,
         selectedThread: null,
+        filterMessages: '',
     };
 
     componentDidMount(){
         this.handleChangeThread();
     }
+
     handleSelectThread = (threadId) => {
         console.log(threadId);
         window.location.href = `#${threadId}`;
@@ -40,7 +42,6 @@ class Container extends React.PureComponent<> {
     }
 
     renderThreadDetails = (thread) => {
-        console.log('ayayay', thread);
         return (
             <button onClick={() => this.handleSelectThread(thread.id)} class="btn btn-mdb-color btn-sm" style={{width: '100%',marginTop: '-.2em'}}>
                 <span style={{float:'left', fontSize: 15}}>{thread.threadDisplayable && thread.threadDisplayable.name}</span>
@@ -148,6 +149,8 @@ class Container extends React.PureComponent<> {
         )
     }
     render() {
+        console.log('zzz', this.props.threads);
+        const messageDetails = this.props.threads.filter(thread => thread.threadDisplayable && thread.threadDisplayable.name.toUpperCase().indexOf(this.state.filterMessages.toUpperCase()) >= 0);
         return (
             <main class="pt-5 mx-lg-5 threads-page-container">
                 <div class="container-fluid mt-5">
@@ -162,12 +165,12 @@ class Container extends React.PureComponent<> {
 
                                     <div class="row container">
                                         <div class="col-md-4 thread-details-container">
-                                            <div class="container-fluid" style={{paddingBottom: '2em'}}>
+                                            <div value={this.state.filterMessages} onChange={ev => this.setState({filterMessages: ev.target.value})} class="container-fluid" style={{paddingBottom: '2em'}}>
                                                 <input class="form-control form-control-md" type="text" placeholder="Search" style={{marginTop: '1em'}} /><br/>
                                                 <hr style={{marginTop: '-.5em'}} />
                                                 <p>Recent Messages</p>
                                                 
-                                                {this.props.threads.map(thread => this.renderThreadDetails(thread))}
+                                                {messageDetails.map(thread => this.renderThreadDetails(thread))}
                                         
                                             </div>
                                         </div>
