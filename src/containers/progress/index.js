@@ -169,6 +169,7 @@ class Container extends React.PureComponent<> {
         return (
             <main class="pt-5 mx-lg-5 threads-page-container">
                 <div class="container-fluid mt-5">
+                    hehey{JSON.stringify(this.props.ownManuscripts)}
                     {this.props.ownManuscripts.map(this.renderManuscript)}
                     {/*
                     <button

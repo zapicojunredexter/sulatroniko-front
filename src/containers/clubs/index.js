@@ -4,6 +4,8 @@ import Dropdown from '../../components/dropdown';
 import UserService from '../../services/user.service';
 import ThreadsService from '../../services/threads.service';
 import config from '../../config/config';
+
+import AssignManuscriptModal from './modals/AssignManuscriptModal';
 import "./styles.scss"
 
 const testData = [
@@ -42,6 +44,7 @@ class Container extends React.PureComponent<> {
         selectedClub: 'Publisher',
         fetchedData: [],
         selectedData: null,
+        selectedPublisher: null,
     };
 
     componentDidMount(){
@@ -56,6 +59,10 @@ class Container extends React.PureComponent<> {
                 window.location.href=`${config.front_url}/threads#${result.id}`;
             })
             .catch(err => alert(err.message));
+    }
+
+    handleClickManuscript = (publisher) => {
+        this.setState({selectedPublisher: publisher});
     }
 
 
@@ -202,35 +209,10 @@ class Container extends React.PureComponent<> {
         const displayData = this.state.fetchedData.filter(data => data.type === this.state.selectedClub);
         return (
             <main class="pt-5 mx-lg-5 threads-page-container">
-
-              <div class="modal fade show" style={{display:'block'}} id="modalLoginAvatarDemo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
-                  <div class="modal-content">
-
-                    <div class="modal-header">
-                      <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%281%29.jpg" class="rounded-circle img-responsive"
-                        alt="Avatar photo" />
-                    </div>
-                    <div class="modal-body text-center mb-1">
-
-                      <h5 class="mt-1 mb-2">Maria Doe</h5>
-
-                      <div class="md-form ml-0 mr-0">
-                        <input type="password" type="text" id="form1" class="form-control ml-0" />
-                        <label for="form1" class="ml-0">Enter password</label>
-                      </div>
-
-                      <div class="text-center mt-4">
-                        <button class="btn btn-cyan">Login
-                          <i class="fas fa-sign-in-alt ml-1"></i>
-                        </button>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
+                <AssignManuscriptModal
+                    selectedPublisher={this.state.selectedPublisher}
+                    closeModal={() => this.setState({selectedPublisher: null})}
+                />
                 <div class="container-fluid mt-5">
                     {this.state.selectedData ? (
                         <>
@@ -247,7 +229,9 @@ class Container extends React.PureComponent<> {
                                 
                                 <div class="d-flex justify-content-center">
                                 <i onClick={() => this.handleClickMessage(this.state.selectedData.id)} class="fa fa-envelope mr-3 ml-3 mt-3"></i>
-                                <i class="fas fa-newspaper mr-3 ml-3 mt-3"></i>
+                                {this.state.selectedData.type === 'Publisher' && (
+                                    <i onClick={() => this.handleClickManuscript(this.state.selectedData)} class="fas fa-newspaper mr-3 ml-3 mt-3"></i>
+                                )}
                                 </div>
                             </div>
                             <div class="card-body row" style={{margin: 20}}>

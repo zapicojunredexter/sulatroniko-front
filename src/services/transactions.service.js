@@ -49,4 +49,19 @@ export default class Service {
             console.error(err);
         }
     }
+    static createTransaction = (params) => async (dispatch, getState) => {
+        try {
+            const { userStore: { uid } } = getState();
+            const payload = {
+                ...params,
+                status: 'pending',
+                authorId: uid,
+            }
+            const results = await RequestService.post(`proposals`,payload);
+            const json = await responseToJson(results);
+            return json;
+        } catch (err) {
+            console.error(err);
+        }
+    }
 };
