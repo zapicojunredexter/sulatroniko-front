@@ -7,6 +7,7 @@ import publishersStore from './publishers/publishers.reducer';
 import userStore from './user/user.reducer';
 import threadsStore from './threads/threads.reducer';
 import copywriterStore from './copywriters/copywriters.reducer';
+import transactionsStore from './transactions/transactions.reducer';
 
 
 const userPersistConfig = {
@@ -20,5 +21,6 @@ export default combineReducers({
     publishersStore,
     threadsStore,
     copywriterStore,
+    transactionsStore,
     userStore: persistReducer(userPersistConfig, userStore),
 });

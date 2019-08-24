@@ -111,14 +111,18 @@ class Container extends React.PureComponent<> {
                             return (
                                 <tr>
                                     <td>{copywriter.name}</td>
-                                    <td>{copywriter.field}</td>
+                                    <td>{!copywriter.deleted ? (
+                                        <span class="badge badge-success">Active</span>
+                                    ) : (
+                                        <span class="badge badge-dark">Inactive</span>
+                                    )}</td>
                                     <td>{copywriter.status}</td>
-                                        <td><button onClick={() => this.handleClickMessage(copywriter.id)} className="btn btn-secondary">message</button></td>
+                                        <td><button onClick={() => this.handleClickMessage(copywriter.id)}>message</button></td>
                                     </tr>
                             );
                         })}
                     </table>
-                    <button onClick={() => this.setState({isAdding: true})} className="btn btn-secondary">ADD</button>
+                    <button onClick={() => this.setState({isAdding: true})}>ADD</button>
                 </div>
             </main>
         );

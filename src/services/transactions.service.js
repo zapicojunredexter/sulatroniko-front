@@ -1,13 +1,15 @@
 import RequestService from './request.service';
 import { responseToJson } from '../utils/parsing.helper';
-import { setPublishers } from '../redux/publishers/publishers.action';
+import { setTransactions } from '../redux/transactions/transactions.action';
 
 export default class Service {
-    static fetchAll = () => async dispatch => {
+    static fetchAll = () => async (dispatch, getState) => {
         try {
-            // const results = await RequestService.get('publishers');
-            // const json = await responseToJson(results);
-            // dispatch(setPublishers(json));
+            const results = await RequestService.get('proposals');
+            const json = await responseToJson(results);
+            const { userStore: { uid } } = getState();
+            const filtered = json.filter(transaction => transaction.authorId === uid || transaction.publisherId);
+            dispatch(setTransactions(filtered));
         } catch (err) {
             console.error(err);
         }
@@ -29,6 +31,7 @@ export default class Service {
             // const { userStore: { uid } } = getState();
             const payload = {
                 ...params,
+                deleted: false,
             };
             const results = await RequestService.post(`transactions/progress/${id}`,payload);
             await responseToJson(results);
@@ -49,6 +52,15 @@ export default class Service {
             console.error(err);
         }
     }
+    static deleteCard = (transactionId, cardId) => async (dispatch, getState) => {
+        try {
+            alert('idelete'+transactionId + "dasdas"+cardId)
+            // const results = await RequestService.patch(`transactions/progress/${id}`,payload);
+            // await responseToJson(results);
+        } catch (err) {
+            console.error(err);
+        }
+    }
     static createTransaction = (params) => async (dispatch, getState) => {
         try {
             const { userStore: { uid } } = getState();
@@ -62,6 +74,22 @@ export default class Service {
             return json;
         } catch (err) {
             console.error(err);
+        }
+    }
+    static approveTransaction = (id) => async (dispatch, getState) => {
+        try {
+            const results = await RequestService.post(`transactions/approve/${id}`);
+            const json = await responseToJson(results);
+        } catch (err) {
+            throw err;
+        }
+    }
+    static assignCopywriter = (transactionId, params) => async (dispatch, getState) => {
+        try {
+            const results = await RequestService.post(`proposals/${transactionId}`, params);
+            const json = await responseToJson(results);
+        } catch (err) {
+            throw err;
         }
     }
 };

@@ -7,8 +7,14 @@ import AuthorsService from '../../services/authors.service';
 import ThreadsService from '../../services/threads.service';
 import Navigation from '../../components/navigation';
 import TransactionService from '../../services/transactions.service';
+import AssignManuscriptCopywriter from './modals/AssignManuscriptCopywriter';
 import config from '../../config/config';
 
+const initialState = {
+    transaction: null,
+    progressData: [],
+    assignCopywriterTransaction: null,
+}
 class Container extends React.PureComponent<> {
     
     // componentDidMount() {
@@ -16,14 +22,18 @@ class Container extends React.PureComponent<> {
     // }
     state = {
         // nullable
-        transaction: null,
-        progressData: [],
+        ...initialState,
     };
 
     componentDidMount(){
+        this.props.fetchAll();
         if(window.location.hash.substr(1)) {
             this.listenTransaction(window.location.hash.substr(1));
         }
+    }
+
+    componentWillUnmount(){
+        this.unlistenTransaction();
     }
 
     handleSelectTransaction = (transactionId) => {
@@ -31,7 +41,18 @@ class Container extends React.PureComponent<> {
         this.listenTransaction(transactionId);
     }
 
+    unlistenTransaction = () => {
+        if(this.cardsListener) {
+            this.setState({...initialState});
+            this.cardsListener();
+        }
+    }
+
     listenTransaction = async (transactionId) => {
+        this.unlistenTransaction();
+        if(!transactionId) {
+            return;
+        }
         const doc = FirebaseClient.instance
             .firestore()
             .collection('transactions')
@@ -46,18 +67,19 @@ class Container extends React.PureComponent<> {
             .collection('progress')
             .onSnapshot(data => {
                     const result = data.docs.map(data => ({id: data.id, cardId: data.id, ...data.data()}));
+                    const notDeleted = result.filter(data => !data.deleted);
                     const progressData = [
                         {
                             columnKey: 'pending',
-                            cardData: result.filter(res => res.status === 'pending')
+                            cardData: notDeleted.filter(res => res.status === 'pending')
                         },
                         {
                             columnKey: 'doing',
-                            cardData: result.filter(res => res.status === 'doing')
+                            cardData: notDeleted.filter(res => res.status === 'doing')
                         },
                         {
                             columnKey: 'done',
-                            cardData: result.filter(res => res.status === 'done')
+                            cardData: notDeleted.filter(res => res.status === 'done')
                         },
                     ];
                     this.setState({progressData});
@@ -74,9 +96,17 @@ class Container extends React.PureComponent<> {
         }
     }
 
+    deleteCard = (cardId) => {
+        if(this.state.transaction && this.state.transaction.id) {
+            this.props.editCard(this.state.transaction.id, {
+                cardId,
+                deleted: true,
+            });
+        }
+    }
+
     changeProgressOrder = (dragged, target) => {
         if(this.state.transaction && this.state.transaction.id) {
-            console.log('ginaedit dapat', dragged, target);
             // this.props.editCard(this.state.transaction.id, {
             //     cardId,
             //     status,
@@ -140,7 +170,24 @@ class Container extends React.PureComponent<> {
         ];
     }
 
-    renderManuscript = (manuscript) => {
+    renderTransaction = transaction => {
+        const { manuscript, copywriter } = transaction;
+        const renderBadge = () => {
+            const statusObj = {
+                pending: {
+                    className: 'badge badge-warning',
+                    label: 'Pending',
+                },
+                approved: {
+                    className: 'badge badge-primary',
+                    label: 'Approved',
+                },
+            };
+            if(!statusObj[transaction.status]){
+                return <span class="badge badge-secondary">{transaction.status}</span>;
+            }
+            return (<span class={statusObj[transaction.status].className}>{statusObj[transaction.status].label}</span>);
+        }
         return (
             <div
                 style={{marginBottom: 20}}
@@ -149,6 +196,8 @@ class Container extends React.PureComponent<> {
             >
                 <div class="card-header">
                     {manuscript.title}
+                    &nbsp;
+                    {renderBadge()}
                 </div>
                 <div class="card-body row">
                     <div class="col-sm-3">
@@ -156,9 +205,34 @@ class Container extends React.PureComponent<> {
                     </div>
                     <div class="col-sm-6">
                         {manuscript.synopsis}
+                        <p>Copywriter: {copywriter ? copywriter.name : 'None'}</p>
                     </div>
                     <div class="col-sm-3 d-flex justify-content-center">
-                        VIEW PROGRESS
+                        <button onClick={() => this.handleSelectTransaction(transaction.id)}>VIEW PROGRESS</button>
+                        {this.props.userType === 'publisher' && transaction.status === 'pending' && (
+                            <>      
+                                <button onClick={() => {
+                                    this.props.approveTransaction(transaction.id)
+                                        .then(res => {
+                                            this.props.fetchAll();
+                                            alert('success');
+                                        })
+                                        .catch(err => err.message);
+                                }}>APPROVE</button>
+                            </>
+                        )}
+                        {this.props.userType === 'publisher' && (
+                            <>
+                                {true ? (
+                                    <button onClick={() => {
+                                        this.setState({assignCopywriterTransaction: transaction})
+                                    }}>ASSIGN COPYWRITER</button>
+                                ): (
+                                    <button onClick={() => {}}>DISASSIGN COPYWRITER</button>
+                                )}
+                            </>
+                        )}
+                                
                     </div>
                 </div>
             </div>
@@ -168,9 +242,39 @@ class Container extends React.PureComponent<> {
 
         return (
             <main class="pt-5 mx-lg-5 threads-page-container">
+                <AssignManuscriptCopywriter
+                    assignCopywriterTransaction={this.state.assignCopywriterTransaction}
+                    closeModal={() => this.setState({assignCopywriterTransaction: null})}
+                />
                 <div class="container-fluid mt-5">
-                    hehey{JSON.stringify(this.props.ownManuscripts)}
-                    {this.props.ownManuscripts.map(this.renderManuscript)}
+                    {this.state.transaction || false ? (
+                        <>
+                            <Board
+                                canDrag={this.props.userType === 'copywriter'}
+                                canAdd={this.props.userType === 'copywriter'}
+                                addCard={(description) => {
+                                    if(this.state.transaction && this.state.transaction.id) {
+                                        this.props.addCard(
+                                            this.state.transaction.id,
+                                            {
+                                                description,
+                                            }
+                                        );
+                                    }
+                                }}
+                                goBack={() => this.handleSelectTransaction('')}
+                                headerLabel={this.state.transaction && this.state.transaction.manuscript && this.state.transaction.manuscript.title}
+                                deleteCard={this.deleteCard}
+                                boardData={this.state.progressData}
+                                changeProgressStatus={this.changeProgressStatus}
+                                changeProgressOrder={this.changeProgressOrder}
+                            />
+                        </>
+                    ) : (
+                        <>
+                        {this.props.transactions.map(this.renderTransaction)}
+                        </>
+                    )}
                     {/*
                     <button
                         onClick={() => {
@@ -186,11 +290,6 @@ class Container extends React.PureComponent<> {
                     >addCard</button>
                     */}
                     
-                    <Board
-                        boardData={this.state.progressData}
-                        changeProgressStatus={this.changeProgressStatus}
-                        changeProgressOrder={this.changeProgressOrder}
-                    />
                 </div>
             </main>
         );
@@ -249,12 +348,16 @@ class Container extends React.PureComponent<> {
 
 const mapStateToProps = state => ({
     ownManuscripts: getOwnManuscripts(state),
+    userType: state.userStore.type,
+    transactions: state.transactionsStore.transactions
 });
 
 const mapDispatchToProps = dispatch => ({
+    approveTransaction: (id) => dispatch(TransactionService.approveTransaction(id)),
     fetch: (id) => dispatch(TransactionService.fetchOne(id)),
+    fetchAll: () => dispatch(TransactionService.fetchAll()),
     addCard: (id, params) => dispatch(TransactionService.addCard(id, params)),
-    editCard: (id, params) => dispatch(TransactionService.editCard(id, params))
+    editCard: (id, params) => dispatch(TransactionService.editCard(id, params)),
 });
 
 export default connect(

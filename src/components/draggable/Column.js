@@ -12,10 +12,12 @@ export default class Container extends React.PureComponent<> {
             <div
                 onDragOver={(ev) => ev.preventDefault()}
                 onDrop={(e) => this.onDrop(e)}
+                class="card"
             >
-                {this.props.columnId}
-                <div>
-                    cards
+                <div class="card-header">
+                    <h5>{this.props.columnId && this.props.columnId.toUpperCase()}</h5>
+                </div>
+                <div style={{padding: 10}}>
                     {this.props.cards}
                 </div>
             </div>

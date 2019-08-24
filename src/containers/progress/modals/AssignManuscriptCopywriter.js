@@ -1,21 +1,19 @@
-import { MDBInputSelect } from "mdbreact";
 import React from "react";
 import { connect } from "react-redux";
+import { getMyCopywriters } from '../../../redux/copywriters/copywriters.selector';
 import TransactionService from '../../../services/transactions.service';
-
-import { getOwnManuscripts } from '../../../redux/manuscripts/manuscripts.selector';
-import "./styles.scss";
 
 class Container extends React.PureComponent<> {
   state = {
     visible: true,
-    selectedManuscript: null,
+    selctedCopywriter: null,
   };
 
 
   render() {
-    const isOpen = !!this.props.selectedPublisher;
-    const { selectedPublisher, ownManuscripts } = this.props;
+    const isOpen = !!this.props.assignCopywriterTransaction;
+    const { assignCopywriterTransaction, copywriters } = this.props;
+    const copywriter = copywriters.find(cw => cw.id === this.state.selctedCopywriter);
     return (
       <div
         class={`modal fade ${isOpen && `show`}`}
@@ -33,7 +31,7 @@ class Container extends React.PureComponent<> {
           <div class="modal-content">
             <div class="modal-header">
               <img
-                src={selectedPublisher && selectedPublisher.displayPic || "default-user.jpg"}
+                src={copywriter && copywriter.displayPic || "default-user.jpg"}
                 class="rounded-circle img-responsive"
                 alt="Avatar photo"
               />
@@ -43,15 +41,15 @@ class Container extends React.PureComponent<> {
                   Assigning Manuscript to:
               </h7>
               <h5 class="mt-1 mb-2">
-                {selectedPublisher && selectedPublisher.name}
+                {copywriter && copywriter.name}
               </h5>
 
               <div class="md-form ml-0 mr-0">
                   
-                    <select onChange={ev => this.setState({ selectedManuscript: ev.target.value })} className="browser-default custom-select">
-                        <option>Choose your option</option>
-                        {ownManuscripts.map(manuscript => (
-                            <option value={manuscript.id}>{(manuscript.title)}</option>
+                    <select onChange={ev => this.setState({ selctedCopywriter: ev.target.value })} className="browser-default custom-select">
+                    <option>Choose your option</option>
+                        {copywriters.map(cw => (
+                            <option value={cw.id}>{cw.name}</option>
                         ))}
                     </select>
         
@@ -62,17 +60,17 @@ class Container extends React.PureComponent<> {
                     type="button"
                     onClick={() => {
                         const params = {
-                            manuscriptId: this.state.selectedManuscript,
-                            publisherId: selectedPublisher.id
+                            copywriterId: this.state.selctedCopywriter,
                         };
-                        this.props.addTransaction(params)
-                        .then(res => {
-                            console.log('tuarang res', res);
-                            alert('success');
-                        })
-                        .catch(err => {
-                            alert(err.message)
-                        });
+                        this.props.assignCopywriter(assignCopywriterTransaction.id, params)
+                            .then(res => {
+                                alert('success');
+                                this.props.closeModal();
+                                this.props.fetchAll();
+                            })
+                            .catch(err => {
+                                alert(err.message)
+                            });
                     }}
                     class="btn btn-cyan"
                 >
@@ -89,11 +87,12 @@ class Container extends React.PureComponent<> {
 }
 
 const mapStateToProps = state => ({
-    ownManuscripts: getOwnManuscripts(state),
+    copywriters: getMyCopywriters(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-    addTransaction: (params) => dispatch(TransactionService.createTransaction(params))
+    fetchAll: () => dispatch(TransactionService.fetchAll()),
+    assignCopywriter: (transacId, params) => dispatch(TransactionService.assignCopywriter(transacId, params))
 });
 
 export default connect(

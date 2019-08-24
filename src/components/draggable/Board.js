@@ -1,29 +1,59 @@
 import React from 'react';
 import Column from './Column';
 import Card from './Card';
+import AddCardModal from './AddCardModal';
 import './styles.scss';
 
 export default class Container extends React.PureComponent<> {
-    renderCard = (cardId, label) => {
+    state = {
+        isAddingCard: false,
+    }
+    renderCard = (card) => {
         return (
-            <Card key={cardId} changeProgressOrder={this.props.changeProgressOrder} cardId={cardId} label={label} />
+            <Card
+                isDraggable={this.props.canDrag}
+                key={card.cardId}
+                changeProgressOrder={this.props.changeProgressOrder}
+                cardId={card.cardId}
+                label={card.description}
+                onClickDelete={() => this.props.deleteCard(card.id)}
+            />
         );
     }
     render() {
+        const {canAdd} = this.props;
         return (
-            <div>
-                {this.props.boardData.map(board => {
-                    const cards = board.cardData.map(card => this.renderCard(card.cardId, card.label))
-                    return (      
-                        <Column
-                            cards={cards}
-                            columnId={board.columnKey}
-                            key={board.columnKey}
-                            changeProgressStatus={this.props.changeProgressStatus}
-                        />  
-                    )
-                })}
-            </div>
+            <>
+                <AddCardModal
+                    visible={this.state.isAddingCard}
+                    handleAddCard={this.props.addCard}
+                    closeModal={() => this.setState({isAddingCard: false})}
+                />
+                <div class="card">
+                    <div class="card-header">
+                        <h4>{this.props.headerLabel}</h4>
+                        <button onClick={this.props.goBack}>GO BACK</button>
+                        {canAdd && (
+                            <button onClick={() => this.setState({isAddingCard: true})}>ADD CARD</button>
+                        )}
+                    </div>
+                    <div class="card-body row">
+                        {this.props.boardData.map(board => {
+                            const cards = board.cardData.map(this.renderCard)
+                            return (    
+                                <div class="col-sm-4">  
+                                    <Column
+                                        cards={cards}
+                                        columnId={board.columnKey}
+                                        key={board.columnKey}
+                                        changeProgressStatus={this.props.changeProgressStatus}
+                                    />  
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
+            </>
         );
         return (
             <div>
