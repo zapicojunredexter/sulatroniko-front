@@ -84,4 +84,12 @@ export default class Service {
         }
     }
 
+    static editThread = (id, params) => async (dispatch, getState) => {
+        try {
+            const results = await RequestService.patch(`threads/${id}`, params);
+            const json = await responseToJson(results);
+        } catch (err) {
+            console.error(err);
+        }
+    }
 };

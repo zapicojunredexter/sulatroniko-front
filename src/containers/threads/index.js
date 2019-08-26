@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getThreads } from '../../redux/threads/threads.selector';
 import ThreadsService from '../../services/threads.service';
 import Navigation from '../../components/navigation';
+import UserService from '../../services/user.service';
 import './styles.scss';
 
 class Container extends React.PureComponent<> {
@@ -11,15 +12,29 @@ class Container extends React.PureComponent<> {
         files: null,
         selectedThread: null,
         filterMessages: '',
+        fetchedData: [],
     };
 
     componentDidMount(){
         this.handleChangeThread();
+        this.fetchUsers();
+    }
+
+    fetchUsers = () => {
+        this.props.fetchAllUserTypes()
+            .then((res) => {
+                this.setState({fetchedData: res});
+            })
+            .catch(err => alert(err.message))
     }
 
     handleSelectThread = (threadId) => {
         console.log(threadId);
         window.location.href = `#${threadId}`;
+        const newThread = {
+            newMessageCount: 0
+        };
+        this.props.editThread(threadId, newThread);
         this.handleChangeThread();
     }
 
@@ -45,7 +60,7 @@ class Container extends React.PureComponent<> {
         return (
             <button onClick={() => this.handleSelectThread(thread.id)} class="btn btn-mdb-color btn-sm" style={{width: '100%',marginTop: '-.2em'}}>
                 <span style={{float:'left', fontSize: 15}}>{thread.threadDisplayable && thread.threadDisplayable.name}</span>
-                {thread.messages.length ? <span class="badge badge-danger" style={{float:'left',marginTop: '.7em',marginLeft: '1em'}}>{thread.messages.length}</span> : null}
+                {thread.newMessageCount ? <span class="badge badge-danger" style={{float:'left',marginTop: '.7em',marginLeft: '1em'}}>{thread.newMessageCount}</span> : null}
                 {/*
                 <span style={{border: '1px solid white',borderRadius: '50%',padding: '2px 8px',float:'right'}}>C</span>
                 */}
@@ -101,7 +116,9 @@ class Container extends React.PureComponent<> {
                         <div class="form-group" style={{marginTop: '-1em !important'}}>
                         <textarea class="form-control" rows="10" placeholder="Type your message"></textarea>
                         </div>
-                        <p class="blue-grey-text" style={{fontSize: 10}}>Tip: For technical issues related to the SulaTroniko site or questions, please contact <a class="blue-text">Support</a>.</p>
+                        
+                        {JSON.stringify(this.state.fetchedData)}
+                        <p class="blue-grey-text" style={{fontSize: 10}}>Tip: For technical issues related to the SulaTroniko site or questions, please contact <a class="blue-text" href="mailto:sulatroniko@sulatroniko.com">Support</a>.</p>
                         <div style={{float:'right', marginBottom: '1.5em'}}>
                             <button type="button" class="btn btn-primary btn-sm">Upload File</button>
                             <button type="button" class="btn btn-primary btn-sm">Send</button>
@@ -225,7 +242,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    fetchAllUserTypes: () => dispatch(UserService.fetchAllUserTypes()),
     sendMessage:(params) => dispatch(ThreadsService.sendMessage(params)),
+    editThread: (id, params) => dispatch(ThreadsService.editThread(id, params)),
 });
 
 export default connect(

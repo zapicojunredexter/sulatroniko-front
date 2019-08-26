@@ -9,6 +9,9 @@ class Container extends React.PureComponent<> {
     state = {
         file: null,
     }
+    componentDidMount(){
+
+    }
     handleFileUpload = () => {
         const filesList = Object.values(this.state.files);
         this.props.testUpload(filesList).then(() => alert('SUBMIT CHAT MESSAGE TO SERVER')).catch(err => alert('ERROR' + err.message));
@@ -19,6 +22,7 @@ class Container extends React.PureComponent<> {
 
         return (
             <main class="pt-5 mx-lg-5 threads-page-container">
+
                 <div class="container-fluid mt-5">
                     <div className="dashboard__container">
                         <div className="dashboard__list-wrapper">

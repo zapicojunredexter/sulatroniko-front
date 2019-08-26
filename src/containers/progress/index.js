@@ -8,12 +8,14 @@ import ThreadsService from '../../services/threads.service';
 import Navigation from '../../components/navigation';
 import TransactionService from '../../services/transactions.service';
 import AssignManuscriptCopywriter from './modals/AssignManuscriptCopywriter';
+import FinishManuscriptModal from './modals/FinishManuscriptModal';
 import config from '../../config/config';
 
 const initialState = {
     transaction: null,
     progressData: [],
     assignCopywriterTransaction: null,
+    finishManuscriptTransaction: null
 }
 class Container extends React.PureComponent<> {
     
@@ -223,13 +225,10 @@ class Container extends React.PureComponent<> {
                         )}
                         {this.props.userType === 'publisher' && (
                             <>
-                                {true ? (
-                                    <button onClick={() => {
+                                <button onClick={() => {
                                         this.setState({assignCopywriterTransaction: transaction})
-                                    }}>ASSIGN COPYWRITER</button>
-                                ): (
-                                    <button onClick={() => {}}>DISASSIGN COPYWRITER</button>
-                                )}
+                                    }}>{copywriter ? `REASSIGN` : `ASSIGN`} COPYWRITER</button>
+                                
                             </>
                         )}
                                 
@@ -246,12 +245,17 @@ class Container extends React.PureComponent<> {
                     assignCopywriterTransaction={this.state.assignCopywriterTransaction}
                     closeModal={() => this.setState({assignCopywriterTransaction: null})}
                 />
+                <FinishManuscriptModal
+                    finishManuscriptTransaction={this.state.finishManuscriptTransaction}
+                    closeModal={() => this.setState({finishManuscriptTransaction: null})}
+                />
                 <div class="container-fluid mt-5">
                     {this.state.transaction || false ? (
                         <>
                             <Board
                                 canDrag={this.props.userType === 'copywriter'}
                                 canAdd={this.props.userType === 'copywriter'}
+                                canConclude={this.props.userType === 'copywriter'}
                                 addCard={(description) => {
                                     if(this.state.transaction && this.state.transaction.id) {
                                         this.props.addCard(
@@ -268,6 +272,7 @@ class Container extends React.PureComponent<> {
                                 boardData={this.state.progressData}
                                 changeProgressStatus={this.changeProgressStatus}
                                 changeProgressOrder={this.changeProgressOrder}
+                                onClickFinish={() => this.setState({finishManuscriptTransaction: this.state.transaction})}
                             />
                         </>
                     ) : (

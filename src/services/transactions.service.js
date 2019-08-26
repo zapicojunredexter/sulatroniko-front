@@ -8,7 +8,7 @@ export default class Service {
             const results = await RequestService.get('proposals');
             const json = await responseToJson(results);
             const { userStore: { uid } } = getState();
-            const filtered = json.filter(transaction => transaction.authorId === uid || transaction.publisherId);
+            const filtered = json.filter(transaction => transaction.authorId === uid || transaction.publisherId === uid || transaction.copywriterId === uid);
             dispatch(setTransactions(filtered));
         } catch (err) {
             console.error(err);
@@ -74,6 +74,19 @@ export default class Service {
             return json;
         } catch (err) {
             console.error(err);
+        }
+    }
+
+    static updateTransaction = (id, params) => async (dispatch, getState) => {
+        try {
+            const results = await RequestService.patch(`transactions/${id}`, params);
+            const json = await responseToJson(results);
+            return json;
+            // const { userStore: { uid } } = getState();
+            // const filtered = json.filter(transaction => transaction.authorId === uid || transaction.publisherId);
+            // dispatch(setTransactions(filtered));
+        } catch (err) {
+            throw err;
         }
     }
     static approveTransaction = (id) => async (dispatch, getState) => {

@@ -19,11 +19,13 @@ export default class Container extends React.PureComponent<> {
                 class="card"
                 style={{marginBottom: 10}}
             >
-                <div style={{position: 'absolute', right: 0}}>
-                    <span class="close" onClick={() => this.props.onClickDelete(this.props.cardId)} style={{marginRight: 5}}>
-                        <span>&times;</span>
-                    </span>
-                </div>
+                {this.props.isDraggable && (
+                    <div style={{position: 'absolute', right: 0}}>
+                        <span class="close" onClick={() => this.props.onClickDelete(this.props.cardId)} style={{marginRight: 5}}>
+                            <span>&times;</span>
+                        </span>
+                    </div>
+                )}
                 <div
                     class="card-body"
                 >

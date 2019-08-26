@@ -201,6 +201,10 @@ class Container extends React.PureComponent<> {
                     <input value={this.state.selectedData.services} style={{borderColor: 'transparent'}} type="text" id="field" class="form-control" disabled/>
                     <label class={'active'} for="field">Services</label>
                 </div>
+                <div class="md-form col-sm-12">
+                    <hr />
+                    somethingg
+                </div>
             </>
         );
     }

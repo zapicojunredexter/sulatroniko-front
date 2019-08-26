@@ -17,6 +17,7 @@ import FirebaseClient from './modules/FirebaseClient';
 import Footer from './components/footer';
 import Header from './components/header';
 import AuthService from './services/auth.service';
+import Notifications from './components/notifications';
 
 import './App.css';
 
@@ -88,10 +89,13 @@ class App extends React.PureComponent<> {
 
     render(){
         return (
-            <Switch>
-                <Route path="/login" render={this.loginRoute} />
-                <Route path="/" render={this.protectedRoute} />
-            </Switch>
+            <>
+                <Notifications />
+                <Switch>
+                    <Route path="/login" render={this.loginRoute} />
+                    <Route path="/" render={this.protectedRoute} />
+                </Switch>
+            </>
         );
     }
 }

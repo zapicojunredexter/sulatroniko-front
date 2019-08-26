@@ -21,7 +21,7 @@ export default class Container extends React.PureComponent<> {
         );
     }
     render() {
-        const {canAdd} = this.props;
+        const {canAdd,canConclude} = this.props;
         return (
             <>
                 <AddCardModal
@@ -36,6 +36,10 @@ export default class Container extends React.PureComponent<> {
                         {canAdd && (
                             <button onClick={() => this.setState({isAddingCard: true})}>ADD CARD</button>
                         )}
+                        {canConclude && (
+                            <button onClick={() => this.props.onClickFinish()}>CONFIRM</button>
+                        )}
+
                     </div>
                     <div class="card-body row">
                         {this.props.boardData.map(board => {
