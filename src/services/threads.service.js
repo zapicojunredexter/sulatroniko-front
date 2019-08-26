@@ -55,7 +55,6 @@ export default class Service {
             };
             const results = await RequestService.post('threads', payload);
             const json = await responseToJson(results);
-            alert('success');
             return json;
         } catch (err) {
             console.error(err);
