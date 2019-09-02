@@ -43,18 +43,18 @@ export default class Container extends React.PureComponent<> {
                                 </div>
                                 <div class="md-form">
                                     <textarea value={this.state.synopsis} onChange={(event) => this.setState({synopsis: event.target.value})} id="field" class="md-textarea form-control" rows="2"></textarea>
-                                    <label class={this.state.synopsis && 'active'} for="field">Synopsis</label>
+                                    <label class={this.state.synopsis && 'active'} for="field">Short Summary</label>
                                 </div>
                             </div>
                             <div className="col-sm-6">
 
                                 <div class="md-form">
-                                    <input style={{borderColor: 'transparent'}} onChange={(event) => this.setState({manuscript: event.target.files})} type="file" id="field" class="form-control" accept="image/jpg, image/jpg, image/png," />
-                                    <label class={'active'} for="field">Manuscript</label>
+                                    <input style={{borderColor: 'transparent'}} onChange={(event) => this.setState({manuscript: event.target.files})} type="file" id="field" class="form-control" />
+                                    <label class={'active'} for="field">Manuscript File</label>
                                 </div>
                                 <div class="md-form">
-                                    <input style={{borderColor: 'transparent'}} onChange={(event) => this.setState({cover: event.target.files})} type="file" id="field" class="form-control"/>
-                                    <label class={'active'} for="field">Cover</label>
+                                    <input style={{borderColor: 'transparent'}} onChange={(event) => this.setState({cover: event.target.files})} type="file" id="field" class="form-control" accept="image/jpg, image/jpg, image/png,"/>
+                                    <label class={'active'} for="field">Proposed Cover</label>
                                 </div>
                                 <button type="button" onClick={this.props.cancel} className="btn btn-danger">Cancel</button>
                                 {'      '}

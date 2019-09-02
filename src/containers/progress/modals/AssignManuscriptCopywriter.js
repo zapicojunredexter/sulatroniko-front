@@ -65,8 +65,8 @@ class Container extends React.PureComponent<> {
                         this.props.assignCopywriter(assignCopywriterTransaction.id, params)
                             .then(res => {
                                 alert('success');
-                                this.props.closeModal();
-                                this.props.fetchAll();
+                                this.props.fetchAll()
+                                    .then(this.props.closeModal);
                             })
                             .catch(err => {
                                 alert(err.message)

@@ -41,7 +41,8 @@ const samplePublisher = {"id":"ZBDiz1PISsxJa7aUbOfT","createdAt":{"_seconds":156
 
 class Container extends React.PureComponent<> {
     state = {
-        selectedClub: 'Publisher',
+        selectedClub: 'All',
+        searchKey: '',
         fetchedData: [],
         selectedData: null,
         selectedPublisher: null,
@@ -210,7 +211,12 @@ class Container extends React.PureComponent<> {
     }
 
     render() {
-        const displayData = this.state.fetchedData.filter(data => data.type === this.state.selectedClub);
+        // const displayData = this.state.fetchedData.filter(data => data.type === this.state.selectedClub || this.state.selectedClub === 'All');
+        const filteredByClub = this.state.fetchedData.filter(data => data.type === this.state.selectedClub || this.state.selectedClub === 'All');
+        const filteredBySearch = filteredByClub.filter(data => data.name.toLowerCase().indexOf(this.state.searchKey.toLowerCase()) > -1 || !this.state.searchKey);
+        
+        const displayData = filteredBySearch;
+        // const displayData = this.state.fetchedData.filter(data => true);
         return (
             <main class="pt-5 mx-lg-5 threads-page-container">
                 <AssignManuscriptModal
@@ -248,15 +254,22 @@ class Container extends React.PureComponent<> {
                         </>
                         ) : (
                         <>
-                                <Dropdown title="Clubs">
-                                    <a class="dropdown-item" onClick={() => this.setState({selectedClub: 'Publisher'})}>Publisher</a>
-                                    <a class="dropdown-item" onClick={() => this.setState({selectedClub: 'Author'})}>Author</a>
-                                    <a class="dropdown-item" onClick={() => this.setState({selectedClub: 'Copywriter'})}>Copywriter</a>
-                                </Dropdown>
-
-                                <div class="row wow fadeIn">
-                                    {displayData.map(this.renderCard)}
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <select class="form-control" onChange={ev => this.setState({selectedClub: ev.target.value})}>
+                                        <option value="All" selected={this.state.selectedClub === 'All'}>All</option>
+                                        <option value="Publisher" selected={this.state.selectedClub === 'Publishers'}>Publishers</option>
+                                        <option value="Author" selected={this.state.selectedClub === 'Authors'}>Authors</option>
+                                        <option value="Copywriter" selected={this.state.selectedClub === 'Copywriters'}>Copywriters</option>
+                                    </select>
                                 </div>
+                                <div class="col-sm-6">
+                                    <input placeholder="Search..." onChange={ev => this.setState({searchKey: ev.target.value})} class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row wow fadeIn">
+                                {displayData.map(this.renderCard)}
+                            </div>
                         </>
                     )}
                 </div>

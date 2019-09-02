@@ -89,14 +89,15 @@ export default class Service {
             throw err;
         }
     }
-    static approveTransaction = (id) => async (dispatch, getState) => {
+    static approveProposal = (id) => async (dispatch, getState) => {
         try {
-            const results = await RequestService.post(`transactions/approve/${id}`);
+            const results = await RequestService.post(`transactions/approve/proposal/${id}`);
             const json = await responseToJson(results);
         } catch (err) {
             throw err;
         }
     }
+    
     static assignCopywriter = (transactionId, params) => async (dispatch, getState) => {
         try {
             const results = await RequestService.post(`proposals/${transactionId}`, params);

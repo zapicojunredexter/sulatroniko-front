@@ -9,13 +9,15 @@ import Navigation from '../../components/navigation';
 import TransactionService from '../../services/transactions.service';
 import AssignManuscriptCopywriter from './modals/AssignManuscriptCopywriter';
 import FinishManuscriptModal from './modals/FinishManuscriptModal';
+import PublishManuscriptModal from './modals/PublishManuscriptModal';
 import config from '../../config/config';
 
 const initialState = {
     transaction: null,
     progressData: [],
     assignCopywriterTransaction: null,
-    finishManuscriptTransaction: null
+    finishManuscriptTransaction: null,
+    publishManuscriptTransaction: null,
 }
 class Container extends React.PureComponent<> {
     
@@ -176,11 +178,11 @@ class Container extends React.PureComponent<> {
         const { manuscript, copywriter } = transaction;
         const renderBadge = () => {
             const statusObj = {
-                pending: {
+                'proposal': {
                     className: 'badge badge-warning',
                     label: 'Pending',
                 },
-                approved: {
+                'proposal approved': {
                     className: 'badge badge-primary',
                     label: 'Approved',
                 },
@@ -210,24 +212,76 @@ class Container extends React.PureComponent<> {
                         <p>Copywriter: {copywriter ? copywriter.name : 'None'}</p>
                     </div>
                     <div class="col-sm-3 d-flex justify-content-center">
-                        <button onClick={() => this.handleSelectTransaction(transaction.id)}>VIEW PROGRESS</button>
-                        {this.props.userType === 'publisher' && transaction.status === 'pending' && (
+                        {transaction.status === 'proposal approved' && (
+                            <>
+                                <button onClick={() => this.handleSelectTransaction(transaction.id)}>VIEW PROGRESS</button>
+                            </>
+                        )}
+                        {this.props.userType === 'publisher' && transaction.status === 'proposal' && (
                             <>      
                                 <button onClick={() => {
-                                    this.props.approveTransaction(transaction.id)
+                                    this.props.approveProposal(transaction.id)
                                         .then(res => {
                                             this.props.fetchAll();
                                             alert('success');
                                         })
                                         .catch(err => err.message);
-                                }}>APPROVE</button>
+                                }}>ACCEPT PROPOSAL</button>
                             </>
                         )}
-                        {this.props.userType === 'publisher' && (
+                        {this.props.userType === 'publisher' && transaction.status === 'published' && (
+                            <>      
+                                <button onClick={() => {
+                                    const params = {
+                                        cover: null,
+                                        synopsis: null,
+                                        status: 'finished'
+                                    };
+                                    this.props.updateTransaction(transaction.id, params)
+                                        .then(() => {
+                                            alert('success');
+                                            this.props.fetchAll();
+                                        })
+                                        .catch(err => alert(err.message));
+                                }}>UNPUBLISH BOOK</button>
+                            </>
+                        )}
+                        {this.props.userType === 'publisher' && transaction.status === `proposal approved` && (
                             <>
                                 <button onClick={() => {
                                         this.setState({assignCopywriterTransaction: transaction})
                                     }}>{copywriter ? `REASSIGN` : `ASSIGN`} COPYWRITER</button>
+                                
+                            </>
+                        )}
+                        {this.props.userType === 'publisher' && transaction.status === `finished` && (
+                            <>
+                                <button onClick={() => {
+
+                                    this.setState({publishManuscriptTransaction: transaction})
+                                    // this.props.publishTransaction(transaction.id)
+                                    //     .then(() => {
+                                    //         alert('SUCCESS')
+                                    //     })
+                                    //     .catch(err => alert(err.message))
+                                    }}>PUBLISH BOOK</button>
+                                
+                            </>
+                        )}
+                        {this.props.userType === 'publisher' && transaction.status === `finished` && (
+                            <>
+                                <button onClick={() => {
+                                    const params = {
+                                        status: 'proposal approved',
+                                        manuscript: null,
+                                    };
+                                    this.props.updateTransaction(transaction.id, params)
+                                        .then(() => {
+                                            alert('success');
+                                            this.props.fetchAll();
+                                        })
+                                        .catch(err => alert(err.message));
+                                    }}>RE DO COPYWRITING</button>
                                 
                             </>
                         )}
@@ -248,6 +302,10 @@ class Container extends React.PureComponent<> {
                 <FinishManuscriptModal
                     finishManuscriptTransaction={this.state.finishManuscriptTransaction}
                     closeModal={() => this.setState({finishManuscriptTransaction: null})}
+                />
+                <PublishManuscriptModal
+                    publishManuscriptTransaction={this.state.publishManuscriptTransaction}
+                    closeModal={() => this.setState({publishManuscriptTransaction: null})}
                 />
                 <div class="container-fluid mt-5">
                     {this.state.transaction || false ? (
@@ -358,11 +416,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    approveTransaction: (id) => dispatch(TransactionService.approveTransaction(id)),
+    approveProposal: (id) => dispatch(TransactionService.approveProposal(id)),
     fetch: (id) => dispatch(TransactionService.fetchOne(id)),
     fetchAll: () => dispatch(TransactionService.fetchAll()),
     addCard: (id, params) => dispatch(TransactionService.addCard(id, params)),
     editCard: (id, params) => dispatch(TransactionService.editCard(id, params)),
+    updateTransaction: (id, params) => dispatch(TransactionService.updateTransaction(id, params))
 });
 
 export default connect(
