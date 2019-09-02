@@ -35,7 +35,6 @@ export default class Service {
             };
             const results = await RequestService.post(`transactions/progress/${id}`,payload);
             await responseToJson(results);
-            alert('success');
         } catch (err) {
             console.error(err);
         }
@@ -66,7 +65,7 @@ export default class Service {
             const { userStore: { uid } } = getState();
             const payload = {
                 ...params,
-                status: 'pending',
+                status: 'proposal',
                 authorId: uid,
             }
             const results = await RequestService.post(`proposals`,payload);

@@ -2,13 +2,24 @@ import React from "react";
 import { connect } from "react-redux";
 import { getMyCopywriters } from '../../../redux/copywriters/copywriters.selector';
 import TransactionService from '../../../services/transactions.service';
-
+import NotificationService from '../../../services/notification.service';
 class Container extends React.PureComponent<> {
   state = {
     visible: true,
     selctedCopywriter: null,
   };
 
+
+  sendNotifToCw= () => {
+    const copywriterId = this.props.assignCopywriterTransaction && this.props.assignCopywriterTransaction.copywriterId;
+    const manuscript = this.props.assignCopywriterTransaction && this.props.assignCopywriterTransaction.manuscript;
+    if(copywriterId) {
+        NotificationService.sendNotif(copywriterId, {
+            title: 'Assigned to Manuscript',
+            message: `You have been assigend to copywriter ${manuscript.title}`,
+        });
+    }
+}
 
   render() {
     const isOpen = !!this.props.assignCopywriterTransaction;
@@ -65,6 +76,7 @@ class Container extends React.PureComponent<> {
                         this.props.assignCopywriter(assignCopywriterTransaction.id, params)
                             .then(res => {
                                 alert('success');
+                                this.sendNotifToCw();
                                 this.props.fetchAll()
                                     .then(this.props.closeModal);
                             })

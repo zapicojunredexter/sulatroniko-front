@@ -82,4 +82,15 @@ export default class Service {
             console.error(err);
         }
     }
+
+    static setNotifIsRead = id => async (dispatch, getState) => {
+        try {
+            const { uid } = getState().userStore;
+            const results = await RequestService.get(`users/notifs/${uid}/${id}`);
+            await responseToJson(results);
+            // dispatch(setPublishers(json));
+        } catch (err) {
+            console.error(err);
+        }
+    }
 };

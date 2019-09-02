@@ -2,6 +2,7 @@ import { MDBInputSelect } from "mdbreact";
 import React from "react";
 import { connect } from "react-redux";
 import TransactionService from '../../../services/transactions.service';
+import NotificationService from '../../../services/notification.service';
 
 import { getOwnManuscripts } from '../../../redux/manuscripts/manuscripts.selector';
 import "./styles.scss";
@@ -67,8 +68,12 @@ class Container extends React.PureComponent<> {
                         };
                         this.props.addTransaction(params)
                         .then(res => {
-                            console.log('tuarang res', res);
                             alert('success');
+                            NotificationService.sendNotif(selectedPublisher.id, {
+                                title: 'New Proposal',
+                                message: 'You have a new Proposal Request'
+                            });
+                            this.props.closeModal();
                         })
                         .catch(err => {
                             alert(err.message)

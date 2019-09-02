@@ -3,6 +3,7 @@ import { setThreads, setThreadContact } from '../redux/threads/threads.action';
 import RequestService from './request.service';
 import StorageService from './storage.service';
 import { responseToJson } from '../utils/parsing.helper';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 export default class Service {
     threadsListener;
@@ -21,7 +22,6 @@ export default class Service {
     }
 
     static listenThreads = (uid) => async dispatch => {
-
         dispatch(this.unListenThreads());
         this.threadsListener = FirebaseClient.instance
             .firestore()
@@ -31,6 +31,11 @@ export default class Service {
             .onSnapshot(data => {
                     const threads = data.docs.map(data => ({id: data.id, ...data.data()}));
                     dispatch(setThreads(threads));
+                    const newMessages = threads.filter(thread => thread.newMessageCount);
+                    if(newMessages.length){
+                        NotificationManager.warning('New Messages', 'You have unread messages', 5000, () => {
+                        });
+                    }
                     threads.forEach((thread) => {
                         dispatch(Service.fetchThreadMembers(thread.memberIds));
                     });
@@ -76,7 +81,6 @@ export default class Service {
             }
             const results = await RequestService.post(`threads/${params.threadId}`, payload);
             const json = await responseToJson(results);
-            alert('success');
 
         } catch (err) {
             console.error(err);

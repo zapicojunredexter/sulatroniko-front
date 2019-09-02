@@ -2,6 +2,7 @@ import { MDBInputSelect } from "mdbreact";
 import React from "react";
 import { connect } from "react-redux";
 import TransactionService from '../../../services/transactions.service';
+import NotificationService from '../../../services/notification.service';
 import StorageService from '../../../services/storage.service';
 
 class Container extends React.PureComponent<> {
@@ -24,12 +25,22 @@ class Container extends React.PureComponent<> {
     this.props.updateTransaction(transactionId, params)
         .then(() => {
             alert('success');
+            this.sendNotifToAuthor();
             this.props.fetchAll()
                 .then(this.props.closeModal)
         })
         .catch(err => alert(err.message));
-    // const coverFiles = Object.values(params.cover);
-    // const coverPaths = await this.props.uploadManuscripts(coverFiles);
+  }
+
+  sendNotifToAuthor = () => {
+      const authorId = this.props.publishManuscriptTransaction && this.props.publishManuscriptTransaction.authorId;
+      const manuscript = this.props.publishManuscriptTransaction && this.props.publishManuscriptTransaction.manuscript;
+      if(authorId) {
+          NotificationService.sendNotif(authorId, {
+              title: 'Book Published',
+              message: `Your manuscript ${manuscript.title} has been published`,
+          });
+      }
   }
 
   render() {

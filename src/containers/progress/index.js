@@ -7,6 +7,7 @@ import AuthorsService from '../../services/authors.service';
 import ThreadsService from '../../services/threads.service';
 import Navigation from '../../components/navigation';
 import TransactionService from '../../services/transactions.service';
+import NotificationService from '../../services/notification.service';
 import AssignManuscriptCopywriter from './modals/AssignManuscriptCopywriter';
 import FinishManuscriptModal from './modals/FinishManuscriptModal';
 import PublishManuscriptModal from './modals/PublishManuscriptModal';
@@ -222,8 +223,15 @@ class Container extends React.PureComponent<> {
                                 <button onClick={() => {
                                     this.props.approveProposal(transaction.id)
                                         .then(res => {
-                                            this.props.fetchAll();
                                             alert('success');
+                                            this.props.fetchAll();
+                                            const authorId = transaction && transaction.authorId;
+                                            const manuscriptTitle = transaction && transaction.manuscript && transaction.manuscript.title;
+                                            if(authorId)
+                                                NotificationService.sendNotif(authorId, {
+                                                    message: `Your manuscript ${manuscriptTitle} has been approved`,
+                                                    title: `Proposal approved`
+                                                });
                                         })
                                         .catch(err => err.message);
                                 }}>ACCEPT PROPOSAL</button>
