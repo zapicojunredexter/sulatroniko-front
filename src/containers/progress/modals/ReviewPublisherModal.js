@@ -4,9 +4,11 @@ import { getMyCopywriters } from '../../../redux/copywriters/copywriters.selecto
 import TransactionService from '../../../services/transactions.service';
 import NotificationService from '../../../services/notification.service';
 import ReviewService from '../../../services/reviews.service';
+import Ratings from '../../../components/ratings';
 class Container extends React.PureComponent<> {
   state = {
     comment: null,
+    score: 3,
   };
 
   render() {
@@ -38,8 +40,13 @@ class Container extends React.PureComponent<> {
               </h5>
               <div class="md-form">
                   <textarea value={this.state.comment} onChange={(event) => this.setState({comment: event.target.value})} id="field" class="md-textarea form-control" rows="2"></textarea>
-                  <label for="field">comment</label>
+                  <label for="field">Comments</label>
               </div>
+              <div class="md-form" style={{display: 'flex', justifyContent: 'center'}}>
+                  <Ratings score={this.state.score} setScore={score => this.setState({score})} />
+              </div>
+
+              
 
 
               <div class="text-center mt-4">
@@ -49,11 +56,17 @@ class Container extends React.PureComponent<> {
                         console.log('dasdas', reviewPublisherTransaction);
                         const params = {
                             comment: this.state.comment,
+                            score: this.state.score,
                             revieweeId: reviewPublisherTransaction && reviewPublisherTransaction.publisherId,
                         };
                         this.props.rateUser(params)
                             .then(() => {
                                 alert('success');
+                                NotificationService.sendNotif(reviewPublisherTransaction && reviewPublisherTransaction.publisherId,
+                                    {
+                                        title: 'New rating',
+                                        message: `You have been rated by ${reviewPublisherTransaction && reviewPublisherTransaction.author && reviewPublisherTransaction.author.name}`,
+                                    });
                                 this.props.closeModal();
                             })
                             .catch(err => alert(err.message));

@@ -56,6 +56,16 @@ export default class Container extends React.PureComponent<> {
                                     <input style={{borderColor: 'transparent'}} onChange={(event) => this.setState({cover: event.target.files})} type="file" id="field" class="form-control" accept="image/jpg, image/jpg, image/png,"/>
                                     <label class={'active'} for="field">Proposed Cover</label>
                                 </div>
+                                <button type="button" onClick={() => {
+                                    this.props.setFreeFieldsManuscript(this.state.id, { deleted: true })
+                                        .then(() => {
+                                            alert('success');
+                                            this.props.fetchAll().catch(() => {});
+                                            this.props.cancel();
+                                        })
+                                        .catch(err => alert(err.message));
+                                }} className="btn btn-danger">Delete</button>
+                                {'      '}
                                 <button type="button" onClick={this.props.cancel} className="btn btn-danger">Cancel</button>
                                 {'      '}
                                 <button type="button" className="btn btn-success" onClick={this.handleEdit}>Submit</button>
@@ -86,6 +96,7 @@ export default class Container extends React.PureComponent<> {
                             <input className="form-control" placeholder="cover" onChange={(event) => this.setState({cover: event.target.files})} type="file" />
                             
                             <br /><br />
+                            {'      '}
                             <button type="button" onClick={this.props.cancel} className="btn btn-danger">Cancel</button>
                             {'      '}
                             <button type="button" className="btn btn-success" onClick={this.handleEdit}>Edit</button>

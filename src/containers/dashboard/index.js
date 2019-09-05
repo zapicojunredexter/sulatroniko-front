@@ -5,30 +5,53 @@ import StorageService from '../../services/storage.service';
 import { getPublicManuscripts } from '../../redux/manuscripts/manuscripts.selector';
 import "./styles.scss"
 
+const arrContains = (str, substr) => {
+    try {
+        const lowerStr = str.toLowerCase();
+        const lowerSubstr = substr.toLowerCase();
+
+        return lowerStr.indexOf(lowerSubstr) > -1;
+    } catch (err) {
+        return false;
+    }
+
+}
 class Container extends React.PureComponent<> {
     state = {
-        file: null,
+        filterManuscripts: '',
+        filterBooks: '',
     }
     componentDidMount(){
 
     }
-    handleFileUpload = () => {
-        const filesList = Object.values(this.state.files);
-        this.props.testUpload(filesList).then(() => alert('SUBMIT CHAT MESSAGE TO SERVER')).catch(err => alert('ERROR' + err.message));
-    }
     render() {
         const published = this.props.manuscripts.filter(manuscript => manuscript.status === 'published');
         const unpublished = this.props.manuscripts.filter(manuscript => manuscript.status === 'unpublished');
+        const manuscripts = this.props.manuscripts;
+        const transactions = this.props.transactions.filter(transaction => transaction.status === 'published');
+
+        const keyedManuscripts = manuscripts.filter(manuscript => (
+            !this.state.filterManuscripts
+            || arrContains(manuscript.title,this.state.filterManuscripts)
+            || arrContains(manuscript.createdAt,this.state.filterManuscripts)
+            || arrContains(manuscript.author && manuscript.author.name,this.state.filterManuscripts)
+        ));
+        const keyedBooks = transactions.filter(({manuscript, author} )=> (
+            !this.state.filterBooks
+            || arrContains(manuscript.title,this.state.filterBooks)
+            || arrContains(manuscript.createdAt,this.state.filterBooks)
+            || arrContains(author && author.name,this.state.filterBooks)
+        ));
 
         return (
             <main class="pt-5 mx-lg-5 threads-page-container">
-
                 <div class="container-fluid mt-5">
                     <div className="dashboard__container">
                         <div className="dashboard__list-wrapper">
-                            <button className="btn btn-info dashboard__button">Unpublished</button>
+                            <h4 style={{fontWeight: 'bold'}}>MANUSCRIPTS</h4>
+                            <input value={this.state.filterManuscripts} onChange={ev => this.setState({filterManuscripts: ev.target.value})} class="form-control" style={{width: 200}} placeholder="Search..." />
                             <div className="row">
-                                {unpublished.map(manuscript => {
+                                {keyedManuscripts.map(manuscript => {
                                     return (
                                         <div className="col-sm-3">
                                             <div className="dashboard__manuscript-card__container">
@@ -42,9 +65,10 @@ class Container extends React.PureComponent<> {
                                     );
                                 })}
                             </div>
-                            <button className="btn btn-info dashboard__button">Published</button>
+                            <h4 style={{fontWeight: 'bold'}}>BOOKS</h4>
+                            <input value={this.state.filterBooks} onChange={ev => this.setState({filterBooks: ev.target.value})} class="form-control" style={{width: 200}} placeholder="Search..." />
                             <div className="row">
-                                {published.map(manuscript => {
+                                {keyedBooks.map(({manuscript}) => {
                                     return (
                                         <div className="col-sm-3">
                                             <div className="dashboard__manuscript-card__container">
@@ -67,76 +91,13 @@ class Container extends React.PureComponent<> {
                 </div>
             </main>
         );
-        return (
-            <div className="dashboard__container">
-                <div className="dashboard__list-wrapper">
-                    <button className="btn btn-info dashboard__button">Unpublished</button>
-                    <div className="row">
-                        {unpublished.map(manuscript => {
-                            return (
-                                <div className="col-sm-3">
-                                    <div className="dashboard__manuscript-card__container">
-                                        <a href={manuscript.manuscript} target="_blank">
-                                            
-                                            <img alt={manuscript.title} src={manuscript.cover} />
-
-                                        </a>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                    <button className="btn btn-info dashboard__button">Published</button>
-                    <div className="row">
-                        {published.map(manuscript => {
-                            return (
-                                <div className="col-sm-3">
-                                    <div className="dashboard__manuscript-card__container">
-                                        <a href={manuscript.manuscript} target="_blank">
-                                            
-                                            <img alt={manuscript.title} src={manuscript.cover} />
-
-                                        </a>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
-                {
-                    /*JSON.stringify(this.props.manuscripts)
-                */
-                }
-            </div>
-        );
-        return (
-            <div>
-                dashboard/index.js
-                <button onClick={this.props.logout}>logout</button>
-
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <input type="file" onChange={event => {
-
-                    const selectedFiles = event.target.files;
-                    this.setState({files: selectedFiles});
-                }} multiple />
-                <button onClick={this.handleFileUpload}>SUBMIT FILE</button>
-            </div>
-        );
     }
 }
 
 
 const mapStateToProps = state => ({
     manuscripts: getPublicManuscripts(state),
+    transactions: state.transactionsStore.transactions,
 });
 
 const mapDispatchToProps = dispatch => ({

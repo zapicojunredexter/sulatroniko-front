@@ -23,7 +23,11 @@ class Container extends React.PureComponent<> {
     }
 
     componentDidMount() {
-        this.props.fetchAll();
+        this.fetchAll();
+    }
+
+    fetchAll = async () => {
+        await this.props.fetchAll();
     }
 
     cancel = () => this.setState({
@@ -75,7 +79,6 @@ class Container extends React.PureComponent<> {
                 synopsis: params.synopsis,
             };
             // adding manuscript
-            
             await this.props.updateManuscript(payload);
             alert('success');
             this.setState({
@@ -155,7 +158,7 @@ class Container extends React.PureComponent<> {
     }
 
     renderEditManuscript = () => {
-        return <EditManuscript toBeUpdated={this.state.isEditingManuscript} handleEdit={this.handleEdit} cancel={this.cancel} />;
+        return <EditManuscript toBeUpdated={this.state.isEditingManuscript} handleEdit={this.handleEdit} setFreeFieldsManuscript={this.props.setFreeFieldsManuscript} cancel={this.cancel} fetchAll={this.fetchAll} />;
         return (
             <div>
                 <div className="manuscript-form-wrapper">
@@ -198,7 +201,7 @@ a
             <div className="row">
                 <div className="col-md-12"></div>
                 <div className="col-md-6">
-                    Unpublished <i  onClick={() => this.setState({isAddingManuscript: true})} class="fas fa-plus"></i>
+                    Unpublished <button type="button" onClick={() => this.setState({isAddingManuscript: true})}>ADD NEW MANUSCRIPT</button>
                     <div className="manuscripts-list-wrapper">
                         {unpublished.map(manuscript => this.renderManuscript(manuscript))}
                     </div>
@@ -276,6 +279,7 @@ const mapDispatchToProps = dispatch => ({
     fetchAll: () => dispatch(ManuscriptsService.fetchAll()),
     addManuscript: (params) => dispatch(ManuscriptsService.add(params)),
     updateManuscript: (params) => dispatch(ManuscriptsService.edit(params)),
+    setFreeFieldsManuscript: (id, params) => dispatch(ManuscriptsService.setFreeFields(id,params)), 
     uploadManuscripts: (file) => dispatch(StorageService.uploadFile(file))
 });
 

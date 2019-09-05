@@ -6,15 +6,13 @@ export default class Service {
 
     static rateUser = params => async (dispatch, getState) => {
         try {
-            alert('TODO SUBMIT'+JSON.stringify(params));
-            // const { uid } = getState().userStore;
-            // const payload = {
-            //     ...params,
-            //     reviewerId: uid,
-            // };
-            // const results = await RequestService.post(`reviews`, payload);
-            // await responseToJson(results);
-            // dispatch(setPublishers(json));
+            const { uid } = getState().userStore;
+            const payload = {
+                ...params,
+                reviewerId: uid,
+            };
+            const results = await RequestService.post(`reviews`, payload);
+            await responseToJson(results);
         } catch (err) {
             throw err;
         }

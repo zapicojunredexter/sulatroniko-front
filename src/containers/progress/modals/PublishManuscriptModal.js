@@ -12,9 +12,6 @@ class Container extends React.PureComponent<> {
   };
 
   finishManuscript = async () => {
-      this.props.onPublish(this.props.publishManuscriptTransaction || {sample: true, id: 123, author: {name: 'sdasda', id: 1234}});
-      this.props.closeModal();
-      return;
     const coverFiles = Object.values(this.state.cover);
     const coverPaths = await this.props.uploadManuscript(coverFiles);
     const cover = coverPaths[0];
@@ -29,6 +26,8 @@ class Container extends React.PureComponent<> {
         .then(() => {
             alert('success');
             // ari dapat
+            this.props.onPublish(this.props.publishManuscriptTransaction);
+      
             this.sendNotifToAuthor();
             this.props.fetchAll()
                 .then(this.props.closeModal)
@@ -69,7 +68,7 @@ class Container extends React.PureComponent<> {
             </div>
             <div class="modal-body text-center">
               <div class="md-form">
-                  <input style={{borderColor: 'transparent', marginBottom: 50}} onChange={(event) => this.setState({cover: event.target.files})} type="file" id="field" class="form-control" />
+                  <input style={{borderColor: 'transparent', marginBottom: 50}} onChange={(event) => this.setState({cover: event.target.files})} type="file" id="field" class="form-control" accept="image/jpg, image/jpg, image/png," />
                                     
                   <label class="active" for="card-details">Cover Photo</label>
                   

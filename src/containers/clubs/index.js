@@ -4,6 +4,7 @@ import Dropdown from '../../components/dropdown';
 import UserService from '../../services/user.service';
 import ThreadsService from '../../services/threads.service';
 import config from '../../config/config';
+import Ratings from '../../components/ratings';
 
 import AssignManuscriptModal from './modals/AssignManuscriptModal';
 import "./styles.scss"
@@ -73,6 +74,24 @@ class Container extends React.PureComponent<> {
             this.setState({fetchedData: res});
         })
         // .catch(err => alert(err.message))
+    }
+
+    renderReviewCard = (data) => {
+        return (
+            <div style={{margin: '0px 15px 30px 15px'}}>
+                <div style={{display: 'flex', alignItems: 'center', height: 60, flexDirection: 'row'}}>
+                    <img src="default-user.png" style={{height: '100%',borderRadius: '50%', border: 'solid rgba(0,0,0,.1) 1px'}} />
+                    <div style={{marginLeft: 10, flex: 1, display: 'flex', flexDirection: 'column',justifyContent: 'center'}}>
+                        <div style={{flex: 1, fontSize: 20, fontWeight: 'bold'}}>{data.reviewee && data.reviewee.name}</div>
+                        <span style={{fontSize: 12}}>{data.date}</span>
+                        <Ratings score={data.score} />
+                    </div>
+                </div>
+                <p style={{marginTop: 10}}>
+                    {data.comment}
+                </p>
+            </div>
+        );
     }
 
     renderCard = (data) => {
@@ -155,6 +174,29 @@ class Container extends React.PureComponent<> {
                     <input value={this.state.selectedData.biography} style={{borderColor: 'transparent'}} type="text" id="field" class="form-control" disabled/>
                     <label class={'active'} for="field">Bio</label>
                 </div>
+                <div class="md-form col-sm-12">
+                    <hr />
+                </div>
+                <div class="col-sm-12" style={{borderLeft: 'solid rgba(0,0,0,.1) 2px', padding: '0px 15px 0px 15px'}}>
+                    {[
+                        {
+                            score: 1,
+                            date: '12-12-2001',
+                            reviewee: {
+                                name: 'jaja',
+                            },
+                            comment: 'testing',
+                        },
+                        {
+                            score: 3,
+                            date: '12-12-2001',
+                            reviewee: {
+                                name: 'dasdas',
+                            },
+                            comment: 'testing 1',
+                        },
+                    ].map(this.renderReviewCard)}
+                </div>
             </>
         );
     }
@@ -205,6 +247,24 @@ class Container extends React.PureComponent<> {
                 <div class="md-form col-sm-12">
                     <hr />
                 </div>
+                <div class="col-sm-12" style={{borderLeft: 'solid rgba(0,0,0,.1) 2px', padding: '0px 15px 0px 15px'}}>
+                    {[
+                        {
+                            score: 1,
+                            reviewee: {
+                                name: 'jaja',
+                            },
+                            comment: 'testing',
+                        },
+                        {
+                            score: 3,
+                            reviewee: {
+                                name: 'dasdas',
+                            },
+                            comment: 'testing 1',
+                        },
+                    ].map(this.renderReviewCard)}
+                </div>
             </>
         );
     }
@@ -212,7 +272,7 @@ class Container extends React.PureComponent<> {
     render() {
         // const displayData = this.state.fetchedData.filter(data => data.type === this.state.selectedClub || this.state.selectedClub === 'All');
         const filteredByClub = this.state.fetchedData.filter(data => data.type === this.state.selectedClub || this.state.selectedClub === 'All');
-        const filteredBySearch = filteredByClub.filter(data => data.name.toLowerCase().indexOf(this.state.searchKey.toLowerCase()) > -1 || !this.state.searchKey);
+        const filteredBySearch = filteredByClub.filter(data => (data.name && data.name.toLowerCase().indexOf(this.state.searchKey.toLowerCase()) > -1) || !this.state.searchKey);
         
         const displayData = filteredBySearch;
         // const displayData = this.state.fetchedData.filter(data => true);
@@ -237,9 +297,9 @@ class Container extends React.PureComponent<> {
                                 <img src={this.state.selectedData.displayPic || "default-user.jpg"} alt="profile_img" class="img-fluid rounded-circle mx-auto d-block" style={{margin: '0.5em', width: 200, height: 200}} />
                                 
                                 <div class="d-flex justify-content-center">
-                                <i onClick={() => this.handleClickMessage(this.state.selectedData.id)} class="fa fa-envelope mr-3 ml-3 mt-3"></i>
-                                {this.state.selectedData.type === 'Publisher' && (
-                                    <i onClick={() => this.handleClickManuscript(this.state.selectedData)} class="fas fa-newspaper mr-3 ml-3 mt-3"></i>
+                                <button onClick={() => this.handleClickMessage(this.state.selectedData.id)} class="fa fa-envelope mr-3 ml-3 mt-3">send message</button>
+                                {this.state.selectedData.type === 'Publisher' && this.props.userType === 'author' && (
+                                    <button onClick={() => this.handleClickManuscript(this.state.selectedData)} class="fas fa-newspaper mr-3 ml-3 mt-3">assign manuscript</button>
                                 )}
                                 </div>
                             </div>
@@ -279,6 +339,7 @@ class Container extends React.PureComponent<> {
 
 
 const mapStateToProps = state => ({
+    userType: state.userStore.type
 });
 
 const mapDispatchToProps = dispatch => ({

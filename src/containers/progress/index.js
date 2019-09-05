@@ -222,12 +222,12 @@ class Container extends React.PureComponent<> {
                         </p>
                     </div>
                     <div class="col-sm-3 justify-content-center">
-                        {(this.props.userType === 'copywriter' && transaction.status === 'published') || true && (
+                        {(this.props.userType === 'copywriter' && transaction.status === 'published') && (
                             <>
                                 <button onClick={() => this.setState({reviewManuscriptTransaction: transaction})}>ADD BOOK REVIEW</button>
                             </>
                         )}
-                        {(this.props.userType === 'author' && transaction.status === 'published') || true && (
+                        {(this.props.userType === 'author' && transaction.status === 'published') && (
                             <>
                                 <button onClick={() => this.setState({reviewPublisherTransaction: transaction})}>LEAVE FEEDBACK FOR PUBLISHER</button>
                             </>
@@ -281,7 +281,7 @@ class Container extends React.PureComponent<> {
                                 
                             </>
                         )}
-                        {this.props.userType === 'publisher' && transaction.status === `finished` || true && (
+                        {this.props.userType === 'publisher' && transaction.status === `finished` && (
                             <>
                                 <button onClick={() => {
 
@@ -327,6 +327,10 @@ class Container extends React.PureComponent<> {
                     reviewPublisherTransaction={this.state.reviewPublisherTransaction}
                     closeModal={() => this.setState({reviewPublisherTransaction: null})}
                 />
+                <ReviewAuthorModal
+                    reviewAuthorTransaction={this.state.reviewAuthorTransaction}
+                    closeModal={() => this.setState({reviewAuthorTransaction: null})}
+                />
                 <AssignManuscriptCopywriter
                     assignCopywriterTransaction={this.state.assignCopywriterTransaction}
                     closeModal={() => this.setState({assignCopywriterTransaction: null})}
@@ -346,10 +350,6 @@ class Container extends React.PureComponent<> {
                 <BookReviewModal
                     reviewManuscriptTransaction={this.state.reviewManuscriptTransaction}
                     closeModal={() => this.setState({reviewManuscriptTransaction: null})}
-                />
-                <ReviewAuthorModal
-                    reviewAuthorTransaction={this.state.reviewAuthorTransaction}
-                    closeModal={() => this.setState({reviewAuthorTransaction: null})}
                 />
                 <div class="container-fluid mt-5">
                     {this.state.transaction || false ? (

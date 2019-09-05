@@ -30,6 +30,18 @@ export default class Service {
             throw err;
         }
     }
+
+    static setFreeFields = (id, params) => async (dispatch, getState) => {
+        try {
+            const results = await RequestService.patch(`manuscripts/${id}`,params);
+            await responseToJson(results);
+        } catch (err) {
+
+            console.error(err);
+            throw err;
+        }
+    }
+
     static add = (params) => async (dispatch, getState) => {
         try {
             const { userStore: { uid } } = getState();

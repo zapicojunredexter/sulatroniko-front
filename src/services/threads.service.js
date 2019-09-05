@@ -21,7 +21,7 @@ export default class Service {
         }
     }
 
-    static listenThreads = (uid) => async dispatch => {
+    static listenThreads = (uid) => async (dispatch, getState) => {
         dispatch(this.unListenThreads());
         this.threadsListener = FirebaseClient.instance
             .firestore()
@@ -31,10 +31,20 @@ export default class Service {
             .onSnapshot(data => {
                     const threads = data.docs.map(data => ({id: data.id, ...data.data()}));
                     dispatch(setThreads(threads));
-                    const newMessages = threads.filter(thread => thread.newMessageCount);
-                    if(newMessages.length){
-                        NotificationManager.warning('New Messages', 'You have unread messages', 5000, () => {
-                        });
+                    const newThreads = threads.filter(thread => thread.newMessageCount);
+                    if(newThreads.length){
+                        let hasNewMessage = false;
+                        newThreads.forEach(thread => {
+                            const { messages } = thread;
+                            const { uid } = getState().userStore;
+                            const lastMessage = messages[messages.length - 1];
+                            if (lastMessage.userId !== uid) {
+                                hasNewMessage = true;
+                            }
+                        })
+                        if(hasNewMessage) {
+                            NotificationManager.warning('New Messages', 'You have unread messages', 5000, () => {});
+                        }
                     }
                     threads.forEach((thread) => {
                         dispatch(Service.fetchThreadMembers(thread.memberIds));

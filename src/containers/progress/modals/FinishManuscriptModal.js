@@ -20,7 +20,11 @@ class Container extends React.PureComponent<> {
         manuscript,
     };
     this.props.updateTransaction(transactionId, params)
-        .then(() => alert('success'))
+        .then(() => {
+            alert('success');
+            this.props.fetchAll();
+            this.props.closeModal();
+        })
         .catch(err => alert(err.message));
     // const coverFiles = Object.values(params.cover);
     // const coverPaths = await this.props.uploadManuscripts(coverFiles);
@@ -74,6 +78,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    fetchAll: () => dispatch(TransactionService.fetchAll()),
     uploadManuscript: (files) => dispatch(StorageService.uploadFile(files)),
     updateTransaction: (id, params) => dispatch(TransactionService.updateTransaction(id, params)),
 });

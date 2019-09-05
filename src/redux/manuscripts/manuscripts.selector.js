@@ -7,7 +7,7 @@ export const getOwnManuscripts = store => {
         const { uid } = userStore(store);
         const { manuscripts } = manuscriptsStore(store);
 
-        return manuscripts.filter(manuscript => manuscript.authorId === uid);
+        return manuscripts.filter(manuscript => manuscript.authorId === uid && !manuscript.deleted);
     } catch (err) {
         console.error(err);
         return [];
