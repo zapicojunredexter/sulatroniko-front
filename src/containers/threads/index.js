@@ -27,7 +27,7 @@ class Container extends React.PureComponent<> {
       .then(res => {
         this.setState({ fetchedData: res });
       })
-      .catch(err => alert(err.message));
+    //   .catch(err => alert(err.message));
   };
 
   getChoices = () => {

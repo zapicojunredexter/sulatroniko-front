@@ -72,7 +72,7 @@ class Container extends React.PureComponent<> {
         .then((res) => {
             this.setState({fetchedData: res});
         })
-        .catch(err => alert(err.message))
+        // .catch(err => alert(err.message))
     }
 
     renderCard = (data) => {
@@ -204,7 +204,6 @@ class Container extends React.PureComponent<> {
                 </div>
                 <div class="md-form col-sm-12">
                     <hr />
-                    somethingg
                 </div>
             </>
         );

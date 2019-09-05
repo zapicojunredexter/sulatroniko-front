@@ -11,6 +11,9 @@ import NotificationService from '../../services/notification.service';
 import AssignManuscriptCopywriter from './modals/AssignManuscriptCopywriter';
 import FinishManuscriptModal from './modals/FinishManuscriptModal';
 import PublishManuscriptModal from './modals/PublishManuscriptModal';
+import BookReviewModal from './modals/BookReviewModal';
+import ReviewAuthorModal from './modals/ReviewAuthorModal';
+import ReviewPublisherModal from './modals/ReviewPublisherModal';
 import config from '../../config/config';
 
 const initialState = {
@@ -19,6 +22,9 @@ const initialState = {
     assignCopywriterTransaction: null,
     finishManuscriptTransaction: null,
     publishManuscriptTransaction: null,
+    reviewManuscriptTransaction: null,
+    reviewAuthorTransaction: null,
+    reviewPublisherTransaction: null,
 }
 class Container extends React.PureComponent<> {
     
@@ -209,10 +215,23 @@ class Container extends React.PureComponent<> {
                         <img src={manuscript.cover} style={{width: 100}} />
                     </div>
                     <div class="col-sm-6">
-                        {manuscript.synopsis}
-                        <p>Copywriter: {copywriter ? copywriter.name : 'None'}</p>
+                        <p>{manuscript.synopsis}</p>
+                        <p>
+                            Copywriter: <b>{copywriter ? copywriter.name : 'None'}</b><br />
+                            Author: <b>dasda</b>
+                        </p>
                     </div>
-                    <div class="col-sm-3 d-flex justify-content-center">
+                    <div class="col-sm-3 justify-content-center">
+                        {(this.props.userType === 'copywriter' && transaction.status === 'published') || true && (
+                            <>
+                                <button onClick={() => this.setState({reviewManuscriptTransaction: transaction})}>ADD BOOK REVIEW</button>
+                            </>
+                        )}
+                        {(this.props.userType === 'author' && transaction.status === 'published') || true && (
+                            <>
+                                <button onClick={() => this.setState({reviewPublisherTransaction: transaction})}>LEAVE FEEDBACK FOR PUBLISHER</button>
+                            </>
+                        )}
                         {transaction.status === 'proposal approved' && (
                             <>
                                 <button onClick={() => this.handleSelectTransaction(transaction.id)}>VIEW PROGRESS</button>
@@ -262,7 +281,7 @@ class Container extends React.PureComponent<> {
                                 
                             </>
                         )}
-                        {this.props.userType === 'publisher' && transaction.status === `finished` && (
+                        {this.props.userType === 'publisher' && transaction.status === `finished` || true && (
                             <>
                                 <button onClick={() => {
 
@@ -303,6 +322,11 @@ class Container extends React.PureComponent<> {
 
         return (
             <main class="pt-5 mx-lg-5 threads-page-container">
+                
+                <ReviewPublisherModal
+                    reviewPublisherTransaction={this.state.reviewPublisherTransaction}
+                    closeModal={() => this.setState({reviewPublisherTransaction: null})}
+                />
                 <AssignManuscriptCopywriter
                     assignCopywriterTransaction={this.state.assignCopywriterTransaction}
                     closeModal={() => this.setState({assignCopywriterTransaction: null})}
@@ -314,6 +338,18 @@ class Container extends React.PureComponent<> {
                 <PublishManuscriptModal
                     publishManuscriptTransaction={this.state.publishManuscriptTransaction}
                     closeModal={() => this.setState({publishManuscriptTransaction: null})}
+                    onPublish={(params) => {
+                        console.log('asdasdas', params);
+                        this.setState({reviewAuthorTransaction: params});
+                    }}
+                />
+                <BookReviewModal
+                    reviewManuscriptTransaction={this.state.reviewManuscriptTransaction}
+                    closeModal={() => this.setState({reviewManuscriptTransaction: null})}
+                />
+                <ReviewAuthorModal
+                    reviewAuthorTransaction={this.state.reviewAuthorTransaction}
+                    closeModal={() => this.setState({reviewAuthorTransaction: null})}
                 />
                 <div class="container-fluid mt-5">
                     {this.state.transaction || false ? (
@@ -322,6 +358,7 @@ class Container extends React.PureComponent<> {
                                 canDrag={this.props.userType === 'copywriter'}
                                 canAdd={this.props.userType === 'copywriter'}
                                 canConclude={this.props.userType === 'copywriter'}
+                                // canConclude
                                 addCard={(description) => {
                                     if(this.state.transaction && this.state.transaction.id) {
                                         this.props.addCard(
@@ -339,6 +376,7 @@ class Container extends React.PureComponent<> {
                                 changeProgressStatus={this.changeProgressStatus}
                                 changeProgressOrder={this.changeProgressOrder}
                                 onClickFinish={() => this.setState({finishManuscriptTransaction: this.state.transaction})}
+                                // onClickFinish={() => this.setState({finishManuscriptTransaction: {qwe: 'asd'}})}
                             />
                         </>
                     ) : (

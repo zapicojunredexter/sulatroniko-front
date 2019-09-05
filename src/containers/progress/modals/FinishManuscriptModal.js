@@ -27,7 +27,7 @@ class Container extends React.PureComponent<> {
   }
 
   render() {
-    const isOpen = !!this.props.finishManuscriptTransaction;
+    const isOpen = !!this.props.finishManuscriptTransaction; 
     return (
       <div
         class={`modal fade ${isOpen && `show`}`}
@@ -53,7 +53,6 @@ class Container extends React.PureComponent<> {
                   <label class="active" for="card-details">Final Manuscript File</label>
                   
               </div>
-
               <div class="text-center">
                 <button
                     onClick={this.finishManuscript}

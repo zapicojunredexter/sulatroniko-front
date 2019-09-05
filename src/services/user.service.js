@@ -40,6 +40,7 @@ export default class Service {
             return json;
         } catch (err) {
             console.error(err);
+            throw err;
         }
     }
 
