@@ -166,25 +166,25 @@
           <div class="row book-row">
             <div class="col-md-3">
               <div class="icon-block">
-               <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="250" height="300"> 
+               <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="220" height="300"> 
               </div>
             </div>
 
            <div class="col-md-3">
             <div class="icon-block">
-             <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="250" height="300"> 
+             <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="220" height="300"> 
             </div>
            </div>
 
           <div class="col-md-3">
             <div class="icon-block">
-              <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="250" height="300"> 
+              <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="220" height="300"> 
             </div>
           </div>
 
           <div class="col-md-3">
             <div class="icon-block">
-             <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="250" height="300"> 
+             <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="220" height="300"> 
             </div>
           </div>
         </div>
@@ -192,26 +192,26 @@
          <div class="row book-row">
           <div class="col-md-3">
             <div class="icon-block">
-             <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="250" height="300"> 
+             <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="220" height="300"> 
             </div>
           </div>
 
           <div class="col-md-3">
             <div class="icon-block">
-             <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="250" height="300"> 
+             <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="220" height="300"> 
             </div>
           </div>
 
 
           <div class="col-md-3">
             <div class="icon-block">
-              <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="250" height="300"> 
+              <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="220" height="300"> 
             </div>
           </div>
 
           <div class="col-md-3">
             <div class="icon-block">
-             <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="250" height="300"> 
+             <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="220" height="300"> 
             </div>
           </div>
          </div>
@@ -247,212 +247,71 @@
 
 
 
-<!-- Modal -->
-<!-- <div class="modal fade show" id="signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="padding-right: 16px; display: block;" aria-modal="true"> -->
-
-<div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<!-- Full Height Modal Right -->
+<!-- <div class="modal fade right show" id="signup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: block; padding-right: 16px;" aria-modal="true"> -->
+<div class="modal fade right" id="signup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content" style="border: 2px solid #ececec;">
+
+  <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+  <div class="modal-dialog modal-full-height modal-right" role="document">
+
+
+    <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title  ml-auto mr-auto">Create an Account</h4>
       </div>
       <div class="modal-body">
-       <div class="row">
-         <div class="col-3">
-           <div class="container">
-            <h6>Login Details</h6>
+        <div class="container">
             <div class="md-form form-sm">
+              <i class="fas fa-envelope prefix" style="font-size: 15px;margin-top: .6em;margin-left: .5em;"></i>
               <input type="email" id="emailadd" class="form-control">
               <label for="emailadd">Email</label> <br/>
             </div>
             <div class="md-form form-sm" style="margin-top: -1.8em;">
+              <i class="fas fa-lock prefix" style="font-size: 15px;margin-top: .6em;margin-left: .5em;"></i>
               <input type="password" id="password" class="form-control">
               <label for="passowrd">Password</label> <br/>
             </div>
             <div class="md-form form-sm" style="margin-top: -1.8em;">
+              <i class="fas fa-lock prefix" style="font-size: 15px;margin-top: .6em;margin-left: .5em;"></i>
               <input type="password" id="confirmpassword" class="form-control">
               <label for="confirmpassword">Confirm Password</label> <br/>
             </div>
             <div class="md-form form-sm" style="margin-top: -1.8em;">
+              <i class="fas fa-phone prefix" style="font-size: 15px;margin-top: .6em;margin-left: .5em;"></i>
               <input type="text" id="phonenumber" class="form-control">
               <label for="phonenumber">Phone Number</label> <br/>
             </div>
-            <div class="md-form form-sm" style="margin-top: -1.8em;">
-              <input type="text" id="birthdate" class="form-control datepicker">
-              <label for="birthdate">Birthdate</label>
+            <div class="user-type-group" style="margin: -2em 0 0 1em;">
+              <p style="color: gray;">Are you a/an? </p>
+               <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="author" name="usertype" checked>
+                <label class="custom-control-label" for="author">Author</label>
+              </div>
+
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="copywriter" name="usertype">
+                <label class="custom-control-label" for="copywriter">Copywriter</label>
+              </div>
+
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="publisher" name="usertype">
+                <label class="custom-control-label" for="publisher">Publisher</label>
+              </div>
+              <p class="red-text" style="font-size: 10px;margin-top: .5em;">Tip: Publishers need to comply all necessary business requirements.</p>
             </div>
            </div> 
            
-         </div>
-         <div class="col-9">
-          <h6>Personal Information</h6>
-          
-          <!-- Grid row -->
-            <div class="form-row" style="margin-top: -.5em;">
-              <!-- Grid column -->
-              <div class="col-md-4">
-                <!-- Material input -->
-                <div class="md-form form-group form-sm">
-                  <input type="text" class="form-control" id="firstname">
-                  <label for="firstname">First Name</label>
-                </div>
-              </div>
-              <!-- Grid column -->
-
-              <!-- Grid column -->
-              <div class="col-md-4">
-                <!-- Material input -->
-                <div class="md-form form-group form-sm">
-                  <input type="text" class="form-control" id="address">
-                  <label for="address">Address</label>
-                </div>
-              </div>
-              <!-- Grid column -->
-
-               <!-- Grid column -->
-              <div class="col-md-4">
-                <!-- Material input -->
-                <div class="md-form form-group form-sm">
-                  <input type="text" class="form-control" id="state-province">
-                  <label for="state-province">State/Province</label>
-                </div>
-              </div>
-              <!-- Grid column -->
-            </div>
-            <!-- Grid row -->
-
-            <div class="form-row" style="margin-top: -1.27em;">
-              <!-- Grid column -->
-              <div class="col-md-4">
-                <!-- Material input -->
-                <div class="md-form form-group form-sm">
-                  <input type="text" class="form-control" id="lastname">
-                  <label for="lastname">Last Name</label>
-                </div>
-              </div>
-              <!-- Grid column -->
-
-              <!-- Grid column -->
-              <div class="col-md-4">
-                <!-- Material input -->
-                <div class="md-form form-group form-sm">
-                  <input type="text" class="form-control" id="city">
-                  <label for="city">City</label>
-                </div>
-              </div>
-              <!-- Grid column -->
-
-               <!-- Grid column -->
-              <div class="col-md-4">
-                <!-- Material input -->
-                <div class="md-form form-group form-sm">
-                  <input type="text" class="form-control" id="zip">
-                  <label for="zip">Zip Code</label>
-                </div>
-              </div>
-              <!-- Grid column -->
-            </div>
-            <!-- Grid row -->
-
-            <div class="form-row" style="margin-top: -1.27em;">
-              <!-- Grid column -->
-              <div class="col-md-4">
-                <!-- Material input -->
-                <div class="md-form form-group form-sm">
-                  <input type="text" class="form-control" id="contactnumber">
-                  <label for="contactnumber">Contact Number</label>
-                </div>
-              </div>
-              <!-- Grid column -->
-
-              <!-- Grid column -->
-              <div class="col-md-4">
-                <!-- Material input -->
-                <div class="md-form form-group form-sm">
-                  <input type="text" class="form-control" id="ccnumber">
-                  <label for="ccnumber">Credit Card Number</label>
-                </div>
-              </div>
-              <!-- Grid column -->
-
-              
-            </div>
-            <!-- Grid row -->
-
-            <div class="form-row" style="margin-top: -1.27em;">
-              <!-- Grid column -->
-              <div class="col-md-4">
-                <!-- Material input -->
-                <div class="md-form form-group form-sm">
-                  <input type="text" class="form-control" id="company">
-                  <label for="company">Company/Institution</label>
-                </div>
-              </div>
-              <!-- Grid column -->
-
-              <!-- Grid column -->
-              <div class="col-md-4">
-                <!-- Material input -->
-                <div class="md-form form-group form-sm">
-                  <input type="text" class="form-control" id="cvv">
-                  <label for="cvv">CVV</label>
-                </div>
-              </div>
-              <!-- Grid column -->
-
-              
-            </div>
-            <!-- Grid row -->
-
-             <div class="form-row" style="margin-top: .2em;">
-              <!-- Grid column -->
-              <div class="col-md-6">
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" class="custom-control-input" id="author" name="usertype" checked>
-                  <label class="custom-control-label" for="author">Author</label>
-                </div>
-
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" class="custom-control-input" id="copywriter" name="usertype">
-                  <label class="custom-control-label" for="copywriter">Copywriter</label>
-                </div>
-
-                <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" class="custom-control-input" id="publisher" name="usertype">
-                  <label class="custom-control-label" for="publisher">Publisher</label>
-                </div>
-              <!-- Grid column -->
-            </div>
-            <!-- Grid row -->
-          </div>
-
-          <div class="form-row">
-            <div class="col-md-12">
-              <p class="red-text" style="font-size: 12px;">Tip: Publishers need to comply all necessary business requirements.</p>
-            </div>
-          </div>
-          <div class="form-row" style="margin-top: -2em;">
-           <div class="col-md-6">
-             <div class="md-form form-sm">
-              <textarea id="bio" class="md-textarea form-control" rows="1" ></textarea>
-              <label for="bio">Bio</label>
-            </div>
-           </div>
-          </div>
-
-        
-        
-         </div>
-       </div>
       </div>
-      <div class="modal-footer" style="border-top: none;">
-        <button type="button" class="btn red lighten-1 btn-md white-text" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn cyan btn-md white-text">Sign Up</button>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn red lighten-1 white-text btn-md" data-dismiss="modal" style="width: 160px;">Close</button>
+        <button type="button" class="btn cyan white-text btn-md">Create Account</button>
       </div>
     </div>
   </div>
 </div>
+<!-- Full Height Modal Right -->
+
 
 
 <!-- Footer -->
