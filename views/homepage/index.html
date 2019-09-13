@@ -1,314 +1,268 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>SulaTroniko</title>
 
   <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="../../assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="../../assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+  <link href="../../assets/css/author/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="../../assets/css/author/mdb.min.css" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="../../assets/css/author/style.min.css" rel="stylesheet">
 </head>
+
 <body>
-<div class="navbar-fixed">
-  <nav role="navigation">
-    <div class="nav-wrapper container">
-      <a id="logo-container" href="#" class="brand-logo">
+  <!--Navbar -->
+<nav class=" navbar fixed-top navbar-expand-sm" style="height: 3.8em;background: white;">
+    <a id="logo-container" href="#" class="brand-logo">
       <img src="../../assets/images/sulatroniko_logo.png" style="width: 150px !important;margin-top: .15em;">
     </a>
-      <ul class="right hide-on-med-and-down">
-        <li><a class="waves-effect cyan btn modal-trigger" href="#login">Login</a></li>
-        <li><a class="waves-effect cyan btn modal-trigger" href="#signup">Sign Up</a></li>
-      </ul>
-
-      <ul id="nav-mobile" class="sidenav">
-        <li><a href="#">Navbar Link</a></li>
-      </ul>
-      <a href="#" data-target="nav-mobile" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
-    </div>
-  </nav>
-</div>
-  <div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
-      <div class="container parallax-header">
-        <br><br>
-        <h1 class="header center light">SulaTroniko</h1>
-        <div class="row center">
-          <h5 class="header col s12 light">Discover new user-generated stories spanning across different genres written
-          by Philippine authors.</h5>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+    aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <div class="md-form form-sm">
+          <i class="fas fa-envelope prefix" style="font-size: 15px;margin-top: .6em;margin-left: .5em;"></i>
+          <input type="text" id="useremail" class="form-control" placeholder="Email">  
         </div>
-        <div class="row center">
-          <a href="#l" id="download-button" class="btn-large waves-effect waves-light cyan">Get Started</a>
+      </li>
+      <li class="nav-item" style="margin-left: 1em;margin-right: .5em;">
+        <div class="md-form form-sm">
+          <i class="fas fa-lock prefix"style="font-size: 15px;margin-top: .6em;margin-left: .5em;"></i> 
+          <input type="password" id="userpassword" class="form-control" placeholder="Password">
         </div>
-        <br><br>
-
-      </div>
-    </div>
-    <!-- <div class="parallax"><img src="../../assets/images/background1.jpg" alt="Unsplashed background img 1"></div> -->
+      </li>
+      <li class="nav-item" style="margin-top: 1.7em;">
+        <a class="waves-effect cyan btn btn-sm">Login</a>
+      </li>
+      <li class="nav-item" style="margin-top: 1.7em;">
+        <a data-toggle="modal" data-target="#signup" class="waves-effect btn btn-primary btn-sm">Sign Up</a>
+      </li>
+    </ul>
   </div>
-
-
-  <div class="container">
-    <div class="section">
-      <h6 class="header center book-header">Back To Homepage</h6>
-      <!--   Icon Section   -->
-      <div class="row book-row">
-        <div class="col s12 m3">
-          <div class="icon-block">
-           <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg"> 
-          </div>
-        </div>
-
-         <div class="col s12 m3">
-          <div class="icon-block">
-           <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg"> 
-          </div>
-        </div>
-
-
-        <div class="col s12 m3">
-          <div class="icon-block">
-            <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg"> 
-          </div>
-        </div>
-
-        <div class="col s12 m3">
-          <div class="icon-block">
-           <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg"> 
-          </div>
-        </div>
-      </div>
-
-       <div class="row book-row">
-        <div class="col s12 m3">
-          <div class="icon-block">
-           <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg"> 
-          </div>
-        </div>
-
-        <div class="col s12 m3">
-          <div class="icon-block">
-           <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg"> 
-          </div>
-        </div>
-
-
-        <div class="col s12 m3">
-          <div class="icon-block">
-            <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg"> 
-          </div>
-        </div>
-
-        <div class="col s12 m3">
-          <div class="icon-block">
-           <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg"> 
-          </div>
-        </div>
-
-       <div class="col s12">
-        <a href="../../views/homepage/allbooks.html"style="float: right;margin-top: 1em;"><b>See All Published Books</b></a>
-       </div>
-
-      </div>
-    </div>
-  </div>
-
-
-
-
-  <!-- Modal Structure -->
-
-  <!-- Start of login-modal -->
-  <!-- <div id="login" class="modal login-modal open" style="display:block;display: block; z-index: 1003; opacity: 1; top: 10%; transform: scaleX(1) scaleY(1);"> -->
-  <div id="login" class="modal login-modal">
-    <div class="modal-content">
-      <h4 class="header center">Login to SulaTroniko</h4>
-       <div class="row">
-        <div class="input-field col s12">
-          <input id="email" type="email" class="validate">
-          <label for="email_inline">Email</label>
-          <span class="helper-text" data-error="Invalid Email"></span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
-          <label for="password">Password</label>
-        </div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect cyan btn">Login</a>
-      <a href="#!" class="modal-close waves-effect red lighten-1 btn" style="margin-right: 2em;">Cancel</a>
-    </div>
-  </div> 
-<!-- End of login-modal -->
-
-<!-- Start of signup-modal -->
-  <!-- <div id="signup" class="modal signup-modal open" style="z-index: 1003; display: block; opacity: 1; top: 10%; transform: scaleX(1) scaleY(1);"> -->
-  <div id="signup" class="modal signup-modal">
-    <div class="modal-content">
-      <h4 class="header center">Create an Account</h4>
-      <hr style="border: .5px solid #e8e8e8;">
-      <div class="row">
-        <div class="input-field col s3">
-          <h6>Login Details</h6>
-
-           <div class="row">
-            <div class="input-field col s12" style="margin-top: .7em;margin-bottom: -1em;">
-              <input id="email" type="email" class="validate">
-              <label for="email_inline">Email</label>
-              <span class="helper-text" data-error="Invalid Email"></span>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="password" type="password" class="validate">
-              <label for="password">Password</label>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="password" type="password" class="validate">
-              <label for="password">Confirm Password</label>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="phone" type="tel" class="validate">
-              <label for="phone">Phone Number</label>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="birthdate" type="text" class="datepicker">
-              <label for="birthdate">Birthdate</label>
-            </div>
-          </div>
-
-        </div>
+</nav>
+<!--/.Navbar -->
+<div class="parallax-container" style="min-height: 100vh;">
+  <div class="container parallax-header" style="font-family: 'Libre Baskerville', serif;">
+        <br><br>
+        <h1 class="text-center white-text" style="font-size: 50px;text-shadow: -1px 1px 0 #000,  1px 1px 0 #000, 1px -1px 0 #000,-1px -1px 0 #000;">SulaTroniko</h1>
     
-        <div class="input-field col s8" style="margin-left: 4em;">
-         <h6 style="margin-left: 1em;">Personal Information</h6>
-          <div class="row">
-            <div class="input-field col s4" style="margin-top: .7em;margin-bottom: -1em;">
-              <input id="first_name" type="text" class="validate">
-              <label for="first_name">First Name</label>
-            </div>
-             <div class="input-field col s4" style="margin-top: .7em;margin-bottom: -1em;">
-              <input id="address" type="text" class="validate">
-              <label for="address">Address</label>
-            </div>
-             <div class="input-field col s4" style="margin-top: .7em;margin-bottom: -1em;">
-              <input id="state_province" type="text" class="validate">
-              <label for="state_province">State/Province</label>
-            </div>
-          </div>
+          <h5 class="text-center white-text" style="font-size: 30px;text-shadow: -1px 1px 0 #000,  1px 1px 0 #000, 1px -1px 0 #000,-1px -1px 0 #000;letter-spacing: 2px; ">Discover new user-generated stories spanning across different genres written
+          by Philippine authors.</h5>
+     
+        <div class="text-center">
+         <a class="waves-effect btn cyan btn-lg">Get Started</a>
+      </div>/
 
-           <div class="row">
-            <div class="input-field col s4" style="margin-top: 1.2em;">
-              <input id="last_name" type="text" class="validate">
-              <label for="last_name">Last Name</label>
-            </div>
-             <div class="input-field col s4" style="margin-top: 1.2em;">
-              <input id="city" type="text" class="validate">
-              <label for="city">City</label>
-            </div>
-             <div class="input-field col s4" style="margin-top: 1.2em;">
-              <input id="zip_code" type="text" class="validate">
-              <label for="zip_code">Zip Code</label>
-            </div>
-          </div>
+    </div>
+</div>
 
-          <div class="row">
-            <div class="input-field col s4">
-              <input id="contact_number" type="text" class="validate">
-              <label for="contact_number">Contact Number</label>
-            </div>
-             <div class="input-field col s4">
-              <input id="credit_card" type="text" class="validate">
-              <label for="credit_card">Credit Card Number</label>
-            </div>
-          </div>
+ <div class="container">
+    <div class="section">
+      <h6 class="text-center" style="margin: 2em 0; font-size: 25px; font-weight: bold;">LATEST PUBLISHED</h6>
+      <!--   Icon Section   -->
+       <div class="row ">
+      <div class="col-sm d-flex justify-content-center">
+       <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="250" height= "300"> 
+      </div>
+      <div class="col-sm d-flex justify-content-center">
+       <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="250" height= "300"> 
+      </div>
+      <div class="col-sm d-flex justify-content-center">
+       <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="250" height= "300"> 
+      </div>
+      <div class="col-sm d-flex justify-content-center">
+       <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="250" height= "300"> 
+      </div>
+    </div>
 
-          <div class="row">
-            <div class="input-field col s4">
-              <input id="company" type="text" class="validate">
-              <label for="company">Company/Institution</label>
-            </div>
-             <div class="input-field col s4">
-              <input id="cvv" type="text" class="validate">
-              <label for="cvv">CVV</label>
-            </div>
-          </div>
+    <div class="row book-row ">
+      <div class="col-sm d-flex justify-content-center">
+       <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="250" height= "300"> 
+      </div>
+      <div class="col-sm d-flex justify-content-center">
+       <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="250" height= "300"> 
+      </div>
+      <div class="col-sm d-flex justify-content-center">
+       <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="250" height= "300"> 
+      </div>
+      <div class="col-sm d-flex justify-content-center">
+       <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="250" height= "300"> 
+      </div>
+    </div>
 
-          <div class="row">
-            <div class="input-field col s6">  
-              <p>
-                <label>
-                  <input class="with-gap" name="group3" type="radio" checked />
-                  <span style="margin-right: 1em;">Author</span>
-                </label>
-                 <label>
-                  <input class="with-gap" name="group3" type="radio" checked />
-                  <span style="margin-right: 1em;">Writer</span>
-                </label>
-                 <label>
-                  <input class="with-gap" name="group3" type="radio" checked />
-                  <span style="margin-right: 1em;">Publisher</span>
-                </label>
-              </p>
-             
-            </div>
-          </div>
-          <div class="row">
-            <div class="col s12" style="margin-top: -3em;">  
-              <p class="red-text" style="font-size: 12px;">Tip: Publishers need to comply all necessary business requirements.</p>
-            </div>
-          </div>
-
-          <div class="row">
-        <div class="input-field col s12" style="margin-top: -1.5em;">
-          <textarea id="textarea1" class="materialize-textarea"></textarea>
-          <label for="textarea1">Bio</label>
+      <div class="row book-row">
+        <div class="col-sm">
+        <a href="../../views/homepage/allbooks.html"style="float: right;margin-bottom: 2em;"><b>See All Published Books</b></a>
         </div>
       </div>
+    
 
-        </div>
+    </div>
+ </div>
 
+
+<!-- Full Height Modal Right -->
+<div class="modal fade right show" id="signup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: block; padding-right: 16px;" aria-modal="true">
+<!-- <div class="modal fade right" id="signup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true"> -->
+
+  <!-- Add class .modal-full-height and then add class .modal-right (or other classes from list above) to set a position to the modal -->
+  <div class="modal-dialog modal-full-height modal-right" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title  ml-auto mr-auto">Create an Account</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+            <div class="md-form form-sm">
+              <i class="fas fa-envelope prefix" style="font-size: 15px;margin-top: .6em;margin-left: .5em;"></i>
+              <input type="email" id="emailadd" class="form-control">
+              <label for="emailadd">Email</label> <br/>
+            </div>
+            <div class="md-form form-sm" style="margin-top: -1.8em;">
+              <i class="fas fa-lock prefix" style="font-size: 15px;margin-top: .6em;margin-left: .5em;"></i>
+              <input type="password" id="password" class="form-control">
+              <label for="passowrd">Password</label> <br/>
+            </div>
+            <div class="md-form form-sm" style="margin-top: -1.8em;">
+              <i class="fas fa-lock prefix" style="font-size: 15px;margin-top: .6em;margin-left: .5em;"></i>
+              <input type="password" id="confirmpassword" class="form-control">
+              <label for="confirmpassword">Confirm Password</label> <br/>
+            </div>
+            <div class="md-form form-sm" style="margin-top: -1.8em;">
+              <i class="fas fa-phone prefix" style="font-size: 15px;margin-top: .6em;margin-left: .5em;"></i>
+              <input type="text" id="phonenumber" class="form-control">
+              <label for="phonenumber">Phone Number</label> <br/>
+            </div>
+            <div class="user-type-group" style="margin: -2em 0 0 1em;">
+              <p style="color: gray;">Are you a/an? </p>
+               <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="author" name="usertype" checked>
+                <label class="custom-control-label" for="author">Author</label>
+              </div>
+
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="copywriter" name="usertype">
+                <label class="custom-control-label" for="copywriter">Copywriter</label>
+              </div>
+
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="publisher" name="usertype">
+                <label class="custom-control-label" for="publisher">Publisher</label>
+              </div>
+              <p class="red-text" style="font-size: 10px;margin-top: .5em;">Tip: Publishers need to comply all necessary business requirements.</p>
+            </div>
+           </div> 
+           
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn red lighten-1 white-text btn-md" data-dismiss="modal" style="width: 160px;">Close</button>
+        <button type="button" class="btn cyan white-text btn-md">Create Account</button>
       </div>
     </div>
-    <div class="modal-footer" style="margin-top: -3em;">
-      <a href="#!" class="modal-close waves-effect cyan btn">Sign Up</a>
-      <a href="#!" class="modal-close waves-effect red lighten-1 btn" style="margin-right: 2em;">Cancel</a>
-    </div>
-  </div> 
-<!-- End of signup-modal -->
+  </div>
+</div>
+<!-- Full Height Modal Right -->
 
-  <footer class="page-footer blue-grey darken-4">
-    <div class="footer-copyright">
-      <div class="container">
-       <a href="#" class="white-text footer-navigation">About Us</a>
-       <a href="#" class="white-text footer-navigation">FAQ</a>
-       <a href="#" class="white-text footer-navigation">Contact Us</a>
-       <a href="#" class="white-text footer-navigation">Terms</a>
-       <a class="right white-text">Copyright 2019 SulaTroniko. All Rights Reserved.</a>
+<!-- Footer -->
+<footer class="white-text font-small blue-grey darken-4">
+
+  <!-- Footer Links -->
+  <div class="container">
+
+    <!-- Grid row-->
+    <div class="row text-center d-flex justify-content-center pt-5 mb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-2 mb-3">
+        <h6 class="text-uppercase font-weight-bold">
+          <a href="#!" class="white-text">About us</a>
+        </h6>
       </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-2 mb-3">
+        <h6 class="text-uppercase font-weight-bold">
+          <a href="#!" class="white-text">FAQ</a>
+        </h6>
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-2 mb-3">
+        <h6 class="text-uppercase font-weight-bold">
+          <a href="#!" class="white-text">Contact Us</a>
+        </h6>
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-2 mb-3">
+        <h6 class="text-uppercase font-weight-bold">
+          <a href="#!" class="white-text">Terms</a>
+        </h6>
+      </div>
+      <!-- Grid column -->
+
+     
+
     </div>
-  </footer>
+    <!-- Grid row-->
+    <hr class="rgba-white-light" style="margin: 0 15%;">
+
+    <!-- Grid row-->
+    <div class="row d-flex text-center justify-content-center mb-md-0 mb-4">
+
+      <!-- Grid column -->
+      <div class="col-md-8 col-12 mt-5">
+        <p style="line-height: 1.7rem">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+          accusantium doloremque laudantium, totam rem
+          aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+          explicabo.
+          Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.</p>
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row-->
+    <hr class="clearfix d-md-none rgba-white-light" style="margin: 10% 15% 5%;">
+  </div>
 
 
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3" style="background: #1e282d;">© 2019 Copyright:
+    <a href="https://mdbootstrap.com/education/bootstrap/" class="grey-text"> SulaTroniko. All Rights Reserved.</a>
+  </div>
+  <!-- Copyright -->
 
+</footer>
+<!-- Footer -->
 
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="../../assets/js/materialize.js"></script>
-  <script src="../../assets/js/init.js"></script>
-  <script src="../../assets/js/index.js"></script>
-
-  </body>
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="../../assets/js/author/jquery-3.4.1.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="../../assets/js/author/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="../../assets/js/author/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="../../assets/js/author/mdb.min.js"></script>
+ <!--  <script src="../../assets/js/materialize.js"></script>
+  <script src="../../assets/js/init.js"></script> -->
+  
+ </body>
 </html>
+
+
