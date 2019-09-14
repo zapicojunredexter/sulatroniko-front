@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Dropdown from '../../components/dropdown';
 import UserService from '../../services/user.service';
 import ThreadsService from '../../services/threads.service';
+import ReviewsService from '../../services/reviews.service';
 import config from '../../config/config';
 import Ratings from '../../components/ratings';
 
@@ -80,7 +81,7 @@ class Container extends React.PureComponent<> {
         return (
             <div style={{margin: '0px 15px 30px 15px'}}>
                 <div style={{display: 'flex', alignItems: 'center', height: 60, flexDirection: 'row'}}>
-                    <img src="default-user.png" style={{height: '100%',borderRadius: '50%', border: 'solid rgba(0,0,0,.1) 1px'}} />
+                    <img src={(data && data.reviewee && data.reviewee.displayPic) || 'default-user.jpg'} alt={data && data.reviewee && data.reviewee.name} style={{height: '100%',borderRadius: '50%', border: 'solid rgba(0,0,0,.1) 1px'}} />
                     <div style={{marginLeft: 10, flex: 1, display: 'flex', flexDirection: 'column',justifyContent: 'center'}}>
                         <div style={{flex: 1, fontSize: 20, fontWeight: 'bold'}}>{data.reviewee && data.reviewee.name}</div>
                         <span style={{fontSize: 12}}>{data.date}</span>
@@ -178,7 +179,7 @@ class Container extends React.PureComponent<> {
                     <hr />
                 </div>
                 <div class="col-sm-12" style={{borderLeft: 'solid rgba(0,0,0,.1) 2px', padding: '0px 15px 0px 15px'}}>
-                    {[
+                    {/*[
                         {
                             score: 1,
                             date: '12-12-2001',
@@ -195,7 +196,8 @@ class Container extends React.PureComponent<> {
                             },
                             comment: 'testing 1',
                         },
-                    ].map(this.renderReviewCard)}
+                    ].map(this.renderReviewCard)*/}
+                    {this.state.selectedData && this.state.selectedData.reviews.map(this.renderReviewCard)}
                 </div>
             </>
         );
@@ -248,7 +250,7 @@ class Container extends React.PureComponent<> {
                     <hr />
                 </div>
                 <div class="col-sm-12" style={{borderLeft: 'solid rgba(0,0,0,.1) 2px', padding: '0px 15px 0px 15px'}}>
-                    {[
+                    {/*[
                         {
                             score: 1,
                             reviewee: {
@@ -263,7 +265,8 @@ class Container extends React.PureComponent<> {
                             },
                             comment: 'testing 1',
                         },
-                    ].map(this.renderReviewCard)}
+                    ].map(this.renderReviewCard)*/}
+                    {this.state.selectedData && this.state.selectedData.reviews.map(this.renderReviewCard)}
                 </div>
             </>
         );
