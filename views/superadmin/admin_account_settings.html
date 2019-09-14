@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Dashboard</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="../../assets/css/author/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="../../assets/css/author/mdb.min.css" rel="stylesheet">
+  <!-- Your custom styles (optional) -->
+  <link href="../../assets/css/author/style.min.css" rel="stylesheet">
+
+<!--   <link href="../../assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/> -->
+
+</head>
+
+<body class="grey lighten-3">
+
+  <!--Main Navigation-->
+  <header>
+
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+      <div class="container-fluid">
+
+        <!-- Collapse -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+          <img src="../../assets/images/sulatroniko_logo.png" style="width: 130px !important;height: 40px;">
+        
+          <!--  <input type="search" placeholder="Search" aria-label="Search" class="form-control center" style="width:40%; margin-right: -11em !important;">
+            <button class="btn btn-primary btn-sm my-0 p" type="submit">
+              <i class="fas fa-search"></i>
+           </button> -->
+  
+          <!-- Right -->
+          <ul class="navbar-nav nav-flex-icons">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user"></i> Profile </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+             <a class="dropdown-item" href="../../views/author/account_settings.html"><i class="fas fa-cog" style="margin-right: .5em;"></i>Account Settings</a>
+             <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt" style="margin-right: .5em;"></i>Logout</a>
+            </div>
+          </ul>
+
+        </div>
+
+      </div>
+    </nav>
+    <!-- Navbar -->
+
+    <!-- Sidebar -->
+    <div class="sidebar-fixed position-fixed">
+
+      <div class="profile-image">
+        <img src="../../assets/images/profile_img.jpg" class="img-fluid rounded-circle mx-auto d-block" alt="" style="margin: .5em 0; width: 200px; height: 200px;">
+        <p class="text-center">Owen Rama</p>
+        <p class="text-center" style="margin-top: -1em;">Admin</p>
+        <hr>
+      </div>
+
+      <div class="list-group list-group-flush">
+        <a href="../../views/superadmin/admindashboard.html" class="list-group-item active waves-effect">
+          <i class="fas fa-chart-pie mr-3"></i>Dashboard
+        </a>
+        <a href="../../views/superadmin/pending_accounts.html" class="list-group-item list-group-item-action waves-effect">
+          <i class="fas fa-users mr-3"></i>Pending Accounts</a>
+      </div>
+
+    </div>
+    <!-- Sidebar -->
+
+  </header>
+  <!--Main Navigation-->
+
+  <!--Main layout-->
+  <main class="pt-5 mx-lg-5" style="min-height: 90vh;">
+ <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-6">
+
+          <!--Card-->
+          <div class="card"  style="margin-top: 4em;">
+
+            <!--Card content-->
+            <div class="card-body">
+
+             <div class="row container">
+                 <div class="md-form col-lg-12" style="margin-left: 2em;">
+                    <h6>Login Details</h6>
+
+                     <div class="row">
+                      <div class="md-form col s12">
+
+                        <input type="text" id="email" class="form-control">
+                        <label for="email">Email</label>
+                        <span class="helper-text" data-error="Invalid Email"></span>
+                        <!-- <input id="email" type="email" class="form-control">
+                        <label for="email_inline">Email</label>
+                        <span class="helper-text" data-error="Invalid Email"></span> -->
+                      </div>
+                    </div>
+                  <div class="row">
+                    <div class="md-form col s12">
+                      <input id="password" type="password" class="form-control">
+                      <label for="password">Change Password</label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="md-form col s12">
+                      <input id="password" type="password" class="form-control">
+                      <label for="password">Confirm Password</label>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="md-form col s12">
+                          <div class=" float-right"><button class="btn btn-primary" type="button">Save Changes</button></div>
+                    </div>
+                  </div>
+
+                </div>
+
+           
+           
+      
+     
+
+             </div>
+               
+
+            </div>
+
+          </div>
+          <!--/.Card-->
+
+
+        </div>
+        <!--Grid column-->
+        
+      </div>
+  </main>
+  <!--Main layout-->
+
+  <!--Footer-->
+  <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4 wow fadeIn">
+    <!--Copyright-->
+    <div class="footer-copyright py-3">
+      © 2019 Copyright:
+      <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> MDBootstrap.com </a>
+    </div>
+    <!--/.Copyright-->
+
+  </footer>
+  <!--/.Footer-->
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <script type="text/javascript" src="../../assets/js/author/jquery-3.4.1.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="../../assets/js/author/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="../../assets/js/author/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="../../assets/js/author/mdb.min.js"></script>
+ <!--  <script src="../../assets/js/materialize.js"></script>
+  <script src="../../assets/js/init.js"></script> -->
+
+</body>
+
+</html>
