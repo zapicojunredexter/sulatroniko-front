@@ -26,7 +26,9 @@ class Container extends React.PureComponent<> {
                   
                     <ul class="navbar-nav nav-flex-icons">
                         <DropDown title="Account">
-                            <Link class="dropdown-item" to="/profile"><i class="fas fa-cog" style={{marginRight: '0.5em'}}></i>Account Settings</Link>
+                            {this.props.userType !== 'admin' && (
+                                <Link class="dropdown-item" to="/profile"><i class="fas fa-cog" style={{marginRight: '0.5em'}}></i>Account Settings</Link>
+                            )}
                             <a class="dropdown-item" onClick={this.props.logout}><i class="fas fa-sign-out-alt" style={{marginRight: '0.5em'}}></i>Logout</a>
                         </DropDown>
                     </ul>

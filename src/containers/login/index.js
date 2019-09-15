@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import AuthService from '../../services/auth.service';
+import RegistrationModal from './modals/RegistrationModal';
 
 class Container extends React.PureComponent<> {
     state = {
         username: 'test@test.com',
         password: 'testtest',
+        isLoggingIn: false,
     }
 
     handleLogin = () => {
@@ -23,127 +25,160 @@ class Container extends React.PureComponent<> {
         .catch(err => alert(err.message));
     }
     render() {
-//         return (
-// <>
-//     <link href="assets-2/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-//     <link href="assets-2/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-// <div class="navbar-fixed">
-//   <nav class="blue-grey darken-4" role="navigation">
-//     <div class="nav-wrapper container" style={{width: '70%'}}>
-//       <a id="logo-container" href="#" class="brand-logo">
-//       Logo
-//     </a>
-//       <ul class="right hide-on-med-and-down">
-//         <li><a class="waves-effect cyan btn" onClick={() => alert('clicked')}>Login</a></li>
-//         <li><a class="waves-effect cyan btn" onClick={() => alert('clicked')}>Sign Up</a></li>
-//       </ul>
-
-//       <ul id="nav-mobile" class="sidenav">
-//         <li><a>Navbar Link</a></li>
-//       </ul>
-//       <a href="#" data-target="nav-mobile" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
-//     </div>
-//   </nav>
-// </div>
-//   <div id="index-banner" class="parallax-container">
-//     <div class="section no-pad-bot">
-//       <div class="container parallax-header" style={{width: '70%'}}>
-//         <br /><br />
-//         <h1 class="header center light">SulaTroniko</h1>
-//         <div class="row center">
-//           <h5 class="header col s12 light">Discover new user-generated stories, spanning across different genres written
-//           by Philippine authors.</h5>
-//         </div>
-//         <div class="row center">
-//           <a href="#l" id="download-button" class="btn-large waves-effect waves-light cyan">Get Started</a>
-//         </div>
-//         <br /><br />
-
-//       </div>
-//     </div>
-//   </div>
-
-
-//   <div class="container" style={{width: '70%'}}>
-//     <div class="section">
-//       <h6 class="header center book-header">LATEST PUBLISHED</h6>
-//       <div class="row book-row">
-//         <div class="col s12 m3">
-//           <div class="icon-block">
-//            <img class="responsive-img z-depth-3" src="../../assets-2/images/book1.jpg" /> 
-//           </div>
-//         </div>
-
-//          <div class="col s12 m3">
-//           <div class="icon-block">
-//            <img class="responsive-img z-depth-3" src="../../assets-2/images/book1.jpg" /> 
-//           </div>
-//         </div>
-
-
-//         <div class="col s12 m3">
-//           <div class="icon-block">
-//             <img class="responsive-img z-depth-3" src="../../assets-2/images/book1.jpg" /> 
-//           </div>
-//         </div>
-
-//         <div class="col s12 m3">
-//           <div class="icon-block">
-//            <img class="responsive-img z-depth-3" src="../../assets-2/images/book1.jpg" /> 
-//           </div>
-//         </div>
-//       </div>
-
-//        <div class="row book-row">
-//         <div class="col s12 m3">
-//           <div class="icon-block">
-//            <img class="responsive-img z-depth-3" src="../../assets-2/images/book2.jpg" /> 
-//           </div>
-//         </div>
-
-//          <div class="col s12 m3">
-//           <div class="icon-block">
-//            <img class="responsive-img z-depth-3" src="../../assets-2/images/book2.jpg" /> 
-//           </div>
-//         </div>
-
-
-//         <div class="col s12 m3">
-//           <div class="icon-block">
-//             <img class="responsive-img z-depth-3" src="../../assets-2/images/book2.jpg" /> 
-//           </div>
-//         </div>
-
-//         <div class="col s12 m3">
-//           <div class="icon-block">
-//            <img class="responsive-img z-depth-3" src="../../assets-2/images/book2.jpg" /> 
-//           </div>
-//         </div>
-//       </div>
-
-//     </div>
-//   </div>
-
-
-//   <footer class="page-footer blue-grey darken-4" style={{paddingLeft: 0}}>
-//     <div class="footer-copyright">
-//       <div class="container">
-//        <a href="#" class="white-text footer-navigation">About Us</a>
-//        <a href="#" class="white-text footer-navigation">FAQ</a>
-//        <a href="#" class="white-text footer-navigation">Contact Us</a>
-//        <a href="#" class="white-text footer-navigation">Terms</a>
-//        <a class="right white-text">Copyright 2019 SulaTroniko. All Rights Reserved.</a>
-//       </div>
-//     </div>
-//   </footer>
-
-
-
-//   <script src="assets-2/js/materialize.js"></script>
-//     <script src="assets-2/js/init.js"></script>
-//     <script src="assets-2/js/index.js"></script>
-//             </>
-//         );
+        return (
+            <>
+            <RegistrationModal
+                isOpen={this.state.isLoggingIn}
+                closeModal={() => {
+                    this.setState({ isLoggingIn: false });
+                }}
+            />
+          <nav class=" navbar fixed-top navbar-expand-sm" style={{height: '3.8em',backgroundColor: 'white'}}>
+              <a id="logo-container" href="#" class="brand-logo">
+                <img src="assets-3/images/sulatroniko_logo.png" style={{width: 150,marginTop: '0.15em'}} />
+              </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+              aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                  <div class="md-form form-sm">
+                    <i class="fas fa-envelope prefix" style={{fontSize: '15px',marginTop: '0.6em',marginLeft: '0.5em',}}></i>
+                    <input type="text" value={this.state.username} onChange={ev => this.setState({ username: ev.target.value })} class="form-control" placeholder="Email" />  
+                  </div>
+                </li>
+                <li class="nav-item" style={{marginLeft: '1em',marginRight: '.5em'}}>
+                  <div class="md-form form-sm">
+                    <i class="fas fa-lock prefix"style={{fontSize: '15px',marginTop: '0.6em',marginLeft: '0.5em',}}></i> 
+                    <input type="password" value={this.state.password} onChange={ev => this.setState({ password: ev.target.value })} class="form-control" placeholder="Password" />
+                  </div>
+                </li>
+                <li class="nav-item" style={{marginTop: '1.7em'}}>
+                  <a class="waves-effect cyan btn btn-sm" onClick={this.handleLogin}>Login</a>
+                </li>
+                <li class="nav-item" style={{marginTop: '1.7em'}}>
+                  <a data-toggle="modal" onClick={() => this.setState({isLoggingIn: true})} class="waves-effect btn btn-primary btn-sm">Sign Up</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <div class="parallax-container" style={{minHeight: "100vh"}}>
+            <div class="container parallax-header" style={{fontFamily: "'Libre Baskerville', serif"}}>
+                  <br /><br />
+                  <h1 class="text-center white-text" style={{fontSize: 50,textShadow: '-1px 1px 0 #000,  1px 1px 0 #000, 1px -1px 0 #000,-1px -1px 0 #000'}}>SulaTroniko</h1>
+              
+                    <h5 class="text-center white-text" style={{fontSize: 50,textShadow: '-1px 1px 0 #000,  1px 1px 0 #000, 1px -1px 0 #000,-1px -1px 0 #000', letterSpacing: 2}}>Discover new user-generated stories spanning across different genres written
+                    by Philippine authors.</h5>
+               
+                  <div class="text-center">
+                   <a class="waves-effect btn cyan btn-lg">Get Started</a>
+                </div>
+              </div>
+          </div>
+          
+           <div class="container">
+              <div class="section">
+                <h6 class="text-center" style={{margin: '2em 0', fontSize: 25, fontWeight: 'bold'}}>LATEST PUBLISHED</h6>
+                 <div class="row ">
+                <div class="col-sm d-flex justify-content-center">
+                 <img class="responsive-img z-depth-3" src="assets-2/images/book1.jpg" width="250" height= "300" /> 
+                </div>
+                <div class="col-sm d-flex justify-content-center">
+                 <img class="responsive-img z-depth-3" src="assets-2/images/book1.jpg" width="250" height= "300" /> 
+                </div>
+                <div class="col-sm d-flex justify-content-center">
+                 <img class="responsive-img z-depth-3" src="assets-2/images/book1.jpg" width="250" height= "300" /> 
+                </div>
+                <div class="col-sm d-flex justify-content-center">
+                 <img class="responsive-img z-depth-3" src="assets-2/images/book1.jpg" width="250" height= "300" /> 
+                </div>
+              </div>
+          
+              <div class="row book-row ">
+                <div class="col-sm d-flex justify-content-center">
+                 <img class="responsive-img z-depth-3" src="assets-2/images/book2.jpg" width="250" height= "300" /> 
+                </div>
+                <div class="col-sm d-flex justify-content-center">
+                 <img class="responsive-img z-depth-3" src="assets-2/images/book2.jpg" width="250" height= "300" /> 
+                </div>
+                <div class="col-sm d-flex justify-content-center">
+                 <img class="responsive-img z-depth-3" src="assets-2/images/book2.jpg" width="250" height= "300" /> 
+                </div>
+                <div class="col-sm d-flex justify-content-center">
+                 <img class="responsive-img z-depth-3" src="assets-2/images/book2.jpg" width="250" height= "300" /> 
+                </div>
+              </div>
+          
+                <div class="row book-row">
+                  <div class="col-sm">
+                  <a href="../../views/homepage/allbooks.html"style={{float: 'right',marginBottom: '2em'}}><b>See All Published Books</b></a>
+                  </div>
+                </div>
+              
+          
+              </div>
+           </div>
+          
+          
+          <footer class="white-text font-small blue-grey darken-4">
+          
+            <div class="container">
+          
+              <div class="row text-center d-flex justify-content-center pt-5 mb-3">
+          
+                <div class="col-md-2 mb-3">
+                  <h6 class="text-uppercase font-weight-bold">
+                    <a href="#!" class="white-text">About us</a>
+                  </h6>
+                </div>
+          
+                <div class="col-md-2 mb-3">
+                  <h6 class="text-uppercase font-weight-bold">
+                    <a href="#!" class="white-text">FAQ</a>
+                  </h6>
+                </div>
+          
+                <div class="col-md-2 mb-3">
+                  <h6 class="text-uppercase font-weight-bold">
+                    <a href="#!" class="white-text">Contact Us</a>
+                  </h6>
+                </div>
+          
+                <div class="col-md-2 mb-3">
+                  <h6 class="text-uppercase font-weight-bold">
+                    <a href="#!" class="white-text">Terms</a>
+                  </h6>
+                </div>
+          
+               
+          
+              </div>
+              <hr class="rgba-white-light" style={{margin: '0 15%'}} />
+          
+              <div class="row d-flex text-center justify-content-center mb-md-0 mb-4">
+          
+                <div class="col-md-8 col-12 mt-5">
+                  <p style={{lineHeight: '1.7rem'}}>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                    accusantium doloremque laudantium, totam rem
+                    aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                    explicabo.
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.</p>
+                </div>
+          
+              </div>
+              <hr class="clearfix d-md-none rgba-white-light" style={{margin: '10% 15% 5%',}} />
+            </div>
+          
+          
+            <div class="footer-copyright text-center py-3" style={{background: '#1e282d'}}>© 2019 Copyright:
+              <a href="https://mdbootstrap.com/education/bootstrap/" class="grey-text"> SulaTroniko. All Rights Reserved.</a>
+            </div>
+          
+          </footer>
+            </>
+        );
         return (
             <div>
                 login/index.js

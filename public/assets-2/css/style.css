@@ -6,6 +6,7 @@
  * Made By MaterializeCSS.com
  */
 
+ /*
 nav ul a,
 nav .brand-logo {
   color: #444;
@@ -19,7 +20,7 @@ p {
 .sidenav-trigger {
   color: #26a69a;
 }
-
+*/
 .parallax-container {
   min-height: 380px;
   line-height: 0;
@@ -44,17 +45,18 @@ p {
 .parallax-header{
    position: absolute;
    top: 25%;
-   left: 15%;
+   left: 5%;
 }
 
 .book-header{
-  margin-top: 1em;
-  font-weight: bold;
-}
-.book-row{
-  margin-top: 2em;
-}
+    margin-top: 1em;
+    font-weight: bold;
+  }
+  .book-row{
+    margin-top: 2em;
+  }
 
+/*
 .login-modal{
   width: 40%;
 }
@@ -99,4 +101,5 @@ footer.page-footer {
 .footer-navigation{
   margin-right: 1em;
 }
+*/
 
