@@ -167,24 +167,32 @@
             <div class="col-md-3">
               <div class="icon-block">
                <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="220" height="300"> 
+               <p class="text-center" style="margin: 1em 0 0 0;font-weight: bold;">Title Here</p>
+               <p class="text-center" style="font-size: 14px;">Author Here</p>
               </div>
             </div>
 
            <div class="col-md-3">
             <div class="icon-block">
-             <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="220" height="300"> 
+             <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="220" height="300">
+             <p class="text-center" style="margin: 1em 0 0 0;font-weight: bold;">Title Here</p>
+             <p class="text-center" style="font-size: 14px;">Author Here</p>
             </div>
            </div>
 
           <div class="col-md-3">
             <div class="icon-block">
-              <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="220" height="300"> 
+              <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="220" height="300">
+              <p class="text-center" style="margin: 1em 0 0 0;font-weight: bold;">Title Here</p>
+              <p class="text-center" style="font-size: 14px;">Author Here</p> 
             </div>
           </div>
 
           <div class="col-md-3">
             <div class="icon-block">
-             <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="220" height="300"> 
+             <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="220" height="300">
+             <p class="text-center" style="margin: 1em 0 0 0;font-weight: bold;">Title Here</p>
+             <p class="text-center" style="font-size: 14px;">Author Here</p> 
             </div>
           </div>
         </div>
@@ -193,12 +201,16 @@
           <div class="col-md-3">
             <div class="icon-block">
              <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="220" height="300"> 
+             <p class="text-center" style="margin: 1em 0 0 0;font-weight: bold;">Title Here</p>
+             <p class="text-center" style="font-size: 14px;">Author Here</p>
             </div>
           </div>
 
           <div class="col-md-3">
             <div class="icon-block">
              <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="220" height="300"> 
+             <p class="text-center" style="margin: 1em 0 0 0;font-weight: bold;">Title Here</p>
+             <p class="text-center" style="font-size: 14px;">Author Here</p>
             </div>
           </div>
 
@@ -206,12 +218,16 @@
           <div class="col-md-3">
             <div class="icon-block">
               <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="220" height="300"> 
+              <p class="text-center" style="margin: 1em 0 0 0;font-weight: bold;">Title Here</p>
+              <p class="text-center" style="font-size: 14px;">Author Here</p>
             </div>
           </div>
 
           <div class="col-md-3">
             <div class="icon-block">
              <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="220" height="300"> 
+             <p class="text-center" style="margin: 1em 0 0 0;font-weight: bold;">Title Here</p>
+             <p class="text-center" style="font-size: 14px;">Author Here</p>
             </div>
           </div>
          </div>
@@ -299,6 +315,7 @@
                 <label class="custom-control-label" for="publisher">Publisher</label>
               </div>
               <p class="red-text" style="font-size: 10px;margin-top: .5em;">Tip: Publishers need to comply all necessary business requirements.</p>
+              <p style="font-size: 12px;">By clicking “Sign Up”, you agree to our <a href="../../views/homepage/terms.html" target="_blank">Terms and Condition of Service </a>. We’ll occasionally send you account related emails.</p>
             </div>
            </div> 
            
@@ -312,6 +329,39 @@
 </div>
 <!-- Full Height Modal Right -->
 
+<div class="modal fade right" id="contactus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+<!-- <div class="modal fade right show" id="contactus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-modal="true" style="display: block; padding-right: 16px;"> -->
+
+  <div class="modal-dialog  modal-side modal-bottom-right" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title ml-auto mr-auto">Contact Us</h4>
+      </div>
+      <div class="modal-body">
+       <div class="md-form form-sm">
+        <i class="fas fa-envelope prefix" style="font-size: 15px;margin-top: .6em;"></i>
+        <input type="email" id="emailadd" class="form-control">
+        <label for="emailadd">Email</label> <br/>
+       </div>
+       <div class="md-form">
+        <i class="fas fa-pencil-alt prefix" style="font-size: 15px;margin-top: .6em;"></i>
+        <textarea id="form10" class="md-textarea form-control" rows="1"></textarea>
+        <label for="form10">Message</label>
+      </div>
+
+
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn red lighten-1 white-text btn-md" data-dismiss="modal">Close</button>
+        <button type="button" class="btn cyan white-text btn-md">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- Footer -->
@@ -342,7 +392,7 @@
       <!-- Grid column -->
       <div class="col-md-2 mb-3">
         <h6 class="text-uppercase font-weight-bold">
-          <a href="#!" class="white-text">Contact Us</a>
+          <a data-toggle="modal" data-target="#contactus" class="white-text">Contact Us</a>
         </h6>
       </div>
       <!-- Grid column -->
@@ -350,7 +400,7 @@
       <!-- Grid column -->
       <div class="col-md-2 mb-3">
         <h6 class="text-uppercase font-weight-bold">
-          <a href="#!" class="white-text">Terms</a>
+          <a href="../../views/homepage/terms.html" class="white-text" target="_blank">Terms</a>
         </h6>
       </div>
       <!-- Grid column -->
