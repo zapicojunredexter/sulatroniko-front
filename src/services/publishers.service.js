@@ -14,6 +14,18 @@ export default class Service {
         }
     }
 
+    static approvePublisher = (id) => async dispatch => {
+        try {
+            const payload = {
+                status: 'approved',
+            };
+            const results = await RequestService.post(`publishers/${id}`,payload);
+            await responseToJson(results);
+        } catch (err) {
+            throw err;
+        }
+    }
+
     static setPublisher = (params) => async (dispatch, getState) => {
         try {
             const { userStore: { uid } } = getState();
@@ -23,7 +35,10 @@ export default class Service {
                 user: params.user,
                 publisherId: uid,
             };
-            // alert('iedit dapat'+ JSON.stringify(payload));
+            console.log(
+                'HEYYY', payload
+            );
+            return;
             const results = await RequestService.post(`publishers/${uid}`,payload);
             const t = await responseToJson(results);
             dispatch(UserService.fetchUserDetails());

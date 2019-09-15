@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import AuthService from '../../services/auth.service';
 import StorageService from '../../services/storage.service';
 import { getPublicManuscripts } from '../../redux/manuscripts/manuscripts.selector';
+import Books from '../books';
 import "./styles.scss"
 
 const arrContains = (str, substr) => {
@@ -46,6 +47,8 @@ class Container extends React.PureComponent<> {
         return (
             <main class="pt-5 mx-lg-5 threads-page-container">
                 <div class="container-fluid mt-5">
+                    <Books />
+                    {/*
                     <div className="dashboard__container">
                         <div className="dashboard__list-wrapper">
                             <h4 style={{fontWeight: 'bold'}}>MANUSCRIPTS</h4>
@@ -83,11 +86,8 @@ class Container extends React.PureComponent<> {
                                 })}
                             </div>
                         </div>
-                        {
-                            /*JSON.stringify(this.props.manuscripts)
-                        */
-                        }
                     </div>
+                    */}
                 </div>
             </main>
         );

@@ -10,6 +10,7 @@ export default class Service {
             const { userStore: { uid } } = getState();
             const filtered = json.filter(transaction => transaction.authorId === uid || transaction.publisherId === uid || transaction.copywriterId === uid);
             dispatch(setTransactions(filtered));
+            return json;
         } catch (err) {
             console.error(err);
         }

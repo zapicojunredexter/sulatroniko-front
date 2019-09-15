@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Author from './forms/Author';
 import Publisher from './forms/Publisher';
 import CopyWriter from './forms/CopyWriter';
+import Admin from './forms/Admin';
 import UserService from '../../services/user.service';
 import CopywriterService from '../../services/copywriters.service';
 import PublisherService from '../../services/publishers.service';
@@ -50,6 +51,10 @@ class Container extends React.PureComponent<> {
                         user={this.props.user}
                         credentials={this.props.credentials}
                     />
+                );
+            case 'admin':
+                return (
+                    <Admin />
                 );
             default:
                 return null;
