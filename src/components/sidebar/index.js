@@ -11,6 +11,15 @@ class Container extends React.PureComponent<> {
         return path === this.props.location.pathname;
     }
 
+    renderDisabled = () => {
+        return null;
+        return (
+            <>
+                <a href="#" class="list-group-item list-group-item-action waves-effect">Account disabled</a>
+            </>
+        );
+    }
+
     renderPublisherNav = () => {
         if(this.props.type !== 'Publisher')
         return null;
@@ -91,7 +100,7 @@ class Container extends React.PureComponent<> {
                 <div class="list-group list-group-flush">
                     {this.renderAuthorNav()}
                     {this.renderCopywriterNav()}
-                    {this.renderPublisherNav()}
+                    {this.props.isApproved ? this.renderPublisherNav() : this.renderDisabled()}
                     {/*
                     */}
                     <a href="#" class="list-group-item list-group-item-action waves-effect teal-text">
@@ -108,6 +117,7 @@ const mapStateToProps = state => ({
     dp: state.userStore.credentials && state.userStore.credentials.displayPic || 'default-user.jpg',
     name: state.userStore.user && state.userStore.user.name,
     type: capitalizeFirstChar(state.userStore.type),
+    isApproved: state.userStore.user && state.userStore.user.status === 'approved'
 });
 
 const mapDispatchToProps = dispatch => ({

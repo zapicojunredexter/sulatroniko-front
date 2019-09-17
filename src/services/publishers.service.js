@@ -16,10 +16,11 @@ export default class Service {
 
     static approvePublisher = (id) => async dispatch => {
         try {
+            alert('TODO '+id)
             const payload = {
                 status: 'approved',
             };
-            const results = await RequestService.post(`publishers/${id}`,payload);
+            const results = await RequestService.post(`users/${id}`,payload);
             await responseToJson(results);
         } catch (err) {
             throw err;
@@ -35,10 +36,6 @@ export default class Service {
                 user: params.user,
                 publisherId: uid,
             };
-            console.log(
-                'HEYYY', payload
-            );
-            return;
             const results = await RequestService.post(`publishers/${uid}`,payload);
             const t = await responseToJson(results);
             dispatch(UserService.fetchUserDetails());

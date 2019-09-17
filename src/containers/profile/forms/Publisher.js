@@ -41,6 +41,13 @@ export default class Container extends React.PureComponent<> {
                     <div class="card-body">
     
                         <div class="row container">
+                            <div class="md-form col-sm-12">
+                                {!this.props.user.status && (
+                                    <p class="red-text" style={{fontSize: 12,marginLeft: '2em',}}>
+                                        Account temporarily disabled
+                                    </p>
+                                )}
+                            </div>
                             <div class="md-form col-lg-3" style={{marginLeft: '4em'}}>
                                 <h6>Login Details</h6>
             

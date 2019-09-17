@@ -1,11 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PublisherService from '../../../services/publishers.service';
+import UserService from '../../../services/user.service';
 class Container extends React.PureComponent<> {
+    state = {
+        data: [],
+    }
     componentDidMount(){
-        this.props.fetchAll();
+        this.fetchAllUserTypes()
+    }
+
+    fetchAllUserTypes = () => {
+        // this.props.fetchAll();
+        this.props.fetchAllUserTypes()
+            .then((res) => {
+                this.setState({data: res});
+            })
+            .catch(err => {});
     }
     render() {
+        const publishers = this.state.data.filter(dat => dat.type === 'Publisher' && dat.status !== 'approved');
         return (
 
             <div class="col-md-12 mb-12">
@@ -20,7 +34,7 @@ class Container extends React.PureComponent<> {
                                     <th>Submission Date</th>
                                     <th>Actions</th>
                                 </tr>
-                                {this.props.publishers.map((publisher, index) => {
+                                {publishers.map((publisher, index) => {
                                     return (
                                         <tr>
                                             <td>{index + 1}</td>
@@ -32,8 +46,7 @@ class Container extends React.PureComponent<> {
                                                     this.props.approvePublisher(publisher.id)
                                                         .then(() => {
                                                             alert('success');
-                                                            this.props.fetchAll()
-                                                                .catch(err => {});
+                                                            this.fetchAllUserTypes();
                                                         })
                                                         .catch(err => alert(err.message))
                                                 }}>approve</button>
@@ -61,7 +74,9 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
     fetchAll: () => dispatch(PublisherService.fetchAll()),
-    approvePublisher: (id) => dispatch(PublisherService.approvePublisher(id))
+    approvePublisher: (id) => dispatch(PublisherService.approvePublisher(id)),
+    fetchAllUserTypes: () => dispatch(UserService.fetchAllUserTypes()),
+    setUser: (id,params) => dispatch(UserService.setUser(id, params)),
 });
 
 export default connect(

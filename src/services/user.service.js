@@ -3,6 +3,16 @@ import { responseToJson } from '../utils/parsing.helper';
 import { setUserDetails, setUserCredentials } from '../redux/user/user.action';
 
 export default class Service {
+
+    static setUser = (id, params) => async (dispatch, getState) => {
+        try {
+            const results = await RequestService.post(`users/${id}`, params);
+            return results;
+        } catch (err) {
+            throw err;
+        }
+    }
+
     static fetchUserDetails = () => async (dispatch, getState) => {
         try {
             const { uid } = getState().userStore;
@@ -12,16 +22,14 @@ export default class Service {
             if(json.type === 'author') {
                 const authorResult = await RequestService.get(`authors/${uid}`);
                 const author = await responseToJson(authorResult).catch((err) => console.error(err));
-                dispatch(setUserDetails({type: json.type, user: author}));
+                dispatch(setUserDetails({type: json.type, user: {...author,status: json.status}}));
             }
             if(json.type === 'publisher') {
-                console.log('naa sna');
                 const publisherResult = await RequestService.get(`publishers/${uid}`);
                 const publisher = await responseToJson(publisherResult).catch((err) => console.error(err));
-                console.log('dasda', publisher);
-                dispatch(setUserDetails({type: json.type, user: publisher}));
+                console.log('AYYY', json, publisher);
+                dispatch(setUserDetails({type: json.type, user: {...publisher, status: json.status}}));
             }
-            console.log('zz', json);
             if(json.type === 'copywriter') {
                 const publisherResult = await RequestService.get(`copywriters/${uid}`);
                 const publisher = await responseToJson(publisherResult).catch((err) => console.error(err));
