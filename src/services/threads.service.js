@@ -23,7 +23,7 @@ export default class Service {
 
     static listenThreads = (uid) => async (dispatch, getState) => {
         dispatch(this.unListenThreads());
-        this.threadsListener = FirebaseClient.instance
+    this.threadsListener = FirebaseClient.instance
             .firestore()
             .collection('threads')
             // .where('isDeleted', '==', false)

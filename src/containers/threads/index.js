@@ -72,8 +72,9 @@ class Container extends React.PureComponent<> {
     return (
       <button
         onClick={() => this.handleSelectThread(thread.id)}
-        class="btn btn-mdb-color btn-sm"
-        style={{ width: "100%", marginTop: "-.2em" }}
+        class="btn btn-sm"
+        style={{ width: "100%", marginTop: "-.2em", backgroundColor: "#2e3951", color: "white" }}
+        style={{ width: "100%", marginTop: "-.2em", backgroundColor: "#45526e", color: "white" }}
       >
         <span style={{ float: "left", fontSize: 15 }}>
           {thread.threadDisplayable && thread.threadDisplayable.name}
@@ -123,6 +124,7 @@ class Container extends React.PureComponent<> {
         {hasSelected ? (
           <>
             <div className="messages">
+             <div className="message-content">
               {selectedThread.messages.map(message => {
                 return (
                   <div
@@ -133,6 +135,17 @@ class Container extends React.PureComponent<> {
                   </div>
                 );
               })}
+              {[...selectedThread.messages,...selectedThread.messages,...selectedThread.messages,...selectedThread.messages].map(message => {
+                return (
+                  <div
+                    className={`chat-bubble ${false ? `is-own` : ``}`}
+                  >
+                    {message.message}
+                    {renderFilesLinks(message.files)}
+                  </div>
+                );
+              })}
+              </div>
             </div>
             <div className="add-components">{this.renderSendMessage()}</div>
           </>
@@ -239,6 +252,7 @@ class Container extends React.PureComponent<> {
     const messageDetails = this.props.threads.filter(
       thread =>
         thread.threadDisplayable &&
+        thread.threadDisplayable.name && 
         thread.threadDisplayable.name
           .toUpperCase()
           .indexOf(this.state.filterMessages.toUpperCase()) >= 0

@@ -56,7 +56,8 @@
 
 .chat-bubble {
     // background-color: green;
-    background-color: silver;
+    background-color: #cecece;
+    
     // margin: 20px;
     margin-top: 10px;
     padding: 10px;
@@ -64,10 +65,24 @@
     width: 80%;
 }
 
+.messages{
+    background-color: white;
+    border-radius: 10px;
+    margin: 2em 0;
+    min-height: 70vh;
+    max-height: 70vh;
+    overflow-y: scroll;
+}
+
+.message-content{
+    padding: .5em 0;
+    margin: 0 .4em;
+}
+
 .is-own {
     width: calc(80%-40px);
     // background-color: blue;
-    background-color: #359999;
+    background-color: #edebeb;
     margin-left: 20%;
     // float:right;
 }
