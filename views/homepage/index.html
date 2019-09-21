@@ -7,6 +7,7 @@
 
   <!-- CSS  -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
   <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
     <!-- Bootstrap core CSS -->
   <link href="../../assets/css/author/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +19,7 @@
 
 <body>
   <!--Navbar -->
-<nav class=" navbar fixed-top navbar-expand-sm" style="height: 3.8em;background: white;">
+<nav class=" navbar fixed-top navbar-expand-sm" style="height: 5em;background: white;">
     <a id="logo-container" href="#" class="brand-logo">
       <img src="../../assets/images/sulatroniko_logo.png" style="width: 150px !important;margin-top: .15em;">
     </a>
@@ -35,10 +36,11 @@
         </div>
       </li>
       <li class="nav-item" style="margin-left: 1em;margin-right: .5em;">
-        <div class="md-form form-sm">
-          <i class="fas fa-lock prefix"style="font-size: 15px;margin-top: .6em;margin-left: .5em;"></i> 
-          <input type="password" id="userpassword" class="form-control" placeholder="Password">
-        </div>
+          <div class="md-form form-sm">
+            <i class="fas fa-lock prefix"style="font-size: 15px;margin-top: .6em;margin-left: .5em;"></i> 
+            <input type="password" id="userpassword" class="form-control" placeholder="Password">
+            <a data-toggle="modal" data-target="#forgotpass" class="blue-text" style="margin-left: 2.5em; font-size: 12px;">Forgot Password?</a>
+          </div>
       </li>
       <li class="nav-item" style="margin-top: 1.7em;">
         <a class="waves-effect cyan btn btn-sm">Login</a>
@@ -69,33 +71,33 @@
     <div class="section">
       <h6 class="text-center" style="margin: 2em 0; font-size: 25px; font-weight: bold;">LATEST PUBLISHED</h6>
       <!--   Icon Section   -->
-       <div class="row ">
+       <div class="row book-row">
       <div class="col-sm d-flex justify-content-center">
-       <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="250" height= "300"> 
+      <a data-toggle="modal" data-target="#bookpreview"> <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="250" height= "300"> </a>
       </div>
       <div class="col-sm d-flex justify-content-center">
-       <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="250" height= "300"> 
+       <a data-toggle="modal" data-target="#bookpreview"><img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="250" height= "300"></a> 
       </div>
       <div class="col-sm d-flex justify-content-center">
-       <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="250" height= "300"> 
+       <a data-toggle="modal" data-target="#bookpreview"><img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="250" height= "300"></a>
       </div>
       <div class="col-sm d-flex justify-content-center">
-       <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="250" height= "300"> 
+       <a data-toggle="modal" data-target="#bookpreview"><img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="250" height= "300"> </a>
       </div>
     </div>
 
     <div class="row book-row ">
       <div class="col-sm d-flex justify-content-center">
-       <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="250" height= "300"> 
+       <a data-toggle="modal" data-target="#bookpreview"><img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="250" height= "300"></a> 
       </div>
       <div class="col-sm d-flex justify-content-center">
-       <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="250" height= "300"> 
+       <a data-toggle="modal" data-target="#bookpreview"><img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="250" height= "300"></a> 
       </div>
       <div class="col-sm d-flex justify-content-center">
-       <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="250" height= "300"> 
+       <a data-toggle="modal" data-target="#bookpreview"><img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="250" height= "300"></a> 
       </div>
       <div class="col-sm d-flex justify-content-center">
-       <img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="250" height= "300"> 
+       <a data-toggle="modal" data-target="#bookpreview"><img class="responsive-img z-depth-3" src="../../assets/images/book2.jpg" width="250" height= "300"></a>
       </div>
     </div>
 
@@ -227,10 +229,10 @@
 </div>
 <!-- Full Height Modal Right -->
 
-<!-- <div class="modal fade right" id="contactus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true"> -->
+<div class="modal fade right" id="contactus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
 
-<div class="modal fade right show" id="contactus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-modal="true" style="display: block; padding-right: 16px;">
+<!-- <div class="modal fade right show" id="contactus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-modal="true" style="display: block; padding-right: 16px;"> -->
 
   <div class="modal-dialog  modal-side modal-bottom-right" role="document">
 
@@ -261,6 +263,76 @@
   </div>
 </div>
 
+
+<!-- Book Preview Modal -->
+<!-- <div class="modal fade" id="bookpreview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true"> -->
+
+
+ <div class="modal fade show" id="bookpreview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-modal="true" style="padding-right: 16px; display: block;">
+
+  <div class="modal-dialog modal-lg" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100" id="myModalLabel">Insert Book Title</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6" >
+            <img class="responsive-img z-depth-3" src="../../assets/images/book1.jpg" width="250" height= "300" style="margin: auto; display:block;margin-top: 2em;">
+          </div>
+          <div class="col-md-6">
+          <p style="font-weight: bold;">Author: Insert Name of Author</p>
+          <hr>
+          <p style="text-indent: 50px;font-size: 14px;">Candy canes dessert cheesecake candy. Macaroon chocolate bar topping sesame snaps gummi bears muffin gingerbread soufflé powder. Jelly beans pudding caramels macaroon chocolate tiramisu icing. Jujubes caramels chocolate bar tiramisu toffee jujubes croissant muffin. Dessert tootsie roll macaroon croissant muffin. Soufflé jelly beans cupcake sugar plum sesame snaps marshmallow. Jelly gummies toffee. Toffee chocolate bar biscuit gummi bears tiramisu macaroon halvah gummi bears candy canes. Tart cheesecake cupcake jujubes. Cookie bear claw toffee oat cake.</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn red lighten-1 white-text btn-sm" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Book Preview Modal -->
+
+<!-- Forgot Password Modal -->
+
+<!-- <div class="modal fade right" id="forgotpass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true"> -->
+
+  <div class="modal fade right show" id="forgotpass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-modal="true" style="display: block; padding-right: 19px;">
+
+  <div class="modal-dialog modal-side modal-top-right" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title w-100" id="myModalLabel">Reset your password</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Please enter your email address and we will send you a link to reset your password.
+        <div class="md-form form-sm">
+          <i class="fas fa-envelope prefix" style="font-size: 15px;margin-top: .6em;margin-left: .5em;"></i>
+          <input type="email" id="emailadd" class="form-control">
+          <label for="emailadd">Email</label> <br/>
+       </div>
+       <button type="button" class="btn cyan white-text btn-md reset-password" style="float:right;margin-top: -2em; " data-dismiss="modal">Send password reset email</button>
+      </div>
+         
+    </div>
+  </div>
+</div>
+
+<!-- Forgot Password Modal -->
 
 <!-- Footer -->
 <footer class="white-text font-small blue-grey darken-4">
@@ -346,9 +418,23 @@
   <script type="text/javascript" src="../../assets/js/author/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="../../assets/js/author/mdb.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.29.2/sweetalert2.all.js"></script>
  <!--  <script src="../../assets/js/materialize.js"></script>
   <script src="../../assets/js/init.js"></script> -->
-  
+  <script>
+    document.querySelector(".reset-password").addEventListener('click', function(){
+      Swal.fire({
+      position: 'top-end',
+      type: 'success',
+      title: 'Email has been sent',
+      showConfirmButton: false,
+      timer: 1500,
+      width: 400
+    })
+    });
+
+  </script>
  </body>
 </html>
 
