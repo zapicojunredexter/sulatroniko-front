@@ -6,8 +6,8 @@ import ForgotPasswordModal from './modals/ForgotPasswordModal';
 
 class Container extends React.PureComponent<> {
     state = {
-        username: 'test@test.com',
-        password: 'testtest',
+        username: '',
+        password: '',
         isLoggingIn: false,
         forgotPassword: false,
     }

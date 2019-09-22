@@ -135,7 +135,7 @@ class Container extends React.PureComponent<> {
                   </div>
                 );
               })}
-              {[...selectedThread.messages,...selectedThread.messages,...selectedThread.messages,...selectedThread.messages].map(message => {
+              {[...selectedThread.messages].map(message => {
                 return (
                   <div
                     className={`chat-bubble ${false ? `is-own` : ``}`}
