@@ -32,7 +32,7 @@ p {
   }
 
   .parallax-container{
-   background-image: url("../../assets/images/background1.jpg");
+   background-image: url("../../assets/images/landingpage.jpg");
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
