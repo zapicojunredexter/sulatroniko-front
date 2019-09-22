@@ -89,4 +89,14 @@ export default class Service {
         dispatch(ThreadsService.unListenThreads());
         dispatch(setIsLoggedOut());
     }
+
+    static requestAppRetrieval = (username) => async dispatch => {
+        try {
+            const userResult = await RequestService.get(`users/email/${username}`);
+            await responseToJson(userResult);
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
 };

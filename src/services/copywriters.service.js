@@ -24,10 +24,8 @@ export default class Service {
 
             const userResult = await RequestService.post(`users`,{...user, type: 'copywriter'});
             const userJson = await responseToJson(userResult);
-            console.log('naad ni sha', userJson);
             const copywriterResult = await RequestService.post(`copywriters/${userJson.id}`,{...copywriter, publisherId: uid});
             const copywriterJson = await responseToJson(copywriterResult);
-            console.log('naad ni sha1', copywriterJson);
             
         } catch (err) {
 
@@ -36,19 +34,32 @@ export default class Service {
         }
     }
 
-
-
     static setCopywriter = (params) => async (dispatch, getState) => {
         try {
             const { userStore: { uid } } = getState();
             const payload = {
                 ...params,
-                copywriter: params.copywriter,
-                user: params.user,
-                publisherId: uid,
+                // copywriter: params.copywriter,
+                // user: params.user,
+                // publisherId: uid,
             };
             // alert('iedit dapat'+ JSON.stringify(payload));
             const results = await RequestService.patch(`copywriters/${uid}`,payload);
+            const t = await responseToJson(results);
+            
+            dispatch(UserService.fetchUserDetails());
+            // dispatch(setManuscripts(json));
+        } catch (err) {
+
+            console.error(err);
+            throw err;
+        }
+    }
+
+
+    static editCopywriter = (id, payload) => async (dispatch, getState) => {
+        try {
+            const results = await RequestService.patch(`copywriters/${id}`,payload);
             const t = await responseToJson(results);
             
             dispatch(UserService.fetchUserDetails());

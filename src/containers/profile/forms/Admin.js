@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Select from 'react-select';
 import PublisherService from '../../../services/publishers.service';
 import UserService from '../../../services/user.service';
 class Container extends React.PureComponent<> {
@@ -20,14 +21,28 @@ class Container extends React.PureComponent<> {
             .catch(err => {});
     }
     render() {
-        const publishers = this.state.data.filter(dat => dat.type === 'Publisher');
+        const publishers = this.state.data.filter(dat => dat.type === 'Publisher' && dat.name && (dat.status === 'approved' || !dat.status));
         const authors = this.state.data.filter(dat => dat.type === 'Author');
         const copywriters = this.state.data.filter(dat => dat.type === 'Copywriter');
         
         return (
 
             <div class="col-md-12 mb-12">
+
                 <div style={{marginTop: '4em'}}>
+                    {/*
+                    <Select
+                        placeholder="selecT"
+                        // value={'chocolate'}
+                        isMulti
+                        onChange={ev => alert(JSON.stringify(ev))}
+                        options={[
+                            { value: 'chocolate', label: 'Chocolate' },
+                            { value: 'strawberry', label: 'Strawberry' },
+                            { value: 'vanilla', label: 'Vanilla' },]}
+                    />
+                    */}
+                    
                     <div class="card">
                         <div class="card-body">
                             <select onChange={ev => this.setState({type: ev.target.value})} class="form-control" style={{width: 200}}>
@@ -61,7 +76,16 @@ class Container extends React.PureComponent<> {
                                                                 })
                                                                 .catch(err => alert(err.message))
                                                         }}>approve</button>
-
+                                                    )}
+                                                    {publisher.status !== 'approved' && (
+                                                        <button class="btn btn-danger" onClick={() => {
+                                                            this.props.rejectPublisher(publisher.id)
+                                                                .then(() => {
+                                                                    alert('success');
+                                                                    this.fetchAllUserTypes();
+                                                                })
+                                                                .catch(err => alert(err.message))
+                                                        }}>reject</button>
                                                     )}
                                                 </td>
                                             </tr>
@@ -78,14 +102,14 @@ class Container extends React.PureComponent<> {
                                         <th>Publisher</th>
                                         <th>Actions</th>
                                     </tr>
-                                    {publishers.map((copywriter, index) => {
+                                    {copywriters.map((copywriter, index) => {
                                         return (
                                             <tr>
                                                 <td>{index + 1}</td>
                                                 <td>{copywriter.name}</td>
                                                 <td>{new Date(copywriter.createdAt._seconds * 1000).toLocaleString()}</td>
                                                 <td>
-                                                    {copywriter.publisherId}
+                                                    {(copywriter.publisher && copywriter.publisher.name) || copywriter.publisherId}
                                                 </td>
                                                 <td></td>
                                             </tr>
@@ -101,7 +125,7 @@ class Container extends React.PureComponent<> {
                                         <th>Date Registered</th>
                                         <th>Actions</th>
                                     </tr>
-                                    {publishers.map((author, index) => {
+                                    {authors.map((author, index) => {
                                         return (
                                             <tr>
                                                 <td>{index + 1}</td>
@@ -129,6 +153,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     fetchAll: () => dispatch(PublisherService.fetchAll()),
     approvePublisher: (id) => dispatch(PublisherService.approvePublisher(id)),
+    rejectPublisher: (id) => dispatch(PublisherService.rejectPublisher(id)),
     fetchAllUserTypes: () => dispatch(UserService.fetchAllUserTypes()),
     setUser: (id,params) => dispatch(UserService.setUser(id, params)),
 });

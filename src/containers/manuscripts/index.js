@@ -46,6 +46,7 @@ class Container extends React.PureComponent<> {
             const payload = {
                 title: params.title,
                 genre: params.genre,
+                genres: params.genres,
                 manuscript: manuscriptPaths[0],
                 cover: coverPaths[0],
                 synopsis: params.synopsis,
@@ -74,6 +75,7 @@ class Container extends React.PureComponent<> {
                 id: params.id,
                 title: params.title,
                 genre: params.genre,
+                genres: params.genres,
                 manuscript: manuscriptPaths[0],
                 cover: coverPaths[0],
                 synopsis: params.synopsis,
@@ -126,7 +128,7 @@ class Container extends React.PureComponent<> {
     }
 
     renderAddManuscript = () => {
-        return <AddManuscript handleAdd={this.handleAdd} cancel={this.cancel} />;
+        return <AddManuscript genres={this.props.genres} handleAdd={this.handleAdd} cancel={this.cancel} />;
         return (
             <div className="manuscript-form-wrapper">
                 <div className="row">
@@ -158,7 +160,7 @@ class Container extends React.PureComponent<> {
     }
 
     renderEditManuscript = () => {
-        return <EditManuscript toBeUpdated={this.state.isEditingManuscript} handleEdit={this.handleEdit} setFreeFieldsManuscript={this.props.setFreeFieldsManuscript} cancel={this.cancel} fetchAll={this.fetchAll} />;
+        return <EditManuscript genres={this.props.genres} toBeUpdated={this.state.isEditingManuscript} handleEdit={this.handleEdit} setFreeFieldsManuscript={this.props.setFreeFieldsManuscript} cancel={this.cancel} fetchAll={this.fetchAll} />;
         return (
             <div>
                 <div className="manuscript-form-wrapper">
@@ -273,6 +275,7 @@ a
 const mapStateToProps = state => ({
     manuscripts: state.manuscriptsStore.manuscripts,
     ownManuscripts: getOwnManuscripts(state),
+    genres: state.genresStore.genres,
 });
 
 const mapDispatchToProps = dispatch => ({

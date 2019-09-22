@@ -27,13 +27,12 @@ export default class Service {
             if(json.type === 'publisher') {
                 const publisherResult = await RequestService.get(`publishers/${uid}`);
                 const publisher = await responseToJson(publisherResult).catch((err) => console.error(err));
-                console.log('AYYY', json, publisher);
                 dispatch(setUserDetails({type: json.type, user: {...publisher, status: json.status}}));
             }
             if(json.type === 'copywriter') {
-                const publisherResult = await RequestService.get(`copywriters/${uid}`);
-                const publisher = await responseToJson(publisherResult).catch((err) => console.error(err));
-                dispatch(setUserDetails({type: json.type, user: publisher}));
+                const copywriterResult = await RequestService.get(`copywriters/${uid}`);
+                const copywriter = await responseToJson(copywriterResult).catch((err) => console.error(err));
+                dispatch(setUserDetails({type: json.type, user: copywriter}));
             }
         } catch (err) {
             console.error(err);

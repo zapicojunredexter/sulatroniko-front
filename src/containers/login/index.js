@@ -2,12 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import AuthService from '../../services/auth.service';
 import RegistrationModal from './modals/RegistrationModal';
+import ForgotPasswordModal from './modals/ForgotPasswordModal';
 
 class Container extends React.PureComponent<> {
     state = {
         username: 'test@test.com',
         password: 'testtest',
         isLoggingIn: false,
+        forgotPassword: false,
     }
 
     handleLogin = () => {
@@ -33,7 +35,13 @@ class Container extends React.PureComponent<> {
                     this.setState({ isLoggingIn: false });
                 }}
             />
-          <nav class=" navbar fixed-top navbar-expand-sm" style={{height: '3.8em',backgroundColor: 'white'}}>
+            <ForgotPasswordModal
+                isOpen={this.state.forgotPassword}
+                closeModal={() => {
+                    this.setState({ forgotPassword: false });
+                }}
+            />
+          <nav class=" navbar fixed-top navbar-expand-sm" style={{height: '5em',backgroundColor: 'white'}}>
               <a id="logo-container" href="#" class="brand-logo">
                 <img src="assets-3/images/sulatroniko_logo.png" style={{width: 150,marginTop: '0.15em'}} />
               </a>
@@ -53,6 +61,8 @@ class Container extends React.PureComponent<> {
                   <div class="md-form form-sm">
                     <i class="fas fa-lock prefix"style={{fontSize: '15px',marginTop: '0.6em',marginLeft: '0.5em',}}></i> 
                     <input type="password" value={this.state.password} onChange={ev => this.setState({ password: ev.target.value })} class="form-control" placeholder="Password" />
+                    <a data-toggle="modal" data-target="#forgotpass" class="blue-text" onClick={() => this.setState({forgotPassword: true})} style={{marginLeft: '2.5em', fontSize: 12}}>Forgot Password?</a>
+                    
                   </div>
                 </li>
                 <li class="nav-item" style={{marginTop: '1.7em'}}>

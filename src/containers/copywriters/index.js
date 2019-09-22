@@ -104,8 +104,7 @@ class Container extends React.PureComponent<> {
                         <tr>
                             <th>Names</th>
                             <th>Status</th>
-                            <th>Specialized Genres</th>
-                            <th></th>
+                            <th>Action</th>
                         </tr>
                         {this.props.myCopywriters.map(copywriter => {
                             return (
@@ -116,8 +115,21 @@ class Container extends React.PureComponent<> {
                                     ) : (
                                         <span class="badge badge-dark">Inactive</span>
                                     )}</td>
-                                    <td>{copywriter.status}</td>
-                                        <td><button onClick={() => this.handleClickMessage(copywriter.id)}>message</button></td>
+                                        <td>
+                                            {copywriter.deleted ? (
+                                                <button onClick={() => this.props.editCopywriter(copywriter.id, {deleted: false}).then(() => {
+                                                    alert('success');
+                                                    this.props.fetchCopywriters().catch(() => {});
+                                                }).catch(err => alert(err.message))}>enable account</button>
+                                            ): (
+                                                <button onClick={() => this.props.editCopywriter(copywriter.id, {deleted: true}).then(() => {
+                                                    alert('success')
+                                                    this.props.fetchCopywriters().catch(() => {});
+                                                }).catch(err => alert(err.message))}>disable account</button>
+
+                                            )}
+                                            <button onClick={() => this.handleClickMessage(copywriter.id)}>message</button>
+                                        </td>
                                     </tr>
                             );
                         })}
@@ -152,6 +164,7 @@ const mapDispatchToProps = dispatch => ({
     fetchCopywriters: () => dispatch(CopywriterService.fetchAll()),
     createThread: (copywriterId) => dispatch(ThreadsService.createThread(copywriterId)),
     add: (params) => dispatch(CopywriterService.add(params)), 
+    editCopywriter: (id, params) => dispatch(CopywriterService.editCopywriter(id, params)),
 });
 
 export default connect(

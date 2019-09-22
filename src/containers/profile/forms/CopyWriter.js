@@ -33,9 +33,15 @@ export default class Container extends React.PureComponent<> {
                     <div class="card-body">
     
                         <div class="row container">
+                            <div class="md-form col-sm-12">
+                                {this.props.user.deleted && (
+                                    <p class="red-text" style={{fontSize: 12,marginLeft: '2em',}}>
+                                        Account disabled by Publisher
+                                    </p>
+                                )}
+                            </div>
                             <div class="md-form col-lg-3" style={{marginLeft: '4em'}}>
                                 <h6>Login Details</h6>
-            
                          
                                 <div class="row">
                                     <div class="md-form col s12">

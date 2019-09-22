@@ -212,7 +212,7 @@ class Container extends React.PureComponent<> {
                 </div>
                 <div class="card-body row">
                     <div class="col-sm-3">
-                        <img src={manuscript.cover} style={{width: 100}} />
+                        <img src={manuscript.cover} alt="cover" style={{width: 100}} />
                     </div>
                     <div class="col-sm-6">
                         <p>{manuscript.synopsis}</p>
@@ -220,6 +220,7 @@ class Container extends React.PureComponent<> {
                             Copywriter: <b>{copywriter ? copywriter.name : 'None'}</b><br />
                             Author: <b>dasda</b>
                         </p>
+                        <a href={transaction && transaction.manuscript && transaction.manuscript.manuscript} style={{textDecoration: 'underline'}}>Download File</a>
                     </div>
                     <div class="col-sm-3 justify-content-center">
                         {(this.props.userType === 'copywriter' && transaction.status === 'published') && (

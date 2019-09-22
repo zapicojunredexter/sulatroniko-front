@@ -44,7 +44,11 @@ export default class Container extends React.PureComponent<> {
                             <div class="md-form col-sm-12">
                                 {!this.props.user.status && (
                                     <p class="red-text" style={{fontSize: 12,marginLeft: '2em',}}>
-                                        Account temporarily disabled
+                                        Account temporarily disabled Send a copy of your business permit or any legal proof of your business to 
+                                        {` `}
+                                        <a href="mailto:emorejcreates99@gmail.com?Subject=Requirements" target="_top">
+                                        emorejcreates99@gmail.com
+                                        </a>
                                     </p>
                                 )}
                             </div>
@@ -97,12 +101,14 @@ export default class Container extends React.PureComponent<> {
             
                                 <div class="md-form row">
                                     <div class="md-form col s6" style={{marginTop: 0}}>
-                                        <input value={this.state.pubCCV} onChange={(event) => this.setState({pubCCV: event.target.value})} id="ccv" type="text" class="form-control"/>
-                                        <label class={this.state.pubCCV && 'active'} for="ccv">CCV</label>
+                                        <textarea value={this.state.pubCCV} onChange={(event) => this.setState({pubCCV: event.target.value})} id="services" class="md-textarea form-control" rows="2"></textarea>
+                                        
+                                        <label class={this.state.pubCCV && 'active'} for="ccv">Vision</label>
                                     </div>
                                     <div class="md-form col s6" style={{marginTop: 0}}>
-                                        <input value={this.state.pubCCNum} onChange={(event) => this.setState({pubCCNum: event.target.value})} id="ccn" type="text" class="form-control"/>
-                                        <label class={this.state.pubCCNum && 'active'} for="ccn">CC Number</label>
+                                        <textarea value={this.state.pubCCNum} onChange={(event) => this.setState({pubCCNum: event.target.value})} id="services" class="md-textarea form-control" rows="2"></textarea>
+                                        
+                                        <label class={this.state.pubCCNum && 'active'} for="ccn">Mission</label>
                                     </div>
                                 </div>
                 

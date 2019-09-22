@@ -16,9 +16,19 @@ export default class Service {
 
     static approvePublisher = (id) => async dispatch => {
         try {
-            alert('TODO '+id)
             const payload = {
                 status: 'approved',
+            };
+            const results = await RequestService.post(`users/${id}`,payload);
+            await responseToJson(results);
+        } catch (err) {
+            throw err;
+        }
+    }
+    static rejectPublisher = (id) => async dispatch => {
+        try {
+            const payload = {
+                status: 'rejected',
             };
             const results = await RequestService.post(`users/${id}`,payload);
             await responseToJson(results);

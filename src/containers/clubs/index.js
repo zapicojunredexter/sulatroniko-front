@@ -95,7 +95,7 @@ class Container extends React.PureComponent<> {
         );
     }
 
-    renderCard = (data) => {
+      renderCard = (data) => {
         return (
             <div onClick={() => this.setState({selectedData: data})} class="col-sm-4" style={{marginTop: 15}}>
                 <div class="card">
@@ -129,7 +129,7 @@ class Container extends React.PureComponent<> {
                     <label class={'active'} for="field">Phone</label>
                 </div>
                 <div class="md-form col-sm-4">
-                    <input value={this.state.selectedData.publisherId} style={{borderColor: 'transparent'}} type="text" id="field" class="form-control" disabled/>
+                    <input value={this.state.selectedData.publisher && this.state.selectedData.publisher.name} style={{borderColor: 'transparent'}} type="text" id="field" class="form-control" disabled/>
                     <label class={'active'} for="field">Publisher</label>
                 </div>
                 <div class="md-form col-sm-12">
@@ -236,11 +236,11 @@ class Container extends React.PureComponent<> {
                 </div>
                 <div class="md-form col-sm-6">
                     <input value={this.state.selectedData.pubCCV} style={{borderColor: 'transparent'}} type="text" id="field" class="form-control" disabled/>
-                    <label class={'active'} for="field">CCV</label>
+                    <label class={'active'} for="field">Vision</label>
                 </div>
                 <div class="md-form col-sm-6">
                     <input value={this.state.selectedData.pubCCNum} style={{borderColor: 'transparent'}} type="text" id="field" class="form-control" disabled/>
-                    <label class={'active'} for="field">CCNumber</label>
+                    <label class={'active'} for="field">Mission</label>
                 </div>
                 <div class="md-form col-sm-12">
                     <input value={this.state.selectedData.services} style={{borderColor: 'transparent'}} type="text" id="field" class="form-control" disabled/>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import AuthorService from '../../services/authors.service';
 import PublisherService from '../../services/publishers.service';
 import TransactionService from '../../services/transactions.service';
+import DetailsModal from './DetailsModal';
 
 class Container extends React.PureComponent<> {
     state = {
@@ -12,7 +13,8 @@ class Container extends React.PureComponent<> {
         selectedPublishers: [],
         transactions: [],
         filterableTitle: '',
-        orderType: 'desc'
+        orderType: 'desc',
+        selectedBook: null,
     }
     componentDidMount() {
         this.snapData()
@@ -84,7 +86,7 @@ class Container extends React.PureComponent<> {
         }, []);
         return (
             <>
-
+    <DetailsModal book={this.state.selectedBook} onClose={() => this.setState({selectedBook: null})} />
   <div class="container-fluid" style={{minHeight: '100vh',marginTop: '7em'}}>
     <div class="section">
      
@@ -123,7 +125,7 @@ class Container extends React.PureComponent<> {
                 <hr />
                  <div>
                   <p>Genre</p>
-                   <div class="genre-group" style={{height: '20vh',overflowY: 'scroll'}}>
+                   <div class="genre-group" style={{overflowY: 'scroll'}}>
                      {this.props.genres.map((genre) => {
                          return (
                             <div class="custom-control custom-checkbox">
@@ -134,6 +136,7 @@ class Container extends React.PureComponent<> {
                      })}
                    </div>
                  </div>
+                 {/*
                  <hr />
                   <div>
                   <p>Author</p>
@@ -149,6 +152,7 @@ class Container extends React.PureComponent<> {
                      })}
                    </div>
                  </div>
+                
                  <hr />
                 <div>
                   <p>Publisher</p>
@@ -164,6 +168,7 @@ class Container extends React.PureComponent<> {
                         })}
                    </div>
                  </div>
+                 */}
               </div>
 
             </div>
@@ -174,9 +179,12 @@ class Container extends React.PureComponent<> {
                 <div class="row book-row">
                     {mappedObj.map(subMappedObj => {
                         return (
-                            <div class="col-md-3">
+                            <div class="col-md-3" onClick={() => this.setState({selectedBook: subMappedObj})}>
                                 <div class="icon-block">
                                 <img class="responsive-img z-depth-3" src={subMappedObj.cover} alt={subMappedObj.title} width="220" height="300" /> 
+                                <p class="text-center" style={{margin: '1em 0 0 0',fontWeight: 'bold'}}>{(subMappedObj.manuscript && subMappedObj.manuscript.title)}</p>
+                                <p class="text-center" style={{fontSize: 14}}>{(subMappedObj.author && subMappedObj.author.name)}</p>
+                                
                                 </div>
                             </div>
                         );

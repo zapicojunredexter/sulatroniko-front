@@ -8,7 +8,7 @@ import Ratings from '../../../components/ratings';
 class Container extends React.PureComponent<> {
   state = {
     comment: null,
-    score: 3,
+    score: 1,
   };
 
   render() {
