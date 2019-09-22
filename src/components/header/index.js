@@ -23,7 +23,7 @@ class Container extends React.PureComponent<> {
                     <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect" target="_blank">
                          <img src="sulatroniko-logo.png" width={100} />
                     </a>
-                  
+          
                     <ul class="navbar-nav nav-flex-icons">
                         <DropDown title="Account">
                             {this.props.userType !== 'admin' && (
