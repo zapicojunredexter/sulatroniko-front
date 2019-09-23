@@ -61,6 +61,7 @@ class Container extends React.PureComponent<> {
               <div class="text-center mt-4">
                 <button
                     type="button"
+                    disabled={!this.state.selectedManuscript}
                     onClick={() => {
                         const params = {
                             manuscriptId: this.state.selectedManuscript,

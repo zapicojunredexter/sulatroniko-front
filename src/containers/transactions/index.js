@@ -413,7 +413,7 @@ class Container extends React.PureComponent<> {
                         </>
                     ) : (
                         <>
-                        {this.props.transactions.filter(transaction => transaction.status === 'proposal' || transaction.status === 'proposal approved').map(this.renderTransaction)}
+                        {this.props.transactions.filter(transaction => transaction.status === 'finished' || transaction.status === 'published').map(this.renderTransaction)}
                         </>
                     )}
                     {/*
@@ -434,6 +434,28 @@ class Container extends React.PureComponent<> {
                 </div>
             </main>
         );
+        return (
+            <div>
+                <Navigation />
+                <button
+                    onClick={() => {
+                        if(this.state.transaction && this.state.transaction.id) {
+                            this.props.addCard(
+                                this.state.transaction.id,
+                                {
+                                    description: 'hellooooo',
+                                }
+                            );
+                        }
+                    }}
+                >addCard</button>
+                <Board
+                    boardData={this.state.progressData}
+                    changeProgressStatus={this.changeProgressStatus}
+                    changeProgressOrder={this.changeProgressOrder}
+                />
+            </div>
+            );
         // return (
         //     <div>
                 

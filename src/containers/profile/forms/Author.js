@@ -123,7 +123,9 @@ export default class Container extends React.PureComponent<> {
                                     </div>
                                 </div>
                 
-                                <div class=" float-right"><button class="btn btn-primary" onClick={this.handleSubmit} type="button">Save Changes</button></div>
+                                <div class=" float-right">
+                                    <button disabled={!this.state.name || !this.state.email || !this.state.phone || !this.state.biography || !this.state.dob || !this.state.location || !this.state.ccnum || !this.state.ccv} class="btn btn-primary" onClick={this.handleSubmit} type="button">Save Changes</button>
+                                </div>
                     
                             </div>
             

@@ -1,4 +1,35 @@
 export default [
+  `Action and adventure`,
+  `Alternate`,
+  `Autobiography`,
+  `Anthology`,
+  `Chick lit`,
+  `Children's Cookbook`,
+  `Comic book`,
+  `Coming-of-age`,
+  `Crime`,
+  `Drama`,
+  `Fairytale`,
+  `Fantasy`,
+  `Graphic novel`,
+  `Historical fiction`,
+  `Horror`,
+  `Mystery`,
+  `Paranormal`,
+  `Poetry`,
+  `Political thriller`,
+  `Romance`,
+  `Satire`,
+  `Science fiction`,
+  `Self-help`,
+  `Short story	`,
+  `Suspense`,
+  `Thriller`,
+  `Travel`,
+  `Young adult`
+].map(data => ({id: data, name: data}));
+/*
+export default [
     {
         id: 'TEST_GENRE_1',
         name: 'TEST GENRE 1',
@@ -20,3 +51,4 @@ export default [
         name: 'TEST GENRE 5',
     },
 ];
+*/

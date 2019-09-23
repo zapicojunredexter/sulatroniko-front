@@ -52,8 +52,7 @@ class Container extends React.PureComponent<> {
             </div>
             <div class="modal-body text-center">
               <div class="md-form">
-                  <input style={{borderColor: 'transparent', marginBottom: 100}} onChange={(event) => this.setState({manuscript: event.target.files})} 
-                  accept="application/pdf, text/plain,application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document" type="file" id="field" class="form-control" />
+                  <input style={{borderColor: 'transparent', marginBottom: 100}} onChange={(event) => this.setState({manuscript: event.target.files})} type="file" id="field" class="form-control" />
                                     
                   <label class="active" for="card-details">Final Manuscript File</label>
                   
@@ -63,7 +62,6 @@ class Container extends React.PureComponent<> {
                     onClick={this.finishManuscript}
                     type="button"
                     class="btn btn-cyan"
-                    disabled={!this.state.manuscript}
                 >
                     Finalize Transaction
                 </button>

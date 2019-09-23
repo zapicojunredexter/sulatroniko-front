@@ -3,7 +3,6 @@ import React from 'react';
 export default class Container extends React.PureComponent<> {
     constructor(props){
         super(props);
-        console.log('heho', props.user);
         this.state = {
             name: '',
             email: '',
@@ -94,7 +93,9 @@ export default class Container extends React.PureComponent<> {
                                     </div>
                                 </div>
                 
-                                <div class=" float-right"><button class="btn btn-primary" type="button" onClick={this.handleSubmit}>Save Changes</button></div>
+                                <div class=" float-right">
+                                    <button disabled={!this.state.name || !this.state.email || !this.state.phone || !this.state.jobDesc} class="btn btn-primary" type="button" onClick={this.handleSubmit}>Save Changes</button>
+                                </div>
                     
                             </div>
             
