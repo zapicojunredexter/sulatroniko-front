@@ -76,7 +76,7 @@ class Container extends React.PureComponent<> {
             return isGenre && isAuthor && isPublisher && isTitle;
         });
         const mapped = filtered.reduce((acc, cur, index) => {
-            const categoryIndex = Math.floor(index / 4);
+            const categoryIndex = Math.floor(index / 3);
             if(acc[categoryIndex]) {
                 acc[categoryIndex].push(cur);
             } else {
@@ -179,9 +179,9 @@ class Container extends React.PureComponent<> {
                 <div class="row book-row">
                     {mappedObj.map(subMappedObj => {
                         return (
-                            <div class="col-md-3" onClick={() => this.setState({selectedBook: subMappedObj})}>
+                            <div class="col-md-4" onClick={() => this.setState({selectedBook: subMappedObj})}>
                                 <div class="icon-block">
-                                <img class="responsive-img z-depth-3" src={subMappedObj.cover} alt={subMappedObj.title} width="220" height="300" /> 
+                                <img class="responsive-img z-depth-4" src={subMappedObj.cover} alt={subMappedObj.title} width="220" height="300" /> 
                                 <p class="text-center" style={{margin: '1em 0 0 0',fontWeight: 'bold'}}>{(subMappedObj.manuscript && subMappedObj.manuscript.title)}</p>
                                 <p class="text-center" style={{fontSize: 14}}>{(subMappedObj.author && subMappedObj.author.name)}</p>
                                 

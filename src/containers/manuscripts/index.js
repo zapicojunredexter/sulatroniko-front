@@ -203,7 +203,7 @@ a
             <div className="row">
                 <div className="col-md-12"></div>
                 <div className="col-md-6">
-                    Unpublished <button type="button" onClick={() => this.setState({isAddingManuscript: true})}>ADD NEW MANUSCRIPT</button>
+                    Unpublished <button type="button" class="btn btn-md btn-primary" onClick={() => this.setState({isAddingManuscript: true})}>ADD NEW MANUSCRIPT</button>
                     <div className="manuscripts-list-wrapper">
                         {unpublished.map(manuscript => this.renderManuscript(manuscript))}
                     </div>

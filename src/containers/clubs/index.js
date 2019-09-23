@@ -99,7 +99,7 @@ class Container extends React.PureComponent<> {
         return (
             <div onClick={() => this.setState({selectedData: data})} class="col-sm-4" style={{marginTop: 15}}>
                 <div class="card">
-                    <img class="card-img-top" src={data.displayPic || "default-user.jpg"} alt="display" />
+                    <img class="card-img-top" src={data.displayPic || "default-user.jpg"} alt="display" style={{width: '369.5px', height: '370px'}} />
                     <div class="card-body">
                         <h5 class="card-title">{data.name}</h5>
                         <p class="card-text"><small class="text-muted">{data.type}</small></p>
@@ -300,9 +300,11 @@ class Container extends React.PureComponent<> {
                                 <img src={this.state.selectedData.displayPic || "default-user.jpg"} alt="profile_img" class="img-fluid rounded-circle mx-auto d-block" style={{margin: '0.5em', width: 200, height: 200}} />
                                 
                                 <div class="d-flex justify-content-center">
-                                <button onClick={() => this.handleClickMessage(this.state.selectedData.id)} class="fa fa-envelope mr-3 ml-3 mt-3">send message</button>
+                               <button onClick={() => this.handleClickMessage(this.state.selectedData.id)} type="button" class="btn btn-primary"><i class="far fa-envelope pr-2" aria-hidden="true"></i>Send Message</button>
+
                                 {this.state.selectedData.type === 'Publisher' && this.props.userType === 'author' && (
-                                    <button onClick={() => this.handleClickManuscript(this.state.selectedData)} class="fas fa-newspaper mr-3 ml-3 mt-3">assign manuscript</button>
+                                    <button onClick={() =>  this.handleClickManuscript(this.state.selectedData)} type="button" class="btn btn-mdb-color"><i class="far fa-newspaper pr-2" aria-hidden="true"></i>Assign Manuscript</button>
+                                   
                                 )}
                                 </div>
                             </div>
