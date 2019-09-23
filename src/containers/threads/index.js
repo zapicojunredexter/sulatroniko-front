@@ -135,16 +135,6 @@ class Container extends React.PureComponent<> {
                   </div>
                 );
               })}
-              {[...selectedThread.messages].map(message => {
-                return (
-                  <div
-                    className={`chat-bubble ${false ? `is-own` : ``}`}
-                  >
-                    {message.message}
-                    {renderFilesLinks(message.files)}
-                  </div>
-                );
-              })}
               </div>
             </div>
             <div className="add-components">{this.renderSendMessage()}</div>
