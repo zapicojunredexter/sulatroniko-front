@@ -72,7 +72,7 @@ class Container extends React.PureComponent<> {
         const docData = await this.props.fetch(transactionId);
         // const docData = await doc.get();
         this.setState({transaction: docData})
-
+        
         this.cardsListener = 
             doc
             .collection('progress')
@@ -218,7 +218,7 @@ class Container extends React.PureComponent<> {
                         <p>{manuscript.synopsis}</p>
                         <p>
                             Copywriter: <b>{copywriter ? copywriter.name : 'None'}</b><br />
-                            Author: <b>dasda</b>
+                            Author: <b>{(transaction.author && transaction.author.name)}</b>
                         </p>
                         <a href={transaction && transaction.manuscript && transaction.manuscript.manuscript} style={{textDecoration: 'underline'}}>Download File</a>
                     </div>
@@ -384,7 +384,7 @@ class Container extends React.PureComponent<> {
                     closeModal={() => this.setState({reviewManuscriptTransaction: null})}
                 />
                 <div class="container-fluid mt-5">
-                    {this.state.transaction || false ? (
+                    {this.state.transaction ?(
                         <>
                             <Board
                                 canDrag={this.props.userType === 'copywriter'}

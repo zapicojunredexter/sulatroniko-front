@@ -99,7 +99,7 @@ class Container extends React.PureComponent<> {
         return (
             <div onClick={() => this.setState({selectedData: data})} class="col-sm-4" style={{marginTop: 15}}>
                 <div class="card">
-                    <img class="card-img-top" src={data.displayPic || "default-user.jpg"} alt="display" style={{width: '369.5px', height: '370px'}} />
+                    <img class="card-img-top" src={data.displayPic || "default-user.jpg"} alt="display" />
                     <div class="card-body">
                         <h5 class="card-title">{data.name}</h5>
                         <p class="card-text"><small class="text-muted">{data.type}</small></p>
