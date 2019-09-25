@@ -81,9 +81,9 @@ class Container extends React.PureComponent<> {
         return (
             <div style={{margin: '0px 15px 30px 15px'}}>
                 <div style={{display: 'flex', alignItems: 'center', height: 60, flexDirection: 'row'}}>
-                    <img src={(data && data.reviewee && data.reviewee.displayPic) || 'default-user.jpg'} alt={data && data.reviewee && data.reviewee.name} style={{height: '100%',borderRadius: '50%', border: 'solid rgba(0,0,0,.1) 1px'}} />
+                    <img src={(data && data.reviewer && data.reviewer.displayPic) || 'default-user.jpg'} alt={data && data.reviewer && data.reviewer.name} style={{height: '100%',borderRadius: '50%', border: 'solid rgba(0,0,0,.1) 1px'}} />
                     <div style={{marginLeft: 10, flex: 1, display: 'flex', flexDirection: 'column',justifyContent: 'center'}}>
-                        <div style={{flex: 1, fontSize: 20, fontWeight: 'bold'}}>{data.reviewee && data.reviewee.name}</div>
+                        <div style={{flex: 1, fontSize: 20, fontWeight: 'bold'}}>{data.reviewer && data.reviewer.name}</div>
                         <span style={{fontSize: 12}}>{data.date}</span>
                         <Ratings score={data.score} />
                     </div>
@@ -226,11 +226,14 @@ class Container extends React.PureComponent<> {
                     <input value={this.state.selectedData.website} style={{borderColor: 'transparent'}} type="text" id="field" class="form-control" disabled/>
                     <label class={'active'} for="field">Website</label>
                 </div>
+                {/*
                 <div class="md-form col-sm-4">
                     <input value={this.state.selectedData.publisherId} style={{borderColor: 'transparent'}} type="text" id="field" class="form-control" disabled/>
                     <label class={'active'} for="field">Publisher</label>
                 </div>
-                <div class="md-form col-sm-8">
+                */}
+                
+                <div class="md-form col-sm-12">
                     <input value={this.state.selectedData.address} style={{borderColor: 'transparent'}} type="text" id="field" class="form-control" disabled/>
                     <label class={'active'} for="field">Address</label>
                 </div>

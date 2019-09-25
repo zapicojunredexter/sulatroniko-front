@@ -182,7 +182,7 @@ class Container extends React.PureComponent<> {
     }
 
     renderTransaction = transaction => {
-        const { manuscript, copywriter } = transaction;
+        const { manuscript, copywriter, publisher } = transaction;
         const renderBadge = () => {
             const statusObj = {
                 'proposal': {
@@ -215,9 +215,11 @@ class Container extends React.PureComponent<> {
                         <img src={manuscript.cover} alt="cover" style={{width: 100}} />
                     </div>
                     <div class="col-sm-6">
+                        <p><h5><b>{manuscript.title}</b></h5></p>
                         <p>{manuscript.synopsis}</p>
                         <p>
-                            Copywriter: <b>{copywriter ? copywriter.name : 'None'}</b><br />
+                            Publisher: <b>{publisher ? publisher.name : '-'}</b><br />
+                            Copywriter: <b>{copywriter ? copywriter.name : '-'}</b><br />
                             Author: <b>{(transaction.author && transaction.author.name)}</b>
                         </p>
                         <a href={transaction && transaction.manuscript && transaction.manuscript.manuscript} style={{textDecoration: 'underline'}}>Download File</a>

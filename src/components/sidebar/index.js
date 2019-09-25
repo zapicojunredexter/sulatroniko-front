@@ -28,7 +28,7 @@ class Container extends React.PureComponent<> {
                 <Link class={`list-group-item waves-effect ${this.isPathActive('/') && 'active'}`} to="/"><i class="fas fa-chart-pie mr-3"></i>Dashboard</Link>
                 <Link class={`list-group-item list-group-item-action waves-effect ${this.isPathActive('/threads') && 'active'}`} to="/threads"><i class="fa fa-envelope mr-3"></i>Message</Link>
                 <Link class={`list-group-item list-group-item-action waves-effect ${this.isPathActive('/progress') && 'active'}`} to="/progress"> <i class="fas fa-gavel mr-3"></i>Work in Progress</Link>
-                <Link class={`list-group-item list-group-item-action waves-effect ${this.isPathActive('/copywriters') && 'active'}`} to="/copywriters"> <i class="fas fa-gavel mr-3"></i>Copywriters</Link>
+                <Link class={`list-group-item list-group-item-action waves-effect ${this.isPathActive('/copywriters') && 'active'}`} to="/copywriters"> <i class="fas fa-users mr-3"></i>Copywriters</Link>
                 <Link class={`list-group-item list-group-item-action waves-effect ${this.isPathActive('/clubs') && 'active'}`} to="/clubs"> <i class="fas fa-users mr-3"></i>Clubs</Link>
                 
                 <Link class={`list-group-item list-group-item-action waves-effect ${this.isPathActive('/transactions') && 'active'}`} to="/transactions"> <i class="fas fa-check-square mr-3"></i>Transaction</Link>

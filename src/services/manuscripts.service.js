@@ -21,7 +21,6 @@ export default class Service {
                 authorId: uid,
                 status: 'unpublished',
             };
-            console.log('eeeeeeeekkk', payload);;
             const results = await RequestService.patch(`manuscripts/${params.id}`,payload);
             await responseToJson(results);
         } catch (err) {

@@ -69,7 +69,6 @@ class Container extends React.PureComponent<> {
   };
 
   renderThreadDetails = thread => {
-      console.log('EKKK', thread, this.state.selectedThread);
     return (
       <button
         onClick={() => this.handleSelectThread(thread.id)}

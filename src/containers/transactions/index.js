@@ -182,7 +182,7 @@ class Container extends React.PureComponent<> {
     }
 
     renderTransaction = transaction => {
-        const { manuscript, copywriter } = transaction;
+        const { manuscript, copywriter, publisher } = transaction;
         const renderBadge = () => {
             const statusObj = {
                 'proposal': {
@@ -217,6 +217,7 @@ class Container extends React.PureComponent<> {
                     <div class="col-sm-6">
                         <p>{manuscript.synopsis}</p>
                         <p>
+                            Publisher: <b>{publisher ? publisher.name : '-'}</b><br />
                             Copywriter: <b>{copywriter ? copywriter.name : 'None'}</b><br />
                             Author: <b>dasda</b>
                         </p>

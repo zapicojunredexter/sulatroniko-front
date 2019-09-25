@@ -32,6 +32,7 @@ export default class Service {
                     const threads = data.docs.map(data => ({id: data.id, ...data.data()}));
                     dispatch(setThreads(threads));
                     const newThreads = threads.filter(thread => thread.newMessageCount);
+                    console.log('AYAYAYzz', threads, uid);
                     if(newThreads.length){
                         let hasNewMessage = false;
                         newThreads.forEach(thread => {
