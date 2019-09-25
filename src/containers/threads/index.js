@@ -74,10 +74,9 @@ class Container extends React.PureComponent<> {
       <button
         onClick={() => this.handleSelectThread(thread.id)}
         class="btn btn-sm"
-        style={{ width: "100%", marginTop: "-.2em", backgroundColor: "#2e3951", color: "white" }}
         style={{ width: "100%", marginTop: "-.2em", backgroundColor: (thread.id === this.state.selectedThread) ? "#425885" : "#2e3951", color: "white" }}
       >
-        <span style={{ float: "left", fontSize: 15 }}>
+        <span style={{textAlign: 'center', fontSize: 15 }}>
           {thread.threadDisplayable && thread.threadDisplayable.name}
         </span>
         {thread.newMessageCount ? (

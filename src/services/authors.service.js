@@ -12,4 +12,16 @@ export default class Service {
 
         }
     }
+
+    static set = (id, params) => async dispatch => {
+        try {
+            const results = await RequestService.post(`authors/${id}`, params);
+            console.log('EK', results, id, params);
+            const json = await responseToJson(results);
+            console.log('HOHOY', json);
+            // dispatch(setAuthors(json));
+        } catch (err) {
+            throw err;
+        }
+    }
 };

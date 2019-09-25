@@ -100,7 +100,7 @@ export default class Container extends React.PureComponent<> {
                                 {'      '}
                                 <button type="button" onClick={this.props.cancel} className="btn btn-danger">Cancel</button>
                                 {'      '}
-                                <button type="button" className="btn btn-success" onClick={this.handleEdit}>Submit</button>
+                                <button disabled={!this.state.id || !this.state.title || !this.state.genres.length || !!this.state.manuscript || !this.state.synopsis || !this.state.cover} type="button" className="btn btn-success" onClick={this.handleEdit}>Submit</button>
                                 
                             </div>
                         </div>

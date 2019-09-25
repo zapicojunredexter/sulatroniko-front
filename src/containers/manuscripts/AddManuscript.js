@@ -120,6 +120,7 @@ export default class Container extends React.PureComponent<> {
                 type="button"
                 className="btn btn-success"
                 onClick={this.handleAdd}
+                disabled={!this.state.title || !this.state.genres.length || !this.state.manuscript || !this.state.synopsis || !this.state.cover}
               >
                 Submit
               </button>
