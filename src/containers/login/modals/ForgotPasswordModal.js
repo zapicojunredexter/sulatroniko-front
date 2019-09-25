@@ -42,7 +42,7 @@ class Container extends React.PureComponent<> {
               your password.
               <div class="md-form form-sm">
                 <i
-                  class="fas fa-envelope prefix"
+                  class="fas fa-user prefix"
                   style={{
                     fontSize: 15,
                     marginTop: "0.6em",

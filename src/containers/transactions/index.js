@@ -227,17 +227,17 @@ class Container extends React.PureComponent<> {
                     <div class="col-sm-3 justify-content-center">
                         {(this.props.userType === 'copywriter' && transaction.status === 'published') && (
                             <>
-                                <button onClick={() => this.setState({reviewManuscriptTransaction: transaction})}>ADD BOOK REVIEW</button>
+                                <button onClick={() => this.setState({reviewManuscriptTransaction: transaction})} class="btn btn-md btn-mdb-color">ADD BOOK REVIEW</button>
                             </>
                         )}
                         {(this.props.userType === 'author' && transaction.status === 'published') && (
                             <>
-                                <button onClick={() => this.setState({reviewPublisherTransaction: transaction})}>LEAVE FEEDBACK FOR PUBLISHER</button>
+                                <button onClick={() => this.setState({reviewPublisherTransaction: transaction})} class="btn btn-md btn-light">LEAVE FEEDBACK FOR PUBLISHER</button>
                             </>
                         )}
                         {transaction.status === 'proposal approved' && (
                             <>
-                                <button onClick={() => this.handleSelectTransaction(transaction.id)}>VIEW PROGRESS</button>
+                                <button onClick={() => this.handleSelectTransaction(transaction.id)} class="btn btn-md btn-info">VIEW PROGRESS</button>
                             </>
                         )}
                         {this.props.userType === 'publisher' && transaction.status === 'proposal' && (
@@ -256,7 +256,7 @@ class Container extends React.PureComponent<> {
                                                 });
                                         })
                                         .catch(err => err.message);
-                                }}>ACCEPT PROPOSAL</button>
+                                }} class="btn btn-md btn-success">ACCEPT PROPOSAL</button>
                             </>
                         )}
                         {this.props.userType === 'publisher' && transaction.status === 'proposal' && (
@@ -287,7 +287,7 @@ class Container extends React.PureComponent<> {
                                         })
                                         .catch(err => err.message);
                                     */
-                                }}>REJECT PROPOSAL</button>
+                                }} class="btn btn-md btn-danger">REJECT PROPOSAL</button>
                             </>
                         )}
                         {this.props.userType === 'publisher' && transaction.status === 'published' && (
@@ -304,14 +304,14 @@ class Container extends React.PureComponent<> {
                                             this.props.fetchAll();
                                         })
                                         .catch(err => alert(err.message));
-                                }}>UNPUBLISH BOOK</button>
+                                }} class="btn btn-danger btn-md">UNPUBLISH BOOK</button>
                             </>
                         )}
                         {this.props.userType === 'publisher' && transaction.status === `proposal approved` && (
                             <>
                                 <button onClick={() => {
                                         this.setState({assignCopywriterTransaction: transaction})
-                                    }}>{copywriter ? `REASSIGN` : `ASSIGN`} COPYWRITER</button>
+                                    }} class="btn btn-md btn-primary">{copywriter ? `REASSIGN` : `ASSIGN`} COPYWRITER</button>
                                 
                             </>
                         )}
@@ -325,7 +325,7 @@ class Container extends React.PureComponent<> {
                                     //         alert('SUCCESS')
                                     //     })
                                     //     .catch(err => alert(err.message))
-                                    }}>PUBLISH BOOK</button>
+                                    }} class="btn btn-md btn-success">PUBLISH BOOK</button>
                                 
                             </>
                         )}
@@ -342,7 +342,7 @@ class Container extends React.PureComponent<> {
                                             this.props.fetchAll();
                                         })
                                         .catch(err => alert(err.message));
-                                    }}>RE DO COPYWRITING</button>
+                                    }} class="btn btn-md btn-warning">RE DO COPYWRITING</button>
                                 
                             </>
                         )}
@@ -430,6 +430,7 @@ class Container extends React.PureComponent<> {
                                 );
                             }
                         }}
+                        class="btn btn-md btn-primary"
                     >addCard</button>
                     */}
                     
@@ -450,6 +451,7 @@ class Container extends React.PureComponent<> {
                             );
                         }
                     }}
+                    class="btn btn-md btn-primary"
                 >addCard</button>
                 <Board
                     boardData={this.state.progressData}

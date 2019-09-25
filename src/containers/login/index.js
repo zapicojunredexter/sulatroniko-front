@@ -53,8 +53,8 @@ class Container extends React.PureComponent<> {
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
                   <div class="md-form form-sm">
-                    <i class="fas fa-envelope prefix" style={{fontSize: '15px',marginTop: '0.6em',marginLeft: '0.5em',}}></i>
-                    <input type="text" value={this.state.username} onChange={ev => this.setState({ username: ev.target.value })} class="form-control" placeholder="Email" />  
+                    <i class="fas fa-user prefix" style={{fontSize: '15px',marginTop: '0.6em',marginLeft: '0.5em',}}></i>
+                    <input type="text" value={this.state.username} onChange={ev => this.setState({ username: ev.target.value })} class="form-control" placeholder="Username" />  
                   </div>
                 </li>
                 <li class="nav-item" style={{marginLeft: '1em',marginRight: '.5em'}}>

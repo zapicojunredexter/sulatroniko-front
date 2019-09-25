@@ -32,12 +32,12 @@ export default class Container extends React.PureComponent<> {
                 <div class="card">
                     <div class="card-header">
                         <h4>{this.props.headerLabel}</h4>
-                        <button onClick={this.props.goBack}>GO BACK</button>
+                        <button onClick={this.props.goBack} class="btn btn-light">GO BACK</button>
                         {canAdd && (
-                            <button onClick={() => this.setState({isAddingCard: true})}>ADD CARD</button>
+                            <button onClick={() => this.setState({isAddingCard: true})} class="btn btn-primary">ADD CARD</button>
                         )}
                         {canConclude && (
-                            <button onClick={() => this.props.onClickFinish()}>CONFIRM</button>
+                            <button onClick={() => this.props.onClickFinish()} class="btn btn-dark-green">CONFIRM</button>
                         )}
 
                     </div>

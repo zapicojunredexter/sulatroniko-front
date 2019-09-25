@@ -120,21 +120,21 @@ class Container extends React.PureComponent<> {
                                                 <button onClick={() => this.props.editCopywriter(copywriter.id, {deleted: false}).then(() => {
                                                     alert('success');
                                                     this.props.fetchCopywriters().catch(() => {});
-                                                }).catch(err => alert(err.message))}>enable account</button>
+                                                }).catch(err => alert(err.message))} style={{marginRight: '10px'}} className="btn btn-success btn-danger"><i className="fas fa-check pr-2" aria-hidden="true"></i>Enable Account</button>
                                             ): (
                                                 <button onClick={() => this.props.editCopywriter(copywriter.id, {deleted: true}).then(() => {
                                                     alert('success')
                                                     this.props.fetchCopywriters().catch(() => {});
-                                                }).catch(err => alert(err.message))}>disable account</button>
+                                                }).catch(err => alert(err.message))} style={{marginRight: '10px'}} class="btn btn-sm btn-danger"><i class="fas fa-ban pr-2" aria-hidden="true"></i>Disable Account</button>
 
                                             )}
-                                            <button onClick={() => this.handleClickMessage(copywriter.id)}>message</button>
+                                            <button onClick={() => this.handleClickMessage(copywriter.id)} className="btn btn-sm btn-mdb-color"><i class="fas fa-envelope pr-2" aria-hidden="true"></i>Message</button>
                                         </td>
                                     </tr>
                             );
                         })}
                     </table>
-                    <button onClick={() => this.setState({isAdding: true})}>ADD</button>
+                    <button class="btn btn-primary btn-sm"onClick={() => this.setState({isAdding: true})}>ADD</button>
                 </div>
             </main>
         );
