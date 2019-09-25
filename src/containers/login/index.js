@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import AuthService from '../../services/auth.service';
 import RegistrationModal from './modals/RegistrationModal';
 import ForgotPasswordModal from './modals/ForgotPasswordModal';
+import Books from '../books';
 
 class Container extends React.PureComponent<> {
     state = {
@@ -29,6 +30,9 @@ class Container extends React.PureComponent<> {
     render() {
         return (
             <>
+            {/*
+            <Books />
+            */}
             <RegistrationModal
                 isOpen={this.state.isLoggingIn}
                 closeModal={() => {

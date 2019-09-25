@@ -62,13 +62,14 @@ class Container extends React.PureComponent<> {
             return secondsB - secondsA;
         });
         const filtered = sorted.filter(transaction => {
-            const genre = true;
+            const genres = (transaction && transaction.manuscript && transaction.manuscript.genres) || [];
             const author = transaction && transaction.author && transaction.author.name;
             const publisher = transaction && transaction.publisher && transaction.publisher.name;
 
             const title = transaction && transaction.manuscript && transaction.manuscript.title && transaction.manuscript.title.toLowerCase();
-    
-            const isGenre = genre;
+            const isGenre = this.state.selectedGenres.reduce((acc, cur) => {
+                return genres.includes(cur);
+            }, true);
             const isAuthor = !selectedAuthors.length || selectedAuthors.includes(author);
             const isPublisher = !selectedPublishers.length || selectedPublishers.includes(publisher);
 

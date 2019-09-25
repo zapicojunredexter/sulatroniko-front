@@ -36,6 +36,12 @@ class Container extends React.PureComponent<> {
           <p style={{textIndent: 50,fontSize: 14}}>
               {book && book.synopsis}
           </p>
+          <p>
+              Tags: {((book && book.manuscript && book.manuscript.genres) || []).map(genr => (
+                <span class="badge badge-primary mr-1">{genr}</span>
+              ))}
+          </p>
+          
           </div>
         </div>
       </div>
