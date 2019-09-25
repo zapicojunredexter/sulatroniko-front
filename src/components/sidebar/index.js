@@ -36,7 +36,7 @@ class Container extends React.PureComponent<> {
         );
     }
     renderAuthorNav = () => {
-        if(this.props.type !== 'Author')
+        if(this.props.type !== 'Author' || this.props.isAuthorDisabled)
         return null;
         return (
             <>
@@ -117,6 +117,7 @@ const mapStateToProps = state => ({
     dp: state.userStore.credentials && state.userStore.credentials.displayPic || 'default-user.jpg',
     name: state.userStore.user && state.userStore.user.name,
     isCopywriterDisabled: state.userStore.type === 'copywriter' && state.userStore.user && state.userStore.user.deleted,
+    isAuthorDisabled: state.userStore.type === 'author' && state.userStore.user && state.userStore.user.deleted,
     type: capitalizeFirstChar(state.userStore.type),
     isApproved: state.userStore.user && state.userStore.user.status === 'approved'
 });

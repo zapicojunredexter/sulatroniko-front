@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import PublisherService from '../../../services/publishers.service';
+import AuthorService from '../../../services/authors.service';
 import UserService from '../../../services/user.service';
 class Container extends React.PureComponent<> {
     state = {
@@ -131,7 +132,46 @@ class Container extends React.PureComponent<> {
                                                 <td>{index + 1}</td>
                                                 <td>{author.name}</td>
                                                 <td>{new Date(author.createdAt._seconds * 1000).toLocaleString()}</td>
-                                                <td></td>
+                                                <td>
+                                                    {author.deleted ? (
+                                                        <button class="btn btn-success" onClick={() => {
+                                                            this.props.setAuthor(author.id, {deleted: false})
+                                                                .then(() => {
+                                                                    alert('success');
+                                                                    const updated = this.state.data.map(dat => {
+                                                                        if(dat.id === author.id) {
+                                                                            return {
+                                                                                ...dat,
+                                                                                deleted: false,
+                                                                            };
+                                                                        }
+                                                                        return dat;
+                                                                    });
+                                                                    this.setState({data: updated});
+                                                                })
+                                                                .catch(err => alert(err.message));
+                                                        }}>enable</button>
+                                                    ) : (
+
+                                                        <button class="btn btn-danger" onClick={() => {
+                                                            this.props.setAuthor(author.id, {deleted: true})
+                                                                .then(() => {
+                                                                    alert('success');
+                                                                    const updated = this.state.data.map(dat => {
+                                                                        if(dat.id === author.id) {
+                                                                            return {
+                                                                                ...dat,
+                                                                                deleted: true,
+                                                                            };
+                                                                        }
+                                                                        return dat;
+                                                                    });
+                                                                    this.setState({data: updated});
+                                                                })
+                                                                .catch(err => alert(err.message));
+                                                        }}>disable</button>
+                                                    )}
+                                                </td>
                                             </tr>
                                         );
                                     })}
@@ -156,6 +196,7 @@ const mapDispatchToProps = dispatch => ({
     rejectPublisher: (id) => dispatch(PublisherService.rejectPublisher(id)),
     fetchAllUserTypes: () => dispatch(UserService.fetchAllUserTypes()),
     setUser: (id,params) => dispatch(UserService.setUser(id, params)),
+    setAuthor: (id,params) => dispatch(AuthorService.set(id, params)),
 });
 
 export default connect(
