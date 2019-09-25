@@ -157,7 +157,7 @@ class Container extends React.PureComponent<> {
                 </div>
                 <div class="md-form col-sm-4">
                     <input value={this.state.selectedData.ccv} style={{borderColor: 'transparent'}} type="text" id="field" class="form-control" disabled/>
-                    <label class={'active'} for="field">CCV</label>
+                    <label class={'active'} for="field">Vision</label>
                 </div>
                 <div class="md-form col-sm-4">
                     <input value={this.state.selectedData.phone} style={{borderColor: 'transparent'}} type="text" id="field" class="form-control" disabled/>

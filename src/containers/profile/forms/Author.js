@@ -108,11 +108,11 @@ export default class Container extends React.PureComponent<> {
                                 <div class="md-form row">
                                     <div class="md-form col s4" style={{marginTop: 0}}>
                                         <input onChange={(event) => this.setState({ccnum: event.target.value})} value={this.state.ccnum} id="ccn" type="text" class="form-control"/>
-                                        <label class={this.state.ccnum && 'active'} for="ccn">CC Number</label>
+                                        <label class={this.state.ccnum && 'active'} for="ccn">Vision</label>
                                     </div>
                                     <div class="md-form col s4" style={{marginTop: 0}}>
                                         <input onChange={(event) => this.setState({ccv: event.target.value})} value={this.state.ccv} id="ccv" type="text" class="form-control"/>
-                                        <label class={this.state.ccv && 'active'} for="ccv">CCV</label>
+                                        <label class={this.state.ccv && 'active'} for="ccv">Mission</label>
                                     </div>
                                 </div>
                 
