@@ -17,7 +17,14 @@ class Container extends React.PureComponent<> {
         selectedBook: null,
     }
     componentDidMount() {
-        this.snapData()
+
+        this.snapData();
+        return;
+        // if(this.props.disableSnap) {
+
+        // } else {
+        //     this.snapData()
+        // }
     }
 
     toggleState = (keyState, value) => {

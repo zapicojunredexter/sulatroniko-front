@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 import AuthService from '../../services/auth.service';
 import RegistrationModal from './modals/RegistrationModal';
 import ForgotPasswordModal from './modals/ForgotPasswordModal';
+import AuthorService from '../../services/authors.service';
+import PublisherService from '../../services/publishers.service';
+import TransactionService from '../../services/transactions.service';
 import Books from '../books';
+import DetailsModal from '../books/DetailsModal';
 
 class Container extends React.PureComponent<> {
     state = {
@@ -11,6 +15,24 @@ class Container extends React.PureComponent<> {
         password: '',
         isLoggingIn: false,
         forgotPassword: false,
+        isHomeView: true,
+        transactions: [],
+        selectedBook: null
+    }
+
+    componentDidMount() {
+        this.snapData()
+    }
+
+    snapData = async () => {
+        const [,,transactions] = await Promise.all([
+            await this.props.fetchAuthors(),
+            await this.props.fetchPublishers(),
+            await this.props.fetchTransaction(),
+        ]);
+        if(transactions && transactions.length) {
+            this.setState({transactions: transactions.filter((item, index) => index < 8)});
+        }
     }
 
     handleLogin = () => {
@@ -28,11 +50,20 @@ class Container extends React.PureComponent<> {
         .catch(err => alert(err.message));
     }
     render() {
+
+        const mapped = this.state.transactions.reduce((acc, cur, index) => {
+            const categoryIndex = Math.floor(index / 4);
+            if(acc[categoryIndex]) {
+                acc[categoryIndex].push(cur);
+            } else {
+                acc[categoryIndex] = [cur];
+            }
+            return acc;
+        }, []);
         return (
             <>
-            {/*
-            <Books />
-            */}
+
+            <DetailsModal book={this.state.selectedBook} onClose={() => this.setState({selectedBook: null})} />
             <RegistrationModal
                 isOpen={this.state.isLoggingIn}
                 closeModal={() => {
@@ -46,7 +77,7 @@ class Container extends React.PureComponent<> {
                 }}
             />
           <nav class=" navbar fixed-top navbar-expand-sm" style={{height: '5em',backgroundColor: 'white'}}>
-              <a id="logo-container" href="#" class="brand-logo">
+              <a id="logo-container" onClick={() => this.setState({isHomeView: true})} class="brand-logo">
                 <img src="assets-3/images/sulatroniko_logo.png" style={{width: 150,marginTop: '0.15em'}} />
               </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
@@ -78,6 +109,8 @@ class Container extends React.PureComponent<> {
               </ul>
             </div>
           </nav>
+          {this.state.isHomeView ? (
+              <>
           <div class="parallax-container" style={{minHeight: "100vh"}}>
             <div class="container parallax-header" style={{fontFamily: "'Libre Baskerville', serif"}}>
                   <br /><br />
@@ -93,49 +126,89 @@ class Container extends React.PureComponent<> {
           </div>
           
            <div class="container">
-              <div class="section">
                 <h6 class="text-center" style={{margin: '2em 0', fontSize: 25, fontWeight: 'bold'}}>LATEST PUBLISHED</h6>
-                 <div class="row ">
-                <div class="col-sm d-flex justify-content-center">
-                 <img class="responsive-img z-depth-3" src="assets-2/images/book1.jpg" width="250" height= "300" /> 
+                
+               {mapped.map((map) => {
+                   return (
+                    <div class="row book-row">
+                        {map.map((daa) => {
+                            return (
+                                <div onClick={() => this.setState({selectedBook: daa})} class="col-sm d-flex justify-content-center">
+                                    <img class="responsive-img z-depth-3" alt={daa.manuscript && daa.manuscript.title} src={daa.cover} width="250" height= "300" /> 
+                                </div>
+                            );
+                        })}
+                    </div>
+                   );
+               })}
+
+<div class="row book-row">
+        <div class="col-sm">
+                    <a onClick={() => this.setState({isHomeView: false})} style={{float: 'right',marginBottom: '2em'}}><b>See All Published Books</b></a>
+                    </div>
                 </div>
-                <div class="col-sm d-flex justify-content-center">
-                 <img class="responsive-img z-depth-3" src="assets-2/images/book1.jpg" width="250" height= "300" /> 
-                </div>
-                <div class="col-sm d-flex justify-content-center">
-                 <img class="responsive-img z-depth-3" src="assets-2/images/book1.jpg" width="250" height= "300" /> 
-                </div>
-                <div class="col-sm d-flex justify-content-center">
-                 <img class="responsive-img z-depth-3" src="assets-2/images/book1.jpg" width="250" height= "300" /> 
-                </div>
-              </div>
-          
-              <div class="row book-row ">
-                <div class="col-sm d-flex justify-content-center">
-                 <img class="responsive-img z-depth-3" src="assets-2/images/book2.jpg" width="250" height= "300" /> 
-                </div>
-                <div class="col-sm d-flex justify-content-center">
-                 <img class="responsive-img z-depth-3" src="assets-2/images/book2.jpg" width="250" height= "300" /> 
-                </div>
-                <div class="col-sm d-flex justify-content-center">
-                 <img class="responsive-img z-depth-3" src="assets-2/images/book2.jpg" width="250" height= "300" /> 
-                </div>
-                <div class="col-sm d-flex justify-content-center">
-                 <img class="responsive-img z-depth-3" src="assets-2/images/book2.jpg" width="250" height= "300" /> 
-                </div>
-              </div>
-          
-                <div class="row book-row">
-                  <div class="col-sm">
-                  <a href="../../views/homepage/allbooks.html"style={{float: 'right',marginBottom: '2em'}}><b>See All Published Books</b></a>
-                  </div>
-                </div>
-              
-          
-              </div>
            </div>
+
+
+            <div class="faq-section" style={{minHeight: '60vh', background: '#f0f0f0',}} id="faq">
+                <div class="container" style={{color: '#212121'}}>
+                    <h3 style={{paddingTop: '2em'}}>Frequently Asked Questions</h3>
+                    <p style={{textIndent: 50,margin: '2em 0'}}>Have a burning question for our team? Chances are, you're not the first to ask! Take a look at some of the most common questions from across our community. Still looking for answers? Reach out to our team. </p>
+                    <ul>
+                    <li style={{marginBottom: '1em'}}>You own your story and Sulatroniko is another venue to share your voice and create more exposure and opportunities for you to get your story published.</li>
+                    <li style={{marginBottom: '1em'}}>You own all the rights to the content you create and post on the Sulatroniko.</li>
+                    <li style={{marginBottom: '1em'}}>Posting on Sulatroniko doesn’t mean you lose First Rights nor would it be viewed as a reprint by a publisher.</li>
+                    <li style={{marginBottom: '1em'}}>You can remove your story whenever you want, unless you already signed a contract you agreed on with a publisher.</li>
+                    </ul>
+                </div>
+            </div>
+
           
-          
+
+
+            <div class="about-us-section" style={{minHeight: '100vh'}} id="about-us">
+                <div class="container">
+                    <h3 style={{paddingTop: '2em'}}>About Us</h3>
+                    <p class="text-center" style={{marginTop: '3em'}}>Sulatroniko is an online writing platform catered toward helping local authors and publishers meet in one community to help them discover and create contents with audience near you. With Sulatroniko, members of publishing industries can directly connect to potential authors without hassle.</p>
+                    <div class="row" style={{marginTop: '2em'}}>
+                    <div class="col-md-4">
+                    <div class="view overlay zoom" style={{borderRadius: '70%',width: 250, height: 250,margin: '0 auto'}}>
+                        <img src="dianne.jpg" class="img-fluid " alt="zoom" style={{width: 250, height: 250, borderRadius: '50%'}} />
+                        <div class="mask flex-center waves-effect waves-light">
+                        <p class="white-text" style={{marginTop: '5em'}}>Dianne Gimenez</p>
+                        </div>
+                    </div>   
+                    <p class="text-center" style={{fontSize: 12, color: 'gray',marginTop: '2em'}}>Dianne is currently connected to publishing companies and does freelance copyediting. She is exposed in student media organizations and often participates in pitching ideas for magazine contents.</p>
+                    </div>
+
+                    <div class="col-md-4">
+                    <div class="view overlay zoom" style={{borderRadius: '70%',width: 250, height: 250,margin: '0 auto'}}>
+                        <img src="osabel.jpg" class="img-fluid " alt="zoom" style={{width: 250, height: 250, borderRadius: '50%'}} />
+                        <div class="mask flex-center waves-effect waves-light">
+                        <p class="white-text" style={{marginTop: '5em'}}>Christine Jesusa Osabel</p>
+                        </div>
+                    </div>   
+                    <p class="text-center" style={{fontSize: 12, color: 'gray',marginTop: '2em'}}>Christine is into website development and is open to new ideas, especially in the field of user interface designing. </p>
+                    </div>
+
+                    <div class="col-md-4">
+                    <div class="view overlay zoom" style={{borderRadius: '70%',width: 250, height: 250,margin: '0 auto'}}>
+                        <img src="jerome.jpg" class="img-fluid " alt="zoom" style={{width: 250, height: 250, borderRadius: '50%'}} />
+                        <div class="mask flex-center waves-effect waves-light">
+                        <p class="white-text" style={{marginTop: '5em'}}>Jerome Lapiña</p>
+                        </div>
+                    </div>   
+                    <p class="text-center" style={{fontSize: 12, color: 'gray',marginTop: '2em'}}>A passionate graphics artist/UX designer accustomed to performing in a deadline-driven environment with emphasis on working with within-budget requirements, attentive to details, and most importantly, a fast learner.</p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            </>
+            ) : (
+                <div>
+                    <Books disableSnap />
+                </div>
+                )}
           <footer class="white-text font-small blue-grey darken-4">
           
             <div class="container">
@@ -227,12 +300,20 @@ class Container extends React.PureComponent<> {
 }
 
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+    genres: state.genresStore.genres,
+    authors: state.authorsStore.authors,
+    publishers: state.publishersStore.publishers,
+});
 
 const mapDispatchToProps = dispatch => ({
     login: (username, password) => dispatch(AuthService.login(username,password)),
     registerAuthor: (username, password) => dispatch(AuthService.registerAuthor(username,password)),
     registerPublisher: (username, password) => dispatch(AuthService.registerPublisher(username,password)),
+
+    fetchAuthors: () => dispatch(AuthorService.fetchAll()),
+    fetchPublishers: () => dispatch(PublisherService.fetchAll()),
+    fetchTransaction: () => dispatch(TransactionService.fetchAll()),
 });
 
 export default connect(

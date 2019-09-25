@@ -219,8 +219,9 @@ class Container extends React.PureComponent<> {
                         <p>{manuscript.synopsis}</p>
                         <p>
                             Publisher: <b>{publisher ? publisher.name : '-'}</b><br />
-                            Copywriter: <b>{copywriter ? copywriter.name : 'None'}</b><br />
-                            Author: <b>dasda</b>
+                            Copywriter: <b>{copywriter ? copywriter.name : '-'}</b><br />
+                            Author: <b>{(transaction.author && transaction.author.name)}</b><br />
+                            <small>Date Published: <b>{(transaction.updatedAt ? new Date(transaction.updatedAt._seconds * 1000).toLocaleDateString() : "-")}</b></small>
                         </p>
                         <a href={transaction && transaction.manuscript && transaction.manuscript.manuscript} style={{textDecoration: 'underline'}}>Download File</a>
                     </div>
