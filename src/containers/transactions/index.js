@@ -215,6 +215,7 @@ class Container extends React.PureComponent<> {
                         <img src={manuscript.cover} alt="cover" style={{width: 100}} />
                     </div>
                     <div class="col-sm-6">
+                        <p><h5><b>{manuscript.title}</b></h5></p>
                         <p>{manuscript.synopsis}</p>
                         <p>
                             Publisher: <b>{publisher ? publisher.name : '-'}</b><br />
