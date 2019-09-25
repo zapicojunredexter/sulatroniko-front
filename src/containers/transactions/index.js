@@ -230,12 +230,12 @@ class Container extends React.PureComponent<> {
                         )}
                         {(this.props.userType === 'author' && transaction.status === 'published') && (
                             <>
-                                <button onClick={() => this.setState({reviewPublisherTransaction: transaction})}>LEAVE FEEDBACK FOR PUBLISHER</button>
+                                <button onClick={() => this.setState({reviewPublisherTransaction: transaction})} class="btn btn-md btn-light">LEAVE FEEDBACK FOR PUBLISHER</button>
                             </>
                         )}
                         {transaction.status === 'proposal approved' && (
                             <>
-                                <button onClick={() => this.handleSelectTransaction(transaction.id)}>VIEW PROGRESS</button>
+                                <button onClick={() => this.handleSelectTransaction(transaction.id)} class="btn btn-md btn-info">VIEW PROGRESS</button>
                             </>
                         )}
                         {this.props.userType === 'publisher' && transaction.status === 'proposal' && (
@@ -309,7 +309,7 @@ class Container extends React.PureComponent<> {
                             <>
                                 <button onClick={() => {
                                         this.setState({assignCopywriterTransaction: transaction})
-                                    }}>{copywriter ? `REASSIGN` : `ASSIGN`} COPYWRITER</button>
+                                    }} class="btn btn-md btn-primary">{copywriter ? `REASSIGN` : `ASSIGN`} COPYWRITER</button>
                                 
                             </>
                         )}
