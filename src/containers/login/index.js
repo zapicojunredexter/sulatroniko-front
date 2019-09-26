@@ -206,7 +206,7 @@ class Container extends React.PureComponent<> {
             </>
             ) : (
                 <div>
-                    <Books disableSnap />
+                    <Books data={this.state.transactions} disableSnap />
                 </div>
                 )}
           <footer class="white-text font-small blue-grey darken-4">

@@ -17,7 +17,6 @@ class Container extends React.PureComponent<> {
         selectedBook: null,
     }
     componentDidMount() {
-
         this.snapData();
         return;
         // if(this.props.disableSnap) {
@@ -39,16 +38,21 @@ class Container extends React.PureComponent<> {
     }
 
     snapData = async () => {
-        const [,,transactions] =await Promise.all([
-            await this.props.fetchAuthors(),
-            await this.props.fetchPublishers(),
-            await this.props.fetchTransaction(),
-        ]);
-        if(transactions && transactions.length) {
-            this.setState({transactions: [
-                ...transactions,
-                //... transactions, ... transactions
-            ]});
+        if(!this.props.data) {
+
+            const [,,transactions] =await Promise.all([
+                await this.props.fetchAuthors(),
+                await this.props.fetchPublishers(),
+                await this.props.fetchTransaction(),
+            ]);
+            if(transactions && transactions.length) {
+                this.setState({transactions: [
+                    ...transactions,
+                    //... transactions, ... transactions
+                ]});
+            }
+        } else {
+            this.setState({transactions: this.props.data});
         }
     }
     render() {
